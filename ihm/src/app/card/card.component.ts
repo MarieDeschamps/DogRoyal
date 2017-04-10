@@ -1,6 +1,6 @@
 /**
- * Created by AELION on 10/04/2017.
- */
+  * Created by Sara Mendez on 10/04/2017.
+  */
 import {Component, Input} from '@angular/core';
 
 @Component({
