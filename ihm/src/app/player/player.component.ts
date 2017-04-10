@@ -1,8 +1,8 @@
 /**
  * Created by Camille on 10/04/2017.
  */
-import { Component, Input, Output,EventEmitter,forEach } from '@angular/core';
-import {pieceComponent} from '../piece/piece.component';
+import { Component, Input, Output} from '@angular/core';
+import {PieceComponent} from '../piece/piece.component';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {pieceComponent} from '../piece/piece.component';
   styleUrls: ['']
 })
 export class PlayerComponent{
-  @Input() pieces: pieceComponent[];
+  @Input() pieces: PieceComponent[];
   isWinner: boolean;
   @Output()
 
