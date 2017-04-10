@@ -20,5 +20,5 @@ state: boolean =false;
   }
   this.state = false;
 };
-positionInitial: number;
+@Input() positionInitial: number;
 }
