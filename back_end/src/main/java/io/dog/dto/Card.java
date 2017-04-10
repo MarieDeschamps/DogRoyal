@@ -1,9 +1,9 @@
 package io.dog.dto;
 
 public class Card {
-    int id;
-    int value;
-    boolean special;
+    private int id;
+    private  int value;
+    private  boolean special;
 
     public Card(int id) {
     	this.id = id;
@@ -31,7 +31,11 @@ public class Card {
         return special;
     }
 
-    @Override
+    public int getId() {
+		return id;
+	}
+
+	@Override
     public String toString() {
         return String.valueOf(value);
     }
