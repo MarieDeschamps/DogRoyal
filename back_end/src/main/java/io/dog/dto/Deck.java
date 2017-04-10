@@ -9,9 +9,13 @@ public class Deck {
     List<Card> disguard;
 
     public Deck() {
+    	this.pickable = new ArrayList<>();
+    	this.disguard = new ArrayList<>();
     }
     
     public Deck(List<Card> cards) {
+    	this.pickable = new ArrayList<>();
+    	this.disguard = new ArrayList<>();
     	this.generateDeck(cards);
     }
 
