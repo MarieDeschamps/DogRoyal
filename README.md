@@ -66,3 +66,4 @@ Enregistrement de la partie dans deux tables :
     position
     id
     onBoard()
+    int positionInitial 
