@@ -10,5 +10,5 @@ import {Component, Input} from '@angular/core';
 })
 
 export class DeckComponent {
-
+ @Input() nOfCardsLeft : number;
 }
