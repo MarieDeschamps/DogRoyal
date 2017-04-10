@@ -5,7 +5,7 @@ import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-deck',
-  template: '',
+  template: `<div>{{nOfCardsLeft}} </div>`,
   // style: ['']
 })
 
