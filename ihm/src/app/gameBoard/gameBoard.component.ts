@@ -10,12 +10,11 @@ import {Component, Input, Output} from '@angular/core';
       <div class="casses"></div>
       <app-gameBoard>
         <div *ngFor='let i of nbOfCases; ' class='case' style='border:1px solid black;' [style.backgroundColor]='white'>
-          <img *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)' />
+          <img *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'/>
         </div>
       </app-gameBoard>
 
     </div>
-
   `,
   styles: [`.case {
     flex: 1 1;
@@ -39,12 +38,15 @@ import {Component, Input, Output} from '@angular/core';
 export class GameBoardComponent {
 
   @Input() position: number [][];
-  @Input() set nbCases (value : number){
-    this.cases=[];
-    for(let i=0; i<value;i++){
+
+  @Input() set nbCases(value: number) {
+    this.cases = [];
+    for (let i = 0; i < value; i++) {
       this.cases.push(i)
-    };
+    }
+    ;
   };
+
   colorCase(i) {
     //vert nbCase-1
     //rouge nbCase =0
@@ -55,7 +57,7 @@ export class GameBoardComponent {
   }
 
 
-cases = [];
+  cases = [];
 }
 
 
