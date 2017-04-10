@@ -1,11 +1,14 @@
-package io.robusta.funko.entities;
+package io.dog.entities;
 
+
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Piece {
+public class PieceDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,10 +18,10 @@ public class Piece {
     int position;
     boolean status = false;
 
-    public Piece() {
+    public PieceDB() {
     }
 
-    public Piece(int player, int position) {
+    public PieceDB(int player, int position) {
         this.player = player;
         this.position = position;
     }
