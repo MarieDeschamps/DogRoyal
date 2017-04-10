@@ -6,7 +6,7 @@ import { Component, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-piece',
-  templateUrl: '',
+  templateUrl: './piece.component.html',
   styleUrls: ['']
 })
 
