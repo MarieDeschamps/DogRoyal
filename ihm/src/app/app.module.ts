@@ -6,6 +6,7 @@ import {HttpModule} from '@angular/http';
 import {CardComponent} from './card/card.component';
 import {DeckComponent} from './deck/deck.component';
 import {HandComponent} from './hand/hand.component';
+import {GameBordComponent} from './gameBord/gameBord.component';
 
 import {AppComponent} from './app.component';
 
@@ -15,7 +16,8 @@ import {AppComponent} from './app.component';
     AppComponent,
     DeckComponent,
     CardComponent,
-    HandComponent
+    HandComponent,
+    GameBordComponent
   ],
   imports: [
     BrowserModule,
