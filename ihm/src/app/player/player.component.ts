@@ -13,9 +13,9 @@ import {PieceComponent} from '../piece/piece.component';
 export class PlayerComponent{
   @Input() pieces: PieceComponent[];
   isWinner: boolean;
-  @Output()
+ // @Output()
 
 
   }
 
-}
+
