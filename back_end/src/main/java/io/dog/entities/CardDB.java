@@ -8,65 +8,63 @@ import javax.persistence.Id;
 @Entity
 public class CardDB {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id = null;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id = null;
 
-    int value;
-    boolean type;
-    boolean pickable;
-    int player;
+	int value;
+	boolean special;
+	boolean pickable = true;
+	int player;
 
-    public CardDB(){
+	public CardDB() {
 
-    }
+	}
 
-    public CardDB(int value, boolean type, boolean pickable, int player) {
-        this.value = value;
-        this.type = type;
-        this.pickable = pickable;
-        this.player = player;
-    }
+	public CardDB(int value, boolean special, int player) {
+		this.value = value;
+		this.special = special;
+		this.player = player;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public int getValue() {
-        return value;
-    }
+	public int getValue() {
+		return value;
+	}
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+	public void setValue(int value) {
+		this.value = value;
+	}
 
-    public boolean isType() {
-        return type;
-    }
+	public boolean isSpecial() {
+		return special;
+	}
 
-    public void setType(boolean type) {
-        this.type = type;
-    }
+	public void setSpecial(boolean special) {
+		this.special = special;
+	}
 
-    public boolean isPickable() {
-        return pickable;
-    }
+	public boolean isPickable() {
+		return pickable;
+	}
 
-    public void setPickable(boolean pickable) {
-        this.pickable = pickable;
-    }
+	public void setPickable(boolean pickable) {
+		this.pickable = pickable;
+	}
 
-    public int getPlayer() {
-        return player;
-    }
+	public int getPlayer() {
+		return player;
+	}
 
-    public void setPlayer(int player) {
-        this.player = player;
-    }
-
+	public void setPlayer(int player) {
+		this.player = player;
+	}
 
 }
