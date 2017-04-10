@@ -2,27 +2,38 @@ package io.dog.dao;
 
 import javax.persistence.EntityManager;
 
-import io.dog.dto.Card;
+import io.dog.entities.CardDB;
 
 public class CardDao {
 
-    EntityManager em;
+	EntityManager em;
 
-    public CardDao(EntityManager em){
-        this.em=em;
-    }
+	public CardDao(EntityManager em) {
+		this.em = em;
+	}
 
-    public void create(Card card){
-        em.persist(card);
-    }
+	public void create(CardDB card) {
+		em.persist(card);
+	}
 
-    public void delete(Card card){
-        em.remove(card);
+	public void delete(CardDB card) {
+		em.remove(card);
 
-    }
+	}
 
-    public void update(Card card){
+	public void update(CardDB card) {
 
-    }
+	}
+
+	public CardDB findById(int id) {
+		return em.find(CardDB.class, id);
+	}
+
+	public CardDB updateCard(CardDB card) {
+		CardDB cards = findById(card.getId());
+		card.setPickable(card.isPickable());
+		card.setPlayer(card.getPlayer());
+		return cards;
+	}
 
 }
