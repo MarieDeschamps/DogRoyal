@@ -1,5 +1,7 @@
 package io.dog.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import io.dog.entities.CardDB;
@@ -30,14 +32,29 @@ public class CardDao {
 	}
 
 	public void updateDisguardCard(int id) {
-		CardDB cards = findById(id);
+		CardDB cards = this.findById(id);
 		cards.setPlayer(0);
 	}
 
 	public void updatePickedCards(int id, int numberplayer) {
-		CardDB cards = findById(id);
+		CardDB cards = this.findById(id);
 		cards.setPlayer(numberplayer);
 		cards.setPickable(false);
 	}
 
+	public List<CardDB> getPlayersCards(int numberplayer) {
+		String jpql = "SELECT c FROM CardDB c WHERE c.player = :player";
+		return em.createQuery(jpql, CardDB.class).setParameter("player", numberplayer).getResultList();
+	}
+	
+	public List<CardDB> getPickablesCards() {
+		String jpql = "SELECT c FROM CardDB c WHERE c.pickable = :pickable";
+		return em.createQuery(jpql, CardDB.class).setParameter("pickable", true).getResultList();
+	}
+	
+	public List<CardDB> getDiguardsCards() {
+		String jpql = "SELECT c FROM CardDB c WHERE c.pickable = false AND c.player = 0";
+		return em.createQuery(jpql, CardDB.class).getResultList();
+	}
+	
 }
