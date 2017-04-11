@@ -9,6 +9,7 @@ import {HandComponent} from './hand/hand.component';
 import {GameBoardComponent} from './gameBoard/gameBoard.component';
 import {PieceComponent} from './piece/piece.component';
 import {PlayerComponent} from  './player/player.component';
+import {PlayersComponent} from './players/players.component';
 
 import {AppComponent} from './app.component';
 
@@ -21,7 +22,8 @@ import {AppComponent} from './app.component';
     HandComponent,
     GameBoardComponent,
     PieceComponent,
-    PlayerComponent
+    PlayerComponent,
+    PlayersComponent
   ],
   imports: [
     BrowserModule,
