@@ -9,6 +9,6 @@ import { Component, Input, Output} from '@angular/core';
   styles: ['']
 })
 export class PlayersComponent{
-@Input() noplayers : number [];
-
+@Input() nOfPlayers : number;
+@Input () players : number[];
 }

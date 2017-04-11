@@ -14,11 +14,8 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
     </div>`,
   styles: [
       `.cardsStyle {
-     
       display: flex;
       flex-flow: row nowrap;
-      
-      
     }`
   ]
 })
