@@ -7,8 +7,8 @@ import { Component, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-player',
-  templateUrl: '',
-  styleUrls: ['']
+  template: '',
+  styles: ['']
 })
 export class PlayerComponent{
   @Input() pieces: number[];
