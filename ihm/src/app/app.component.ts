@@ -12,7 +12,8 @@ interface PlayerState {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  nOfPlayers;
+  nOfPieces;
 
   casseStart(idPlayer) {
     (idPlayer - 1) * 16;

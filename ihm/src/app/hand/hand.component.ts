@@ -10,12 +10,15 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
       <app-card *ngFor='let nOfCard of cards; let i=index;'
                 [nOfCard]='nOfCard'
                 [chooseCard]='chooseCard'
-                (chosen)='onChosen(i)'></app-card>
+                (chosen)='onChosen(i)' style='border:1px solid black;font-size: 100%;text-align: center'></app-card>
     </div>`,
   styles: [
       `.cardsStyle {
+     
       display: flex;
       flex-flow: row nowrap;
+      
+      
     }`
   ]
 })
