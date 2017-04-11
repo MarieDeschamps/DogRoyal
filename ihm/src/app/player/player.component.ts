@@ -12,6 +12,7 @@ import { Component, Input, Output} from '@angular/core';
 })
 export class PlayerComponent{
   @Input() pieces: number[];
+  @Input() hand: number[];
  // @Output()
 
 
