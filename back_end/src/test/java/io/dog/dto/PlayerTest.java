@@ -62,22 +62,28 @@ public class PlayerTest {
 		assertTrue(player.getCards().size()==initNbCards+2);
 	}
 	
+	@Test
 	public void playableCardOrDisguard(){
-		int initNbCards = player.getCards().size();
+		int initNbCards;
+		if(player.getCards()==null){
+			initNbCards = 0;
+		}else{
+			initNbCards = player.getCards().size();
+		}
 		Card c = new Card(10,3,false);
-		player.getCards().add(c);
-		Deck d = new Deck();
+		List<Card> cs = new ArrayList<>();
+		cs.add(c);
+		Deck d = new Deck(cs);
+		player.pick(d);
 		Piece p = player.getPieces().get(0);
 		
 		assertFalse(player.playableCardOrDisguard(d, c, p));
 		
-		c = new Card(15,3,false);
-		player.getCards().add(c);
+		player.pick(d);
 		p.setStatus(true);
 		assertTrue(player.playableCardOrDisguard(d, c, p));
 		
-		assertTrue(p.getPosition()==3);
-		assertTrue(d.getDisguard().get(d.getDisguard().size()).getId()==15);
+		assertTrue(d.getDisguard().get(d.getDisguard().size()-1).getId()==10);
 		assertTrue(player.getCards().size()==initNbCards);
 	}
 }

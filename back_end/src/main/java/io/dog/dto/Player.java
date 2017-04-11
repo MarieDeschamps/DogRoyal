@@ -57,15 +57,14 @@ public class Player {
 		boolean movePiece;
 		if (p.isArrived() == true) {
 			movePiece = false;
-			this.disguardCard(d, c);
 		} else if (c.isSpecial() == true) {
 			movePiece = true;
 		} else if (p.isStatus()) {
 			movePiece = true;
 		} else {
 			movePiece = false;
-			this.disguardCard(d, c);
 		}
+		this.disguardCard(d, c);
 		return movePiece;
 	}
 
