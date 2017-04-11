@@ -10,7 +10,7 @@ import {Component, Input, Output} from '@angular/core';
       <div class="casses"></div>
       <app-gameBoard>
         <div *ngFor='let i of nbOfCases; ' class='case' style='border:1px solid black;' [style.backgroundColor]='white'>
-          <img *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'/>
+         
         </div>
       </app-gameBoard>
 
@@ -34,7 +34,7 @@ import {Component, Input, Output} from '@angular/core';
   }
   `]
 })
-
+// <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class GameBoardComponent {
 
   @Input() position: number [][];
