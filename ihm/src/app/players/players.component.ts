@@ -12,4 +12,5 @@ export class PlayersComponent{
 @Input() nbOfPlayers : number;
 
 
+
 }

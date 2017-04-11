@@ -4,6 +4,7 @@
 import {Component, Input, Output} from '@angular/core';
 
 
+
 @Component({
   selector: 'app-gameBoard',
   template: `
@@ -22,7 +23,7 @@ import {Component, Input, Output} from '@angular/core';
 
     .cases {
       display: flex;
-      flex-flow: row nowrap;
+      flex-flow: row wrap;
     }
 
     .piece {
@@ -35,7 +36,7 @@ import {Component, Input, Output} from '@angular/core';
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class GameBoardComponent {
   @Input() position: number [][];
-
+  @Input() players ;
   @Input() set nbCases(value: number) {
     this.cases = [];
     for (let i = 0; i < value; i++) {
@@ -50,18 +51,14 @@ export class GameBoardComponent {
     if (!this.position || !this.cases)
       return 'pink';
 
-    let nbJoueurs = this.position.length;
-    let nbCases = this.cases.length;
+    let nbPlayer = this.players.length;
+    console.log(nbPlayer);
 
-    console.log(nbCases);
-    console.log(nbJoueurs);
+    for (let j = 0; j < nbPlayer; j++) {
+      for (let p = 0; p < this.players[j].pieces.length; p++) {
+        if (this.players[j].pieces[p] == i) {
 
-    for (let j = 0; j < nbJoueurs; j++) {
-      for (let p = 0; p < this.position[j].length; p++) {
-        if (this.position[j][p] == i) {
-          let red = (j * 3 * 17 * 23 + 50) % 256;
-          let green = (nbJoueurs * j * j * 31 + 50) % 256;
-          return `rgb(${red},${green},20)`;
+          return this.players[j].color;
         }
       }
     }
