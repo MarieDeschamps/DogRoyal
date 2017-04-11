@@ -60,4 +60,10 @@ public class Piece {
 		this.initialPosition = initialPosition;
 	}
 	
+	public void resetToBeginning(){
+		this.status = false;
+		this.arrived = false;
+		this.position = 0;
+	}
+	
 }
