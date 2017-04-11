@@ -18,6 +18,11 @@ public class Deck {
     	this.disguard = new ArrayList<>();
     	this.generateDeck(cards);
     }
+    
+    public Deck(List<Card> pickable, List<Card> disguard) {
+    	this.pickable = pickable;
+    	this.disguard = disguard;
+    }
 
     public void generateDeck(List<Card> cards){
         this.disguard = cards;
