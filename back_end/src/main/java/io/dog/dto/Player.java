@@ -53,7 +53,7 @@ public class Player {
 		this.cards.addAll(d.pick(nbCards));
 	}
 
-	public boolean playableCardOrDisguard(Deck d, Card c, Piece p) {
+	public boolean playableCard(Card c, Piece p) {
 		boolean movePiece;
 		if (p.isArrived() == true) {
 			movePiece = false;
@@ -64,11 +64,10 @@ public class Player {
 		} else {
 			movePiece = false;
 		}
-		this.disguardCard(d, c);
 		return movePiece;
 	}
 
-	private void disguardCard(Deck d, Card c) {
+	public void disguardCard(Deck d, Card c) {
 		cards.remove(c);
 		d.addToDisguard(c);
 	}
