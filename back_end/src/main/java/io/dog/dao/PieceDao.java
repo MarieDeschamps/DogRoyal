@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import io.dog.entities.CardDB;
 import io.dog.entities.PieceDB;
 
 public class PieceDao {
@@ -45,5 +46,14 @@ public class PieceDao {
 		String jpql = "SELECT p FROM PieceDB p WHERE p.player = :player";
 		return em.createQuery(jpql, PieceDB.class).setParameter("player", numberplayer).getResultList();
 	}
-
+	
+	public List<PieceDB> findAll() {
+		String jpql = "SELECT * FROM PieceDB";
+		return em.createQuery(jpql, PieceDB.class).getResultList();
+	}
+	
+	public int getNbPlayers() {
+		String jpql = "SELECt COUNT(*) from ( SELECT DISTINCT p.player FROM PieceDB) AS nbplayers";
+		return em.createQuery(jpql).getFirstResult();
+	}
 }

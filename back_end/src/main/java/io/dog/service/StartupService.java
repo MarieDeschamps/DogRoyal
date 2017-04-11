@@ -29,8 +29,6 @@ public class StartupService {
 		System.out.println("======================== AFTER STARTUP ================================");
 		this.cdao = new CardDao(em);
 		this.pdao = new PieceDao(em);
-		createDeck();
-		createPiece(2, 4);
 	}
 
 	public void createDeck() {
