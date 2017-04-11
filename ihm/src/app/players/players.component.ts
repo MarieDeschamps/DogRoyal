@@ -2,13 +2,13 @@
   * Created by Sara Mendez on 11/04/2017.
   */
 import { Component, Input, Output} from '@angular/core';
+import {Player, Deck} from '../model';
 
 @Component({
   selector: 'app-players',
-  template: '',
+  template: ``,
   styles: ['']
 })
 export class PlayersComponent{
-@Input() noplayers : number [];
-
+@Input() players : Player[];
 }

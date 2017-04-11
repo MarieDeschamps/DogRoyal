@@ -1,3 +1,10 @@
+<!--<div>
+  Choose the number of players
+  <input [(ngModel)]='nOfPlayers'/>
+  Choose the number of players
+  <input [(ngModel)]='nOfPieces'/>
+</div>
+
 <h1>
     D O G - R O Y A L
 </h1>
@@ -30,9 +37,9 @@
 
 //////////////////
 
-<!--
-<app-gameBoard [nbCases]="12" [position]="[[2,4],[5,7]]" ></app-gameBoard>
--->
+&lt;!&ndash;
+<app-gameBoard [nbCases]="12" [players]="[[[2,3],[5,4,3]],[[2,3],[5,4,3]]]" ></app-gameBoard>
+&ndash;&gt;
 
 
 
@@ -41,3 +48,13 @@
 
 <h2>TEST PLAYER</h2>
 <app-player [pieces]="[3,4,5]"></app-player>
+
+/////////////////////////////////////////////////-->
+<h2>Choose Yourself!</h2>
+<div>
+  Choose the number of players
+  <input [(ngModel)]='nOfPlayers'/>
+  Choose the number of players
+  <input [(ngModel)]='nOfPieces'/>
+</div>
+

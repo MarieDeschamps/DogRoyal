@@ -2,13 +2,14 @@
  * Created by Sara Mendez on 10/04/2017.
  */
 import {Component, Input} from '@angular/core';
+import {Deck} from '../model';
 
 @Component({
   selector: 'app-deck',
-  template: `<div>{{nOfCardsLeft}} </div>`,
+  template: `<div>DISCARD{{deck.discard}} PICK{{deck.pick}} </div>`,
   // style: ['']
 })
 
 export class DeckComponent {
- @Input() nOfCardsLeft : number;
+ @Input() deck : Deck;
 }
