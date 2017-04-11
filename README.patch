@@ -1,0 +1,12 @@
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- README.md	(date 1491823655000)
++++ README.md	(date 1491825030000)
+@@ -66,3 +66,4 @@
+     position
+     id
+     onBoard()
++    int positionInitial 

@@ -25,10 +25,10 @@ export class AppComponent {
   chooseCard = false;
   winner = null;
 
-  chooseOneCard (nOfCard:number){
-    if (nOfCard==14){
-    //TODO un pion commence a jouer
-    }else {
+  chooseOneCard(nOfCard: number) {
+    if (nOfCard == 14) {
+      //TODO un pion commence a jouer
+    } else {
       //TODO le joueur choisi un pion pour avancer
       //if position pion == position de un autre pion => position pion =0;
       //else poisition pion = position+nOfCard
@@ -36,8 +36,9 @@ export class AppComponent {
     }
 
 
-}
-  chooseOnePiece(piecePosition : number[]){
+  }
+
+  chooseOnePiece(piecePosition: number[]) {
 
   }
 
