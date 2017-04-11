@@ -4,11 +4,13 @@
 import {Component, Input, Output} from '@angular/core';
 
 
+
 @Component({
   selector: 'app-gameBoard',
   template: `
     <div class="cases">
-      <div *ngFor='let i of cases; ' class='case' style='border:1px solid black;' [style-background]='colorCase(i)'>
+      <div *ngFor='let i of cases;' class='case' style='border:1px solid black;' [style.backgroundColor]='colorCase(i)'>
+        {{i}}
       </div>
     </div>
   `,
@@ -21,12 +23,11 @@ import {Component, Input, Output} from '@angular/core';
 
     .cases {
       display: flex;
-      flex-flow: row nowrap;
+      flex-flow: row wrap;
     }
 
     .piece {
-      width: 3em;
-      height: 3em;
+
       display: block;
       margin: 0 auto;
     }
@@ -34,9 +35,8 @@ import {Component, Input, Output} from '@angular/core';
 })
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class GameBoardComponent {
-
   @Input() position: number [][];
-
+  @Input() players ;
   @Input() set nbCases(value: number) {
     this.cases = [];
     for (let i = 0; i < value; i++) {
@@ -45,23 +45,26 @@ export class GameBoardComponent {
     ;
   };
 
-  colorCase(i) {
-    let x = this.position.length;
-    let t = this.cases.length;
-    for (let j = 0; j < x; j++) {
-      let nbCases = this.cases.length;
+  cases = [];
 
-      for (let k = 0; k < t; t++) {
-        let red = Math.floor(((nbCases - 1 - k) * 255) / (nbCases - 1));
-        let green = Math.floor((k * 255) / (nbCases - 1))
-        if (this.position[j][k] = this.position[j][i]) {
-          return `rgb(${red},${green},0)`;
+  colorCase(i) {
+    if (!this.position || !this.cases)
+      return 'pink';
+
+    let nbPlayer = this.players.length;
+    console.log(nbPlayer);
+
+    for (let j = 0; j < nbPlayer; j++) {
+      for (let p = 0; p < this.players[j].pieces.length; p++) {
+        if (this.players[j].pieces[p] == i) {
+
+          return this.players[j].color;
         }
       }
     }
-  }
 
-  cases = [];
+    return 'white';
+  }
 }
 
 

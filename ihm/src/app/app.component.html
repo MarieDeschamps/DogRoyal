@@ -26,8 +26,13 @@
 
 <h2>TEST GAME BOARD</h2>
 
-<app-gameBoard [nbCases]="72"></app-gameBoard>
-<app-gameBoard [nbCases]="15" [position]="[[2,4],[5,7]]"></app-gameBoard>
+<app-gameBoard [nbCases]="12"></app-gameBoard>
+
+//////////////////
+
+<!--
+<app-gameBoard [nbCases]="12" [position]="[[2,4],[5,7]]" ></app-gameBoard>
+-->
 
 
 
@@ -35,4 +40,4 @@
 <app-piece [position]="3" [positionInitial]="0"></app-piece>
 
 <h2>TEST PLAYER</h2>
-<app-player></app-player>
+<app-player [pieces]="[3,4,5]"></app-player>
