@@ -10,7 +10,7 @@ import {Component, Input, Output} from '@angular/core';
       <div class="casses"></div>
       <app-gameBoard>
         <div *ngFor='let i of nbOfCases; ' class='case' style='border:1px solid black;' [style.backgroundColor]='white'>
-         
+          {i}
         </div>
       </app-gameBoard>
 
