@@ -29,11 +29,15 @@ public class CardDao {
 		return em.find(CardDB.class, id);
 	}
 
-	public CardDB updateCard(CardDB card) {
-		CardDB cards = findById(card.getId());
-		card.setPickable(card.isPickable());
-		card.setPlayer(card.getPlayer());
-		return cards;
+	public void updateDisguardCard(int id) {
+		CardDB cards = findById(id);
+		cards.setPlayer(0);
+	}
+
+	public void updatePickedCards(int id, int numberplayer) {
+		CardDB cards = findById(id);
+		cards.setPlayer(numberplayer);
+		cards.setPickable(false);
 	}
 
 }
