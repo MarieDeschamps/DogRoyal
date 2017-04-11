@@ -5,6 +5,7 @@
 	version="2.0">
 	<persistence-unit name="dogroyal" transaction-type="RESOURCE_LOCAL">
 		<class>io.dog.entities.CardDB</class>
+		<class>io.dog.entities.PieceDB</class>
 		
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

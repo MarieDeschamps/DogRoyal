@@ -1,6 +1,7 @@
 package io.dog.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import javax.persistence.EntityManager;
 
@@ -10,18 +11,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import io.dog.EmFactory;
-import io.dog.entities.CardDB;
+import io.dog.entities.PieceDB;
 
-public class CardDaoTest {
-
+public class PieceDaoTest {
 	EntityManager em;
-	CardDao dao;
-	CardDB one = new CardDB(2, false);
+	PieceDao dao;
+	PieceDB one = new PieceDB(2, 16);
 
 	@Before
 	public void setUp() {
 		em = EmFactory.createEntityManager();
-		dao = new CardDao(em);
+		dao = new PieceDao(em);
 	}
 
 	@After
@@ -51,38 +51,27 @@ public class CardDaoTest {
 	}
 
 	@Test
-	public void updatePickedAndDisguardCard() {
+	public void updatePiece() {
 		em.getTransaction().begin();
 
 		// Create Data
-		for (int i = 0; i < 7; i++) {
-			em.persist(new CardDB(2, false));
-			em.persist(new CardDB(3, false));
-			em.persist(new CardDB(5, false));
-			em.persist(new CardDB(6, false));
-			em.persist(new CardDB(8, false));
-			em.persist(new CardDB(9, false));
-			em.persist(new CardDB(10, false));
-			em.persist(new CardDB(12, false));
-
+		for (int i = 0; i < 2; i++) {
+			em.persist(new PieceDB(1, 0));
+			em.persist(new PieceDB(2, 16));
 		}
 
-		for (int i = 0; i < 20; i++) {
-			em.persist(new CardDB(0, true));
-		}
 		em.getTransaction().commit();
 
-		// Player one pick one card
+		// Add Piece One to Status True
 		em.getTransaction().begin();
-		dao.updatePickedCards(5, 1);
-		assertTrue(dao.findById(5).getPlayer() == 1);
+		dao.updateStatus(1);
+		assertTrue(dao.findById(1).isStatus());
 		em.getTransaction().commit();
 
-		// Add this card to disguard
+		// Move this piece to position 10
 		em.getTransaction().begin();
-		dao.updateDisguardCard(5);
-		assertTrue(dao.findById(5).getPlayer() == 0);
+		dao.updatePosition(1, 10);
+		assertTrue(dao.findById(1).getPosition() == 10);
 		em.getTransaction().commit();
 	}
-
 }
