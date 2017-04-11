@@ -64,14 +64,14 @@ public class PieceDaoTest {
 
 		// Add Piece One to Status True
 		em.getTransaction().begin();
-		dao.updateStatus(1);
-		assertTrue(dao.findById(1).isStatus());
+		dao.updateStatus(3);
+		assertTrue(dao.findById(3).isStatus());
 		em.getTransaction().commit();
 
 		// Move this piece to position 10
 		em.getTransaction().begin();
-		dao.updatePosition(1, 10);
-		assertTrue(dao.findById(1).getPosition() == 10);
+		dao.updatePosition(3, 10);
+		assertTrue(dao.findById(3).getPosition() == 10);
 		em.getTransaction().commit();
 	}
 }

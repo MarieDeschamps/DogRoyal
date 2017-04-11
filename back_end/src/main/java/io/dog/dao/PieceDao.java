@@ -1,5 +1,7 @@
 package io.dog.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import io.dog.entities.PieceDB;
@@ -37,6 +39,11 @@ public class PieceDao {
 	public void updatePosition(int id, int position) {
 		PieceDB pieces = findById(id);
 		pieces.setPosition(position);
+	}
+	
+	public List<PieceDB> getPlayersPieces(int numberplayer) {
+		String jpql = "SELECT p FROM PieceDB p WHERE p.player = :player";
+		return em.createQuery(jpql, PieceDB.class).setParameter("player", numberplayer).getResultList();
 	}
 
 }
