@@ -1,10 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Player, Deck, Hand} from './model';
 
-interface PlayerState {
-  piecePosition: number [];
-  cards: number[];
-  nOfPiecesLeft: number;
-}
+
 
 @Component({
   selector: 'app-root',
@@ -12,34 +9,38 @@ interface PlayerState {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  nOfPlayers;
+  nOfPieces;
+  @Input()
 
-
-  casseStart(idPlayer) {
-    (idPlayer - 1) * 16;
-  };
-
-  casseWin(idPlayer) {
-    ((idPlayer - 1) * 16) - 1;
+  player1: Player = {
+    pieces: [
+      {'position': 0,'state' : false,'id':1},
+      {'position' : 0, 'state' : false,'id':2}
+      ],
+    hand: {cards:[
+      {'card':14, 'id':1},
+      {'card':5, 'id':2},
+      {'card':8, 'id':3},
+      {'card':1 ,'id':4}
+      ]},
+    color: 'red'
   }
+  player2: Player = {
+    pieces: [
+      {'position': 0,'state' : false,'id':3},
+      {'position' : 0, 'state' : false,'id':4}
+    ],
+    hand: {cards:[
+      {'card':5, 'id':5},
+      {'card':14, 'id':6},
+      {'card':7, 'id':7},
+      {'card':3, 'id':8}
+    ]},
+    color: 'blue'
+  }
+  players = [this.player1,this.player2];
 
   chooseCard = false;
-  winner = null;
-
-  chooseOneCard(nOfCard: number) {
-    if (nOfCard == 14) {
-      //TODO un pion commence a jouer
-    } else {
-      //TODO le joueur choisi un pion pour avancer
-      //if position pion == position de un autre pion => position pion =0;
-      //else poisition pion = position+nOfCard
-      //check this.player wins
-    }
-
-
-  }
-
-  chooseOnePiece(piecePosition: number[]) {
-
-  }
 
 }

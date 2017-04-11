@@ -2,7 +2,7 @@
  * Created by Camille on 10/04/2017.
  */
 import { Component, Input, Output} from '@angular/core';
-//import {PieceComponent} from '../piece/piece.component';
+import {Player} from '../model';
 
 
 @Component({
@@ -11,10 +11,7 @@ import { Component, Input, Output} from '@angular/core';
   styles: ['']
 })
 export class PlayerComponent{
-  @Input() pieces: number[];
-  @Input() hand: number[];
-  color: String;
- // @Output()
+  @Input() player : Player;
 
 
   }
