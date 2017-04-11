@@ -50,6 +50,7 @@ public class Piece {
 
 	public void setArrived(boolean arrived) {
 		this.arrived = arrived;
+		this.setPosition(-1);
 	}
 
 	public int getInitialPosition() {
