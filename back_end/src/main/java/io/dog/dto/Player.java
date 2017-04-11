@@ -8,24 +8,22 @@ public class Player {
 	List<Card> cards;
 	int number;
 	
-	public Player(List<Piece> pieces, List<Card> cards, int number) {
+	public Player(List<Piece> pieces, int number) {
+		this.number = number;
 		for (Piece piece : pieces) {
-			piece.setInitialPosition((number-1)*16);
+			piece.setInitialPosition(this.initialPosition());
 		}
 		this.pieces = pieces;
-		this.cards = cards;
-		this.number = number;
+		this.cards = new ArrayList<>();
 	}
 	
-	public Player(int nbPiece, List<Integer> pieceIds, List<Card> cards, int number) {
-		List<Piece> pieces = new ArrayList<>();
-		
-		for (int i = 0; i<nbPiece; i++) {
-			pieces.add(new Piece(pieceIds.get(i), (number-1)*16));
+	public Player(List<Piece> pieces, List<Card> cards, int number) {
+		this.number = number;
+		for (Piece piece : pieces) {
+			piece.setInitialPosition(this.initialPosition());
 		}
 		this.pieces = pieces;
 		this.cards = cards;
-		this.number = number;
 	}
 
 	public int initialPosition(){
