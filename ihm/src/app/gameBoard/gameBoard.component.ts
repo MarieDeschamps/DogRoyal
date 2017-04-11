@@ -5,7 +5,6 @@ import {Component, Input, Output} from '@angular/core';
 import {Player, Deck} from '../model';
 
 
-
 @Component({
   selector: 'app-gameBoard',
   template: `
@@ -36,7 +35,8 @@ import {Player, Deck} from '../model';
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class GameBoardComponent {
 
-  @Input() players ;
+  @Input() players;
+
   @Input() set nbCases(value: number) {
     this.cases = [];
     for (let i = 0; i < value; i++) {
@@ -48,7 +48,7 @@ export class GameBoardComponent {
   cases = [];
 
   colorCase(i) {
-    if (!this.players.position || !this.cases)
+    if (!this.players.pieces.position || !this.cases)
       return 'pink';
 
     let nbPlayer = this.players.length;

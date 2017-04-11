@@ -58,3 +58,11 @@
   <input [(ngModel)]='nOfPieces'/>
 </div>
 
+<app-players *ngFor="let i of players;">
+  <app-player [player]="players[i]">
+    <app-hand [hand]="players[i].hand" [chooseCard]="true"></app-hand>
+
+  </app-player>
+
+</app-players>
+
