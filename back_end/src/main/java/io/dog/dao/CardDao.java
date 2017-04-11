@@ -57,4 +57,10 @@ public class CardDao {
 		return em.createQuery(jpql, CardDB.class).getResultList();
 	}
 	
+	public List<CardDB> findAll() {
+		String jpql = "SELECT * FROM CardDB c";
+		return em.createQuery(jpql, CardDB.class).getResultList();
+		
+	}
+	
 }
