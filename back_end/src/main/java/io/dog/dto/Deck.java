@@ -39,6 +39,9 @@ public class Deck {
     }
 
     public List<Card> pick(int nbCards) {
+    	if(this.size()+this.disguard.size()<nbCards){
+    		throw new IllegalArgumentException("not enough cards in the full deck");
+    	}
         List<Card> cardsPicked = new ArrayList<>();
         for (int i = 1; i <= nbCards; i++) {
             if(this.isEmpty()){

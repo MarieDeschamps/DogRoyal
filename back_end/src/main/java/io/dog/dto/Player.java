@@ -40,11 +40,17 @@ public class Player {
 	}
 
 	public void pick(Deck d) {
-		cards.add(d.pick());
+		if(this.cards==null){
+			this.cards = new ArrayList<>();
+		}
+		this.cards.add(d.pick());
 	}
 
 	public void pick(Deck d, int nbCards) {
-		cards.addAll(d.pick(nbCards));
+		if(this.cards==null){
+			this.cards = new ArrayList<>();
+		}
+		this.cards.addAll(d.pick(nbCards));
 	}
 
 	public boolean playableCardOrDisguard(Deck d, Card c, Piece p) {
