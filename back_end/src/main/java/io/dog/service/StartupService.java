@@ -26,7 +26,7 @@ public class StartupService {
 	}
 
 	void createData() {
-		CardDB one = new CardDB(3, false, 1);
+		CardDB one = new CardDB(3, false);
 		em.persist(one);
 
 	}

@@ -15,16 +15,16 @@ public class CardDB {
 	int value;
 	boolean special;
 	boolean pickable = true;
-	int player;
+	int player = 0;
 
 	public CardDB() {
 
 	}
 
-	public CardDB(int value, boolean special, int player) {
+	public CardDB(int value, boolean special) {
 		this.value = value;
 		this.special = special;
-		this.player = player;
+
 	}
 
 	public Integer getId() {
