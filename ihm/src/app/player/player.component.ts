@@ -7,12 +7,12 @@ import { Component, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-player',
-  template: '',
+  templateUrl: './player.component.html',
   styles: ['']
 })
 export class PlayerComponent{
   @Input() pieces: number[];
-  isWinner: boolean;
+  isWinner: boolean = false;
  // @Output()
 
 
