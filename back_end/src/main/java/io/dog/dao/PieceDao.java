@@ -29,11 +29,14 @@ public class PieceDao {
 		return em.find(PieceDB.class, id);
 	}
 
-	public PieceDB updateCard(PieceDB piece) {
-		PieceDB pieces = findById(piece.getId());
-		piece.setPosition(piece.getPosition());
-		piece.setStatus(piece.isStatus());
-		return pieces;
+	public void updateStatus(int id) {
+		PieceDB pieces = findById(id);
+		pieces.setStatus(true);
+	}
+
+	public void updatePosition(int id, int position) {
+		PieceDB pieces = findById(id);
+		pieces.setPosition(position);
 	}
 
 }
