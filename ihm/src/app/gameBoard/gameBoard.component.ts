@@ -2,14 +2,13 @@
  * Created by Sara Mendez on 10/04/2017.
  */
 import {Component, Input, Output} from '@angular/core';
-import {isNumber} from "util";
+
 
 @Component({
   selector: 'app-gameBoard',
   template: `
     <div class="cases">
-      <div *ngFor='let i of cases; ' class='case' style='border:0.5px solid black;' style-background="colorCase(i)">
-
+      <div *ngFor='let i of cases; ' class='case' style='border:1px solid black;' [style-background]='colorCase(i)'>
       </div>
     </div>
   `,
@@ -17,7 +16,7 @@ import {isNumber} from "util";
     .case {
       height: 20px;
       flex: 1 1;
-      border: 0.5px solid black;
+      border: 1px solid black;
     }
 
     .cases {
@@ -61,7 +60,6 @@ export class GameBoardComponent {
       }
     }
   }
-
 
   cases = [];
 }
