@@ -43,7 +43,7 @@ public class CardDao {
 	}
 
 	public List<CardDB> getPlayersCards(int numberplayer) {
-		String jpql = "SELECT c FROM CardDB c WHERE c.player = :player";
+		String jpql = "SELECT c FROM CardDB c WHERE c.player = :player ORDER BY c.value";
 		return em.createQuery(jpql, CardDB.class).setParameter("player", numberplayer).getResultList();
 	}
 

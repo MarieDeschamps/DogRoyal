@@ -47,9 +47,14 @@ public class CardDaoTest {
 
 		// Update 2 players with 5 cards
 		for (int i = 0; i < 5; i++) {
-			dao.updatePickedCards(i + 5, 1);
 			dao.updatePickedCards(i + 15, 2);
 		}
+
+			dao.updatePickedCards(2, 1);
+			dao.updatePickedCards(65, 1);
+			dao.updatePickedCards(3, 1);
+			dao.updatePickedCards(66, 1);
+			dao.updatePickedCards(12, 1);
 
 		// Update 10 cards to disguard
 		for (int i = 0; i < 10; i++) {
@@ -117,6 +122,10 @@ public class CardDaoTest {
 		List<CardDB> player1Cards = dao.getPlayersCards(1);
 		List<CardDB> player2Cards = dao.getPlayersCards(2);
 
+		for (CardDB cardDB : player1Cards) {
+			System.out.println(cardDB.getId() + "-- value -- "+cardDB.getValue());
+			
+		}
 		assertTrue(player1Cards.size() == 5);
 		assertTrue(player2Cards.size() == 5);
 		assertTrue(disguard.size() == 10);
