@@ -2,7 +2,7 @@
  * Created by Sara Mendez on 10/04/2017.
  */
 import {Component, Input, Output} from '@angular/core';
-import {Player, Deck} from '../model';
+import {Player, Deck, Players} from '../model';
 
 
 @Component({
@@ -35,7 +35,7 @@ import {Player, Deck} from '../model';
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class GameBoardComponent {
 
-  @Input() players;
+  @Input() players : Players;
 
   @Input() set nbCases(value: number) {
     this.cases = [];
@@ -48,7 +48,7 @@ export class GameBoardComponent {
   cases = [];
 
   colorCase(i) {
-    if (!this.players.pieces.position || !this.cases)
+    if (!this.players || !this.cases)
       return 'pink';
 
     let nbPlayer = this.players.length;

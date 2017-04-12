@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Player, Deck, Hand} from './model';
+import {Players, Player, Deck, Hand} from './model';
 
 
 
@@ -13,20 +13,7 @@ export class AppComponent {
   nOfPieces;
   @Input()
 
-  player1: Player = {
-    pieces: [
-      {'position': 0,'state' : false,'id':1},
-      {'position' : 0, 'state' : false,'id':2}
-      ],
-    hand: [
-      {'value':14, 'id':1},
-      {'value':5, 'id':2},
-      {'value':8, 'id':3},
-      {'value':1 ,'id':4}
-      ],
-    color: 'red'
-  }
-  player2: Player = {
+  playersTry : Players = [{
     pieces: [
       {'position': 0,'state' : false,'id':3},
       {'position' : 0, 'state' : false,'id':4}
@@ -38,8 +25,19 @@ export class AppComponent {
       {'value':3, 'id':8}
     ],
     color: 'blue'
-  }
-  players = [this.player1,this.player2];
+  }, {
+    pieces: [
+      {'position': 0,'state' : false,'id':1},
+      {'position' : 0, 'state' : false,'id':2}
+    ],
+    hand: [
+      {'value':14, 'id':1},
+      {'value':5, 'id':2},
+      {'value':8, 'id':3},
+      {'value':1 ,'id':4}
+    ],
+    color: 'red'
+  }];
 
   chooseCard = false;
 
