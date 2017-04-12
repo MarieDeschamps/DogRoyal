@@ -36,32 +36,6 @@ public class PlayerTest {
 		assertTrue(player.getCards().get(0).getId()==1);
 	}
 	
-	@Test (expected = IllegalArgumentException.class)
-	public void pickMultipleError(){
-		List<Card> cs = new ArrayList<>();
-		cs.add(new Card(1,3,false));
-		Deck d = new Deck(cs);
-		player.pick(d, 5);
-	}
-	
-	@Test
-	public void pickMultiple(){
-		int initNbCards;
-		if(player.getCards()==null){
-			initNbCards = 0;
-		}else{
-			initNbCards = player.getCards().size();
-		}
-		
-		List<Card> cs = new ArrayList<>();
-		cs.add(new Card(1,3,false));
-		cs.add(new Card(2,4,false));
-		cs.add(new Card(3,5,false));
-		Deck d = new Deck(cs);
-		player.pick(d, 2);
-		assertTrue(player.getCards().size()==initNbCards+2);
-	}
-	
 	@Test
 	public void playableCard(){
 		Card c = new Card(10,3,false);

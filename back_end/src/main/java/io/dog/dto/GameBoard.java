@@ -38,16 +38,16 @@ public class GameBoard {
 		}
 	}
 
-	public boolean samePosition(Piece p) {
+	public Piece samePosition(Piece p) {
 		if (!p.isArrived() && p.isStatus()) {
 			for (Piece piece : pieces) {
 				if (p.getId() != piece.getId() && p.getPosition()== piece.getPosition() && !piece.isArrived() && piece.isStatus()) {
 					piece.resetToBeginning();
-					return true;
+					return piece;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	public Piece getPieceInTheList(Piece p){

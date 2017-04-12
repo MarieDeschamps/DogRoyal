@@ -46,13 +46,6 @@ public class Player {
 		this.cards.add(d.pick());
 	}
 
-	public void pick(Deck d, int nbCards) {
-		if(this.cards==null){
-			this.cards = new ArrayList<>();
-		}
-		this.cards.addAll(d.pick(nbCards));
-	}
-
 	public boolean playableCard(Card c, Piece p) {
 		boolean movePiece;
 		if (p.isArrived() == true) {
