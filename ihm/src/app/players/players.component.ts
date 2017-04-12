@@ -8,7 +8,7 @@ import {Player, Deck, Players} from '../model';
   selector: 'app-players',
   template: `<div *ngFor="let player of players;">
   <app-player [player]="player">
-    <app-hand [hand]="player.hand" [chooseCard]="true"></app-hand>
+    <app-hand [hand]="player.hand" [chooseCard]="false"></app-hand>
   </app-player>
   </div>`,
   styles: ['']

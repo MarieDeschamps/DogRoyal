@@ -15,8 +15,8 @@ export class AppComponent {
 
   playersTry : Players = [{
     pieces: [
-      {'position': 0,'state' : false,'id':3},
-      {'position' : 0, 'state' : false,'id':4}
+      {'position': 2,'state' : false,'id':3},
+      {'position' : 3, 'state' : false,'id':4}
     ],
     hand:[
       {'value':5, 'id':5},
@@ -27,8 +27,8 @@ export class AppComponent {
     color: 'blue'
   }, {
     pieces: [
-      {'position': 0,'state' : false,'id':1},
-      {'position' : 0, 'state' : false,'id':2}
+      {'position': 5,'state' : false,'id':1},
+      {'position' : 7, 'state' : false,'id':2}
     ],
     hand: [
       {'value':14, 'id':1},

@@ -35,7 +35,7 @@ import {Players} from '../model';
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class GameBoardComponent {
 
-  @Input() players : Players;
+  @Input() players: Players;
 
   @Input() set nbCases(value: number) {
     this.cases = [];
