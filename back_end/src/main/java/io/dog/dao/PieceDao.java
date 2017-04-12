@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import io.dog.entities.CardDB;
 import io.dog.entities.PieceDB;
 
 public class PieceDao {
