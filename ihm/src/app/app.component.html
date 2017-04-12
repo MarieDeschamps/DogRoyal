@@ -6,9 +6,13 @@
 
 
 <div *ngIf="!winner">
-<div *ngIf="start">
-  <app-players [players]="playersTry"></app-players>
-  <br/>
-  <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
-</div>
+  <div *ngIf="start">
+
+    <app-players [players]="playersTry"></app-players>
+
+    <br/>
+    <app-deck [deck]="deckTry"></app-deck>
+    <br/>
+    <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
+  </div>
 </div>
