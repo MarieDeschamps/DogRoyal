@@ -19,6 +19,7 @@ public class PieceDaoTest {
 	EntityManager em;
 	PieceDao dao;
 	PieceDB one = new PieceDB(2, 16);
+	PieceDB two = new PieceDB(3, 32);
 
 	@Before
 	public void setUp() {
@@ -57,23 +58,19 @@ public class PieceDaoTest {
 		em.getTransaction().begin();
 
 		// Create Data
-		for (int i = 0; i < 2; i++) {
-			em.persist(new PieceDB(1, 0));
-			em.persist(new PieceDB(2, 16));
-		}
-
+		dao.create(two);
 		em.getTransaction().commit();
 
 		// Add Piece One to Status True
 		em.getTransaction().begin();
-		dao.updateStatus(3);
-		assertTrue(dao.findById(3).isStatus());
+		dao.updateStatus(two.getId());
+		assertTrue(dao.findById(two.getId()).isStatus());
 		em.getTransaction().commit();
 
 		// Move this piece to position 10
 		em.getTransaction().begin();
-		dao.updatePosition(3, 10);
-		assertTrue(dao.findById(3).getPosition() == 10);
+		dao.updatePosition(two.getId(), 10);
+		assertTrue(dao.findById(two.getId()).getPosition() == 10);
 		em.getTransaction().commit();
 	}
 
@@ -121,6 +118,12 @@ public class PieceDaoTest {
 		em.getTransaction().begin();
 		List<PieceDB> all = dao.findAll();
 		assertTrue(all.size() > 3);
+		em.getTransaction().commit();
+		
+		em.getTransaction().begin();
+		dao.deleteAll();
+		all = dao.findAll();
+		assertTrue(all.isEmpty());
 		em.getTransaction().commit();
 
 	}

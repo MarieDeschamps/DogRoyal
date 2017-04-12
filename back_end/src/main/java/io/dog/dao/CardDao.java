@@ -67,4 +67,9 @@ public class CardDao {
 		String jpql = "UPDATE CardDB c SET c.pickable=true WHERE c.player=0";
 		em.createQuery(jpql).executeUpdate();
 	}
+	
+	public void deleteAll(){
+		String jpql = "DELETE FROM CardDB";
+		em.createQuery(jpql).executeUpdate();
+	}
 }

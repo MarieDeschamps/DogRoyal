@@ -56,4 +56,9 @@ public class PieceDao {
 		Object r = em.createQuery(jpql).getSingleResult();
 		return (int) (long) (Long) r;
 	}
+
+	public void deleteAll() {
+		String jpql = "DELETE FROM PieceDB";
+		em.createQuery(jpql).executeUpdate();
+	}
 }

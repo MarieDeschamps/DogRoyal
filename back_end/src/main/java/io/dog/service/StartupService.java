@@ -58,5 +58,10 @@ public class StartupService {
 			}
 		}
 	}
+	
+	public void deleteGame(){
+		cdao.deleteAll();
+		pdao.deleteAll();
+	}
 
 }
