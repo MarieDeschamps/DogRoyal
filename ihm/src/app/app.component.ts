@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {Players} from './model';
+import {Deck, Players} from './model';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +7,29 @@ import {Players} from './model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  nOfPlayers;
-  nOfPieces;
+  nOfPlayers: number;
+  nOfPieces: number;
   @Input() Players;
-  @Output() choosePlayers = new EventEmitter<number>();
+  nbCases: number;
+  start: boolean;
+  winner = null;
 
+  newGameData($event) {
+    this.nOfPieces = $event.piecesPlayer;
+    this.nOfPlayers = $event.totalPlayers;
+    this.start = true;
+    this.nbCases = 16 * (this.nOfPlayers);
+  }
+  ;
 
-  nbCases = 16 * (this.playersTry.length);
+  deckTry: Deck = {
+    'pick': 76, 'discard': 0
+  };
 
   playersTry: Players = [{
     pieces: [
       {'position': 2, 'state': false, 'id': 3, 'choosePiece': true},
-      {'position': 3, 'state': false, 'id': 4, 'choosePiece': true}
+      {'position': 1, 'state': false, 'id': 4, 'choosePiece': true}
     ],
     hand: [
       {'value': 5, 'id': 5, 'chooseCard': true},
@@ -30,7 +41,7 @@ export class AppComponent {
   }, {
     pieces: [
       {'position': 5, 'state': false, 'id': 1, 'choosePiece': true},
-      {'position': 7, 'state': false, 'id': 2, 'choosePiece': true}
+      {'position': 9, 'state': false, 'id': 2, 'choosePiece': true}
     ],
     hand: [
       {'value': 14, 'id': 1, 'chooseCard': true},
@@ -41,6 +52,6 @@ export class AppComponent {
     color: 'red'
   }];
 
-  chooseCard = false;
 
 }
+

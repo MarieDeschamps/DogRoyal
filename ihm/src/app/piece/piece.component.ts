@@ -9,7 +9,7 @@ import {Piece} from '../model';
   template: `
     <div class="piece">
       <div>Piece position{{piece.position}}</div>
-      <button *ngIf="piece.choosePiece" (click)="onChoosePiece()"> Choose this piece</button>
+      <button *ngIf="piece.choosePiece" (click)="onChoosePiece(piece)"> Choose this piece</button>
     </div><br/>`,
   styles: [`
     .piece {
@@ -21,9 +21,10 @@ import {Piece} from '../model';
 export class PieceComponent {
   @Input() piece: Piece;
 
-  @Output() choosenPiece: EventEmitter<number> = new EventEmitter();
+  @Output() choosenPiece: EventEmitter<Piece> = new EventEmitter();
 
-  onChoosePiece() {
-    this.choosenPiece.emit();
+  onChoosePiece(piece) {
+    this.choosenPiece.emit(piece);
+    console.log(this.piece)
   }
 }

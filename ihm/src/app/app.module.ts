@@ -10,8 +10,10 @@ import {GameBoardComponent} from './gameBoard/gameBoard.component';
 import {PieceComponent} from './piece/piece.component';
 import {PlayerComponent} from  './player/player.component';
 import {PlayersComponent} from './players/players.component';
+import {NewGameFormComponent} from "./forms/newGameForm.component";
 
 import {AppComponent} from './app.component';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import {AppComponent} from './app.component';
     GameBoardComponent,
     PieceComponent,
     PlayerComponent,
-    PlayersComponent
+    PlayersComponent,
+    NewGameFormComponent
   ],
   imports: [
     BrowserModule,

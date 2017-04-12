@@ -64,7 +64,7 @@ public class LoadService {
 		
 		if (list.isEmpty()){
 			System.out.println("List of Cards is empty");
-			return null;
+			return new ArrayList<>();
 		}
 
 		List<Card> newList = new ArrayList<>();
@@ -78,7 +78,7 @@ public class LoadService {
 
 		if (list.isEmpty()){
 			System.out.println("List of Pieces is Empty");
-			return null;
+			return new ArrayList<>();
 		}
 		
 		List<Piece> newList = new ArrayList<>();
