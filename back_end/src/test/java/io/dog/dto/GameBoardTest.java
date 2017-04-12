@@ -57,13 +57,13 @@ public class GameBoardTest {
 	@Test
 	public void samePosition() {
 		Piece p = board.getPieces().get(0);
-		assertFalse(board.samePosition(p));
+		assertTrue(board.samePosition(p)==null);
 		
 		board.startPiece(p);
-		assertFalse(board.samePosition(p));
+		assertTrue(board.samePosition(p)==null);
 		
 		p.setPosition(10);
-		assertTrue(board.samePosition(p));
+		assertTrue(board.samePosition(p)!=null);
 		assertFalse(board.getPieces().get(3).isStatus());
 	}
 }

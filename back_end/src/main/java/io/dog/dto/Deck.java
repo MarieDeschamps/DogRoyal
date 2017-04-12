@@ -42,25 +42,11 @@ public class Deck {
     		throw new IllegalArgumentException("not enough cards in the full deck");
     	}
     	if(this.isEmpty()){
-            this.shuffle();
+    		throw new IllegalArgumentException("not enough cards in the pickables");
         }
         Card c = this.pickable.get(0);
         this.pickable.remove(0);
         return c;
-    }
-
-    public List<Card> pick(int nbCards) {
-    	if(this.size()+this.disguard.size()<nbCards){
-    		throw new IllegalArgumentException("not enough cards in the full deck");
-    	}
-        List<Card> cardsPicked = new ArrayList<>();
-        for (int i = 1; i <= nbCards; i++) {
-            if(this.isEmpty()){
-                this.shuffle();
-            }
-            cardsPicked.add(this.pick());
-        }
-        return cardsPicked;
     }
 
     public void addToDisguard(Card c) {
