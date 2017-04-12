@@ -58,13 +58,13 @@ public class CardDao {
 	}
 
 	public List<CardDB> findAll() {
-		String jpql = "SELECT * FROM CardDB c";
+		String jpql = "SELECT c FROM CardDB c";
 		return em.createQuery(jpql, CardDB.class).getResultList();
 
 	}
 
 	public void updateNewDeck() {
-		String jpql = "UPDATE CardDB c SET c.pickable=1 WHERE c.player=0";
-		em.createQuery(jpql, CardDB.class);
+		String jpql = "UPDATE CardDB c SET c.pickable=true WHERE c.player=0";
+		em.createQuery(jpql).executeUpdate();
 	}
 }

@@ -40,19 +40,20 @@ public class PieceDao {
 		PieceDB pieces = findById(id);
 		pieces.setPosition(position);
 	}
-	
+
 	public List<PieceDB> getPlayersPieces(int numberplayer) {
 		String jpql = "SELECT p FROM PieceDB p WHERE p.player = :player";
 		return em.createQuery(jpql, PieceDB.class).setParameter("player", numberplayer).getResultList();
 	}
-	
+
 	public List<PieceDB> findAll() {
-		String jpql = "SELECT * FROM PieceDB";
+		String jpql = "SELECT p FROM PieceDB";
 		return em.createQuery(jpql, PieceDB.class).getResultList();
 	}
-	
+
 	public int getNbPlayers() {
-		String jpql = "SELECt COUNT(*) from ( SELECT DISTINCT p.player FROM PieceDB) AS nbplayers";
-		return em.createQuery(jpql).getFirstResult();
+		String jpql = "select count(distinct p.player) FROM PieceDB p";
+		Object r = em.createQuery(jpql).getSingleResult();
+		return (int) (long) (Long) r;
 	}
 }

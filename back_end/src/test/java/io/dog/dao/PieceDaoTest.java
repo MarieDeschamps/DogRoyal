@@ -3,6 +3,8 @@ package io.dog.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.junit.After;
@@ -37,7 +39,7 @@ public class PieceDaoTest {
 	}
 
 	@Test
-	public void createAndDelete() {
+	public void createAndDeleteTest() {
 		em.getTransaction().begin();
 		dao.create(one);
 		assertTrue(one.getId() > 0);
@@ -51,7 +53,7 @@ public class PieceDaoTest {
 	}
 
 	@Test
-	public void updatePiece() {
+	public void updatePieceTest() {
 		em.getTransaction().begin();
 
 		// Create Data
@@ -73,5 +75,56 @@ public class PieceDaoTest {
 		dao.updatePosition(3, 10);
 		assertTrue(dao.findById(3).getPosition() == 10);
 		em.getTransaction().commit();
+	}
+	
+	
+	@Test
+	public void getNbPlayersAndPlayersTest() {
+		em.getTransaction().begin();
+
+		// Create Data
+		for (int i = 0; i < 2; i++) {
+			em.persist(new PieceDB(1, 0));
+			em.persist(new PieceDB(2, 16));
+		}
+
+		em.getTransaction().commit();
+		
+		em.getTransaction().begin();
+		int i = dao.getNbPlayers();
+		System.out.println(i);
+		assertTrue(i == 2);
+		em.getTransaction().commit();
+		
+		em.getTransaction().begin();
+		
+		List<PieceDB> onePiece = dao.getPlayersPieces(1);
+		List<PieceDB> twoPiece = dao.getPlayersPieces(2);
+		assertTrue(onePiece.size() == 2);
+		assertTrue(twoPiece.size() == 2);
+		
+		em.getTransaction().commit();
+		
+		
+		
+	}
+	
+	@Test
+	public void findAllTest() {
+		em.getTransaction().begin();
+
+		// Create Data
+		for (int i = 0; i < 2; i++) {
+			em.persist(new PieceDB(1, 0));
+			em.persist(new PieceDB(2, 16));
+		}
+
+		em.getTransaction().commit();
+		
+		em.getTransaction().begin();
+		List<PieceDB> all = dao.findAll();
+		assertTrue(all.size() == 4);
+		em.getTransaction().commit();
+		
 	}
 }
