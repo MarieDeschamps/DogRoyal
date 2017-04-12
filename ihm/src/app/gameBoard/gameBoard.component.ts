@@ -2,7 +2,7 @@
  * Created by Sara Mendez on 10/04/2017.
  */
 import {Component, Input, Output} from '@angular/core';
-import {Player, Deck, Players} from '../model';
+import {Players} from '../model';
 
 
 @Component({

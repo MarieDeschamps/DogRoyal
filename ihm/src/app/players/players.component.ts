@@ -2,7 +2,7 @@
   * Created by Sara Mendez on 11/04/2017.
   */
 import { Component, Input, Output} from '@angular/core';
-import {Player, Deck} from '../model';
+import {Player, Deck, Players} from '../model';
 
 @Component({
   selector: 'app-players',
@@ -10,5 +10,5 @@ import {Player, Deck} from '../model';
   styles: ['']
 })
 export class PlayersComponent{
-@Input() players : Player[];
+@Input() players : Players;
 }

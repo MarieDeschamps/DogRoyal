@@ -2,7 +2,7 @@
  * Created by Camille on 10/04/2017.
  */
 import { Component, Input, Output} from '@angular/core';
-
+import {Piece} from '../model';
 
 @Component({
   selector: 'app-piece',
@@ -11,14 +11,6 @@ import { Component, Input, Output} from '@angular/core';
 })
 
 export class PieceComponent{
-@Input() position: number;
-state: boolean =false;
-@Output() set stateOnBoard(value: boolean){
+@Input() piece:Piece ;
 
-  while(this.position >= this.positionInitial && this.position !== this.positionInitial+64){
-    this.state = true;
-  }
-  this.state = false;
-};
-@Input() positionInitial: number;
 }
