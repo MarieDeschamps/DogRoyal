@@ -17,6 +17,7 @@ public class Player {
 	}
 
 	public Player(List<Piece> pieces, List<Card> cards, int number) {
+		this.number=number;
 		for (Piece piece : pieces) {
 			piece.setInitialPosition(this.initialPosition());
 		}
