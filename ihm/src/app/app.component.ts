@@ -13,6 +13,7 @@ export class AppComponent {
   nbCases : number;
   start : boolean;
 
+
   newGameData($event) {
     this.nOfPieces = $event.piecesPlayer;
     this.nOfPlayers = $event.totalPlayers;
@@ -20,6 +21,7 @@ export class AppComponent {
     this.nbCases = 16 * (this.nOfPlayers);
   }
 ;
+
 
   playersTry: Players = [{
     pieces: [

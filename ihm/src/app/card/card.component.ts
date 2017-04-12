@@ -9,7 +9,7 @@ import {Card} from '../model';
   template: `
     <div class="card">
       <div>{{card.value}}</div>
-      <button *ngIf="card.chooseCard" (click)="onChooseCard()"> choose this card</button>
+      <button *ngIf="card.chooseCard" (click)="onChooseCard(card)"> choose this card</button>
     </div>
   `,
   styles:[`
@@ -22,10 +22,11 @@ export class CardComponent {
 
   @Input() card: Card;
 
-  @Output() choosenCard: EventEmitter<number> = new EventEmitter();
+  @Output() choosenCard: EventEmitter<Card> = new EventEmitter();
 
-  onChooseCard() {
-    this.choosenCard.emit();
+  onChooseCard(card) {
+    this.choosenCard.emit(card);
+    console.log(this.card);
   }
 
 }
