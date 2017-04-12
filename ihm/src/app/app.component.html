@@ -61,8 +61,7 @@
 <app-players *ngFor="let player of players;">
   <app-player [player]="player">
     <app-hand [hand]="player.hand" [chooseCard]="true"></app-hand>
-
   </app-player>
 
 </app-players>
-
+<app-gameBoard [nbCases]="12" [players]="playersTry"></app-gameBoard>

@@ -1,39 +1,48 @@
-export function Exchange() {
-    let beginPath = "dog/"
+import {Http, Response} from "@angular/http";
+import "rxjs/add/operator/toPromise";
+
+
+
+export class Exchange {
+  beginPath = "dog/";
+
+  constructor(private http: Http) {
+  }
+
+  getGamesChoice() {
+    this.http.get(this.beginPath)
+      .toPromise()
+      .then((response: Response) => response.json());
+  }
 }
+/*
+  create(nbPlayers, nbPiecesByPlayer) {
+    return fetch(this.beginPath + "create/{{nbPlayers}}/{{nbPiecesByPlayer}}", {method: "POST"});
+  }
 
-Exchange.prototype = {
-    getGamesChoice: function(){
-        return fetch(this.beginPath, { method: "GET" });
-    },
+  /!*load (game) {
+   return fetch(this.beginPath+"load/{{game}}", { method: "POST" });
+   },*!/
 
-    create: function (nbPlayers, nbPiecesByPlayer) {
-        return fetch(this.beginPath+"create/{{nbPlayers}}/{{nbPiecesByPlayer}}", { method: "POST" });
-    },
+  load() {
+    return fetch(this.beginPath + "load", {method: "POST"});
+  }
 
-    /*load: function (game) {
-        return fetch(this.beginPath+"load/{{game}}", { method: "POST" });
-    },*/
+  pick5() {
+    return fetch(this.beginPath + "pick5", {method: "PUT"});
+  }
 
-    load: function () {
-        return fetch(this.beginPath+"load", { method: "POST" });
-    },
-
-    pick5: function(){
-        return fetch(this.beginPath+"pick5", { method: "PUT" });
-    },
-
-    play: function(player, card, piece){
-        return fetch(this.path,
-				{
-					headers: {
-						'Accept': 'application/json',
-						'Content-Type': 'application/json'
-					},
-					method: "POST",
-					body: JSON.stringify(player, card, piece)
-				})
-    }
+  play(player, card, piece) {
+    return fetch(this.beginPath,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(player, card, piece)
+      })
+  }
 }
-
 export default Exchange;
+ */
