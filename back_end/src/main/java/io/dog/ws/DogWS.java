@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,6 +26,7 @@ import io.dog.service.StartupService;
 @Path("dog")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes("application/json")
+@RequestScoped
 public class DogWS {
 
 	@EJB
@@ -44,35 +46,47 @@ public class DogWS {
 	@GET
 	public List<Integer> gamesChoice(){
 		List<Integer> games = new ArrayList<>();
+		games.add(1);
+		games.add(2);
 		//get la liste des ids des parties
 		return games;
 	}
 	
 	@POST
 	@Path("create/{nbPlayers}/{nbPiecesByPlayer}")
-	public ContainerForWS create(@PathParam("nbPlayers") int nbPlayers, @PathParam("nbPiecesByPlayer") int nbPiecesByPlayer){
+	public ContainerForOutputWS create(@PathParam("nbPlayers") int nbPlayers, @PathParam("nbPiecesByPlayer") int nbPiecesByPlayer){
 		if(nbPlayers<2){
-			return new ContainerForWS(0, false, "There must be almost 2 players");
+			return new ContainerForOutputWS(0, false, "There must be almost 2 players");
 		}
 		if(nbPiecesByPlayer<=0){
-			return new ContainerForWS(0, false, "There must be almost 1 piece by player");
+			return new ContainerForOutputWS(0, false, "There must be almost 1 piece by player");
 		}
 
 		startupService.createDeck();
 		startupService.createPiece(nbPlayers, nbPiecesByPlayer);
 
-		return loadBdd();
+		this.loadBdd();
+		return new ContainerForOutputWS(deck, players, whoPlayNow, true);
 	}
 	
 	@POST
 	@Path("load")
-	public ContainerForWS load(){
-		return loadBdd();
+	public ContainerForOutputWS load(){
+		this.loadBdd();
+		return new ContainerForOutputWS(deck, players, whoPlayNow, true);
 	}
 	
 	@PUT
 	@Path("pick5")
-	public ContainerForWS pick5(){
+	public ContainerForOutputWS pick5(){
+		this.loadBdd();
+		
+		//guard
+		for (Player player : players) {
+			if(player.getCards()!=null && !player.getCards().isEmpty()){
+				return new ContainerForOutputWS(whoPlayNow, false,"the players already have cards");
+			}
+		}
 		
 		for (Player player : players) {
 			for(int c = 0; c<5;c++){
@@ -84,26 +98,43 @@ public class DogWS {
 			}
 		}
 		playerService.updatePickedCards(players);
-		ContainerForWS result = new ContainerForWS(deck, players, whoPlayNow, true);
+		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow, true);
 		return result;
 	}
 	
 	@PUT
 	@Path("play")
-	public ContainerForWS play(Player player, Card card, Piece piece){
+	public ContainerForOutputWS play(ContainerForInputWS input){
+		Player player = input.getPlayer();
+		Card card = input.getCard();
+		Piece piece = input.getPiece();
+		this.loadBdd();
+		
+		//guards
 		if(!players.contains(player)){
-			return new ContainerForWS(whoPlayNow, false,"the player is not in game");
+			return new ContainerForOutputWS(whoPlayNow, false,"the player is not in game");
 		}
-		if(player.getCards().isEmpty()){
-			return new ContainerForWS(whoPlayNow, false,"the player has no cards");
-		}
-		if(!player.getCards().contains(card)){
-			return new ContainerForWS(whoPlayNow, false, "the player have not this card");
-		}
-		if(!player.getPieces().contains(piece)){
-			return new ContainerForWS(whoPlayNow, false, "the player have not this piece");
+		player = players.get(players.indexOf(player));
+		
+		if(player.getNumber()!=whoPlayNow){
+			return new ContainerForOutputWS(whoPlayNow, false,"it's not the player "+ player.getNumber() + " turn");
 		}
 		
+		if(player.getCards().isEmpty()){
+			return new ContainerForOutputWS(whoPlayNow, false,"the player has no cards");
+		}
+		
+		if(!player.getCards().contains(card)){
+			return new ContainerForOutputWS(whoPlayNow, false, "the player have not this card");
+		}
+		card  = player.getCards().get(player.getCards().indexOf(card));
+		
+		if(!player.getPieces().contains(piece)){
+			return new ContainerForOutputWS(whoPlayNow, false, "the player have not this piece");
+		}
+		piece  = player.getPieces().get(player.getPieces().indexOf(piece));
+		
+		//play
 		if(player.playableCard(card, piece)){
 			if(piece.isStatus()==false){
 				gameBoard.startPiece(piece);
@@ -117,33 +148,51 @@ public class DogWS {
 				modifiedPieces.add(comedPiece);
 			}
 			playerService.updatePieces(modifiedPieces);
+			player.disguardCard(deck, card);
 			playerService.updateDisguardCard(card);
 		}else{
 			for(Card c : player.getCards()){
 				for(Piece p : player.getPieces()){
 					if(player.playableCard(c, p)){
-						return new ContainerForWS(whoPlayNow, false,"It exists a card in the player hand that can be played in a player piece");
+						return new ContainerForOutputWS(whoPlayNow, false,"It exists a card in the player hand that can be played in a player piece");
 					}
 				}
 			}
 			player.disguardCard(deck, card);
 			playerService.updateDisguardCard(card);
 		}
-		
-		return new ContainerForWS(deck, players, whoPlayNow++,true);
+		whoPlayNow++;
+		boolean winner = true;
+		for(Piece p : player.getPieces()){
+			if(!p.isArrived()){
+				winner = false;
+			}
+		}
+		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow,true);
+		if(winner){
+			result.setWinner(player);
+		}
+		return result;
 	}
 	
-	private ContainerForWS loadBdd() {
+	private void loadBdd() {
 		deck = loadService.getDeck();
+		deck.shufflePickable();
 		players = loadService.getPlayers();
+		
+		List<Piece> pieces = new ArrayList<>();
+		for (Player p : players) {
+			pieces.addAll(p.getPieces());
+		}
+		gameBoard = new GameBoard(players.size(), pieces);
+		
 		whoPlayNow = 1;
 		for (int p=1;p<players.size();p++) {
-			if(players.get(p).getCards().size()>players.get(p-1).getCards().size()){
-				whoPlayNow = players.get(p-1).getNumber();
+			if(players.get(p).getCards()!= null && players.get(p-1).getCards()!= null && players.get(p).getCards().size()>players.get(p-1).getCards().size()){
+				whoPlayNow = players.get(p).getNumber();
 				break;
 			}
 		}
-		return new ContainerForWS(deck, players, whoPlayNow, true);
 	}
 	
 }

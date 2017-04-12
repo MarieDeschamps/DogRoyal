@@ -38,7 +38,7 @@ public class Deck {
     }
 
     public Card pick() {
-    	if(this.size()+this.disguard.size()<1){
+    	if(this.disguard!=null && this.size()+this.disguard.size()<1){
     		throw new IllegalArgumentException("not enough cards in the full deck");
     	}
     	if(this.isEmpty()){
@@ -57,6 +57,10 @@ public class Deck {
         Collections.shuffle(this.disguard);
         this.pickable.addAll(this.disguard);
         this.disguard = new ArrayList<>();
+    }
+    
+    public void shufflePickable(){
+    	Collections.shuffle(this.pickable);
     }
 
 	public List<Card> getPickable() {

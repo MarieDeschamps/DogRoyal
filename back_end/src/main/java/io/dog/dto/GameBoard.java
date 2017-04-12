@@ -21,7 +21,6 @@ public class GameBoard {
 			throw new IllegalArgumentException("The piece is not in the game!");
 		}
 		p.setStatus(true);
-		this.samePosition(p);
 	}
 	
 	public void movePiece(Piece p, int nbMoves){
@@ -34,7 +33,6 @@ public class GameBoard {
 			p.setPosition(0);
 		}else{
 			p.setPosition(newPosition);
-			this.samePosition(p);
 		}
 	}
 

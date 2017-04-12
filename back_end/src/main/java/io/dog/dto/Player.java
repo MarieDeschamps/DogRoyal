@@ -8,12 +8,18 @@ public class Player {
 	List<Card> cards;
 	int number;
 	
+	public Player() {
+		this.pieces = new ArrayList<>();
+		this.cards = new ArrayList<>();
+	}
+
 	public Player(List<Piece> pieces, int number) {
 		this.number = number;
 		for (Piece piece : pieces) {
 			piece.setInitialPosition(this.initialPosition());
 		}
 		this.pieces = pieces;
+		this.cards = new ArrayList<>();
 	}
 
 	public Player(List<Piece> pieces, List<Card> cards, int number) {
@@ -22,7 +28,7 @@ public class Player {
 			piece.setInitialPosition(this.initialPosition());
 		}
 		this.pieces = pieces;
-		this.cards = new ArrayList<>();
+		this.cards = cards;
 	}
 
 	public Player(int nbPiece, List<Integer> pieceIds, List<Card> cards, int number) {
@@ -44,7 +50,18 @@ public class Player {
 		if(this.cards==null){
 			this.cards = new ArrayList<>();
 		}
-		this.cards.add(d.pick());
+		boolean added = false;
+		Card card = d.pick();
+		for(int c = 0; c<this.cards.size();c++){
+			if(this.cards.get(c).getValue()>card.getValue()){
+				this.cards.add(c,card);
+				added = true;
+				break;
+			}
+		}
+		if(!added){
+			this.cards.add(card);
+		}
 	}
 
 	public boolean playableCard(Card c, Piece p) {
@@ -78,4 +95,39 @@ public class Player {
 		return number;
 	}
 
+	public void setPieces(List<Piece> pieces) {
+		this.pieces = pieces;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + number;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (number != other.number)
+			return false;
+		return true;
+	}
+	
+	
 }
