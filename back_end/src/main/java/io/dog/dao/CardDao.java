@@ -46,21 +46,25 @@ public class CardDao {
 		String jpql = "SELECT c FROM CardDB c WHERE c.player = :player";
 		return em.createQuery(jpql, CardDB.class).setParameter("player", numberplayer).getResultList();
 	}
-	
+
 	public List<CardDB> getPickablesCards() {
 		String jpql = "SELECT c FROM CardDB c WHERE c.pickable = :pickable";
 		return em.createQuery(jpql, CardDB.class).setParameter("pickable", true).getResultList();
 	}
-	
+
 	public List<CardDB> getDiguardsCards() {
 		String jpql = "SELECT c FROM CardDB c WHERE c.pickable = false AND c.player = 0";
 		return em.createQuery(jpql, CardDB.class).getResultList();
 	}
-	
+
 	public List<CardDB> findAll() {
 		String jpql = "SELECT * FROM CardDB c";
 		return em.createQuery(jpql, CardDB.class).getResultList();
-		
+
 	}
-	
+
+	public void updateNewDeck() {
+		String jpql = "UPDATE CardDB c SET c.pickable=1 WHERE c.player=0";
+		em.createQuery(jpql, CardDB.class);
+	}
 }

@@ -63,5 +63,10 @@ public class PlayerService {
 			}
 		}
 	}
+	
+	public void updateNewDeck(){
+		cdao.updateNewDeck();
+	}
+	
 
 }

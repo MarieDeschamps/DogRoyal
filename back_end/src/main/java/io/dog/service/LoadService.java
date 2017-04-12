@@ -61,6 +61,11 @@ public class LoadService {
 	}
 
 	public List<Card> toCard(List<CardDB> list) {
+		
+		if (list.isEmpty()){
+			System.out.println("List of Cards is empty");
+			return null;
+		}
 
 		List<Card> newList = new ArrayList<>();
 		for (CardDB card : list) {
@@ -71,6 +76,11 @@ public class LoadService {
 
 	public List<Piece> toPiece(List<PieceDB> list) {
 
+		if (list.isEmpty()){
+			System.out.println("List of Pieces is Empty");
+			return null;
+		}
+		
 		List<Piece> newList = new ArrayList<>();
 		boolean arrived;
 		int initialPosition;
