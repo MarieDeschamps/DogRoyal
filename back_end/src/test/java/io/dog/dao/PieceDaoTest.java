@@ -76,8 +76,7 @@ public class PieceDaoTest {
 		assertTrue(dao.findById(3).getPosition() == 10);
 		em.getTransaction().commit();
 	}
-	
-	
+
 	@Test
 	public void getNbPlayersAndPlayersTest() {
 		em.getTransaction().begin();
@@ -89,26 +88,24 @@ public class PieceDaoTest {
 		}
 
 		em.getTransaction().commit();
-		
+
 		em.getTransaction().begin();
 		int i = dao.getNbPlayers();
 		System.out.println(i);
 		assertTrue(i == 2);
 		em.getTransaction().commit();
-		
+
 		em.getTransaction().begin();
-		
+
 		List<PieceDB> onePiece = dao.getPlayersPieces(1);
 		List<PieceDB> twoPiece = dao.getPlayersPieces(2);
 		assertTrue(onePiece.size() == 2);
 		assertTrue(twoPiece.size() == 2);
-		
+
 		em.getTransaction().commit();
-		
-		
-		
+
 	}
-	
+
 	@Test
 	public void findAllTest() {
 		em.getTransaction().begin();
@@ -120,11 +117,11 @@ public class PieceDaoTest {
 		}
 
 		em.getTransaction().commit();
-		
+
 		em.getTransaction().begin();
 		List<PieceDB> all = dao.findAll();
-		assertTrue(all.size() == 4);
+		assertTrue(all.size() > 3);
 		em.getTransaction().commit();
-		
+
 	}
 }

@@ -47,7 +47,7 @@ public class PieceDao {
 	}
 
 	public List<PieceDB> findAll() {
-		String jpql = "SELECT p FROM PieceDB";
+		String jpql = "SELECT p FROM PieceDB p";
 		return em.createQuery(jpql, PieceDB.class).getResultList();
 	}
 
