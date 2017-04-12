@@ -6,7 +6,7 @@ import java.util.List;
 public class Player {
 	List<Piece> pieces;
 	List<Card> cards;
-	int number;
+	int id;
 	
 	public Player() {
 		this.pieces = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Player {
 	}
 
 	public Player(List<Piece> pieces, int number) {
-		this.number = number;
+		this.id = number;
 		for (Piece piece : pieces) {
 			piece.setInitialPosition(this.initialPosition());
 		}
@@ -23,7 +23,7 @@ public class Player {
 	}
 
 	public Player(List<Piece> pieces, List<Card> cards, int number) {
-		this.number=number;
+		this.id=number;
 		for (Piece piece : pieces) {
 			piece.setInitialPosition(this.initialPosition());
 		}
@@ -39,11 +39,11 @@ public class Player {
 		}
 		this.pieces = pieces;
 		this.cards = cards;
-		this.number = number;
+		this.id = number;
 	}
 
 	public int initialPosition() {
-		return (number - 1) * 16;
+		return (id - 1) * 16;
 	}
 
 	public void pick(Deck d) {
@@ -91,8 +91,8 @@ public class Player {
 		return cards;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getId() {
+		return id;
 	}
 
 	public void setPieces(List<Piece> pieces) {
@@ -103,15 +103,15 @@ public class Player {
 		this.cards = cards;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setId(int number) {
+		this.id = number;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + number;
+		result = prime * result + id;
 		return result;
 	}
 
@@ -124,7 +124,7 @@ public class Player {
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		if (number != other.number)
+		if (id != other.id)
 			return false;
 		return true;
 	}

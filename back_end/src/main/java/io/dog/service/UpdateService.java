@@ -16,7 +16,7 @@ import io.dog.dto.Player;
 
 @Stateless
 @Named
-public class PlayerService {
+public class UpdateService {
 	CardDao cdao;
 	PieceDao pdao;
 
@@ -39,7 +39,7 @@ public class PlayerService {
 
 		for (Player player : players) {
 			for (Card card : player.getCards()) {
-				cdao.updatePickedCards(card.getId(), player.getNumber());
+				cdao.updatePickedCards(card.getId(), player.getId());
 			}
 		}
 	}

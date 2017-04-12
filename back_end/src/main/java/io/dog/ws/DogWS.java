@@ -20,8 +20,8 @@ import io.dog.dto.GameBoard;
 import io.dog.dto.Piece;
 import io.dog.dto.Player;
 import io.dog.service.LoadService;
-import io.dog.service.PlayerService;
-import io.dog.service.StartupService;
+import io.dog.service.UpdateService;
+import io.dog.service.CreateService;
 
 @Path("dog")
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,10 +30,10 @@ import io.dog.service.StartupService;
 public class DogWS {
 
 	@EJB
-	StartupService startupService;
+	CreateService createService;
 	
 	@EJB
-	PlayerService playerService;
+	UpdateService updateService;
 	
 	@EJB
 	LoadService loadService;
@@ -61,9 +61,9 @@ public class DogWS {
 		if(nbPiecesByPlayer<=0){
 			return new ContainerForOutputWS(0, false, "There must be almost 1 piece by player");
 		}
-
-		startupService.createDeck();
-		startupService.createPiece(nbPlayers, nbPiecesByPlayer);
+		createService.deleteGame();
+		createService.createDeck();
+		createService.createPiece(nbPlayers, nbPiecesByPlayer);
 
 		this.loadBdd();
 		return new ContainerForOutputWS(deck, players, whoPlayNow, true);
@@ -92,12 +92,12 @@ public class DogWS {
 			for(int c = 0; c<5;c++){
 				if(deck.isEmpty()){
 					deck.shuffle();
-					playerService.updateNewDeck();
+					updateService.updateNewDeck();
 		        }
 				player.pick(deck);
 			}
 		}
-		playerService.updatePickedCards(players);
+		updateService.updatePickedCards(players);
 		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow, true);
 		return result;
 	}
@@ -116,8 +116,8 @@ public class DogWS {
 		}
 		player = players.get(players.indexOf(player));
 		
-		if(player.getNumber()!=whoPlayNow){
-			return new ContainerForOutputWS(whoPlayNow, false,"it's not the player "+ player.getNumber() + " turn");
+		if(player.getId()!=whoPlayNow){
+			return new ContainerForOutputWS(whoPlayNow, false,"it's not the player "+ player.getId() + " turn");
 		}
 		
 		if(player.getCards().isEmpty()){
@@ -147,9 +147,9 @@ public class DogWS {
 			if(comedPiece !=null){
 				modifiedPieces.add(comedPiece);
 			}
-			playerService.updatePieces(modifiedPieces);
+			updateService.updatePieces(modifiedPieces);
 			player.disguardCard(deck, card);
-			playerService.updateDisguardCard(card);
+			updateService.updateDisguardCard(card);
 		}else{
 			for(Card c : player.getCards()){
 				for(Piece p : player.getPieces()){
@@ -159,7 +159,7 @@ public class DogWS {
 				}
 			}
 			player.disguardCard(deck, card);
-			playerService.updateDisguardCard(card);
+			updateService.updateDisguardCard(card);
 		}
 		whoPlayNow++;
 		boolean winner = true;
@@ -171,6 +171,7 @@ public class DogWS {
 		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow,true);
 		if(winner){
 			result.setWinner(player);
+			createService.deleteGame();
 		}
 		return result;
 	}
@@ -189,7 +190,7 @@ public class DogWS {
 		whoPlayNow = 1;
 		for (int p=1;p<players.size();p++) {
 			if(players.get(p).getCards()!= null && players.get(p-1).getCards()!= null && players.get(p).getCards().size()>players.get(p-1).getCards().size()){
-				whoPlayNow = players.get(p).getNumber();
+				whoPlayNow = players.get(p).getId();
 				break;
 			}
 		}

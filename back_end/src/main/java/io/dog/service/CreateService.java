@@ -17,7 +17,7 @@ import io.dog.entities.PieceDB;
 
 @Startup
 @Singleton
-public class StartupService {
+public class CreateService {
 	CardDao cdao;
 	PieceDao pdao;
 
