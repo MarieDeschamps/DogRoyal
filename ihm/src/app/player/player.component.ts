@@ -8,7 +8,7 @@ import {Piece, Player} from '../model';
 @Component({
   selector: 'app-player',
   template: `
-    <div>Player {{player.color}}
+    <div>Player {{player.id}} with {{player.color}}  pieces
       <div *ngFor="let piece of player.pieces;let i=indexPiece">
         <app-piece [piece]="piece"
         ></app-piece>

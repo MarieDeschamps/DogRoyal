@@ -2,8 +2,7 @@ export interface Player {
   pieces: Piece[];
   hand: Hand;
   color: string;
-
-
+  id : number;
 }
 
 export interface Piece {
@@ -30,5 +29,4 @@ export interface Deck {
 }
 
 export interface Players extends Array<Player> {
-
 }
