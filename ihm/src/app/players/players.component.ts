@@ -7,12 +7,12 @@ import {Player, Deck, Players} from '../model';
 @Component({
   selector: 'app-players',
   template: `
-    <div *ngFor="let player of players;">
+    <div class="playersStyle" *ngFor="let player of players;">
       <app-player [player]="player">
         <app-hand [hand]="player.hand"></app-hand>
       </app-player>
     </div>`,
-  styles: ['']
+  styles: [``]
 })
 export class PlayersComponent {
   @Input() players: Players;

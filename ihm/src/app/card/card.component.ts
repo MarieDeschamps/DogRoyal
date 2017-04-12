@@ -7,14 +7,15 @@ import {Card} from '../model';
 @Component({
   selector: 'app-card',
   template: `
-    <div class="cardStyle">
+    <div class="card">
       <div>{{card.value}}</div>
-      <div *ngIf="card.chooseCard">
-        <button (click)="onChooseCard()"> choose this card</button>
-      </div>
+      <button *ngIf="card.chooseCard" (click)="onChooseCard()"> choose this card</button>
     </div>
-  `
-  // style:
+  `,
+  styles:[`
+    .card {
+    border: 1px solid black;
+  }`]
 })
 
 export class CardComponent {

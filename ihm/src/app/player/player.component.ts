@@ -10,8 +10,7 @@ import {Player} from '../model';
   template: `
     <div>Player {{player.color}}
       <div *ngFor="let piece of player.pieces;let i=indexPiece">
-        <app-piece [piece]="piece" 
-                   [choosePiece]="piece.choosePiece"
+        <app-piece [piece]="piece"
                    (choosenPiece)="chooseThisPiece(i)"></app-piece>
       </div>
       <app-hand [hand]="player.hand" ></app-hand>

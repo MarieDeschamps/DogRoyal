@@ -7,10 +7,9 @@ import {Piece} from '../model';
 @Component({
   selector: 'app-piece',
   template: `
-    <div class="piece">Piece position{{piece.position}}
-      <div *ngIf="choosePiece">
-        <button (click)="onChoosePiece()"> choose this piece</button>
-      </div>
+    <div class="piece">
+      <div>Piece position{{piece.position}}</div>
+      <button *ngIf="piece.choosePiece" (click)="onChoosePiece()"> Choose this piece</button>
     </div><br/>`,
   styles: [`
     .piece {

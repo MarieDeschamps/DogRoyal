@@ -25,11 +25,6 @@ import {Players} from '../model';
       display: flex;
       flex-flow: row wrap;
     }
-
-    .piece {
-      display: block;
-      margin: 0 auto;
-    }
   `]
 })
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>

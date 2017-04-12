@@ -1,6 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Players, Player, Deck, Hand} from './model';
-
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Players} from './model';
 
 @Component({
   selector: 'app-root',
@@ -11,30 +10,33 @@ export class AppComponent {
   nOfPlayers;
   nOfPieces;
   @Input() Players;
-  @Input() choosen: number;
+  @Output() choosePlayers = new EventEmitter<number>();
+
+
+  nbCases = 16 * (this.playersTry.length);
 
   playersTry: Players = [{
     pieces: [
-      {'position': 2, 'state': false, 'id': 3, 'choosePiece': false},
-      {'position': 3, 'state': false, 'id': 4, 'choosePiece': false}
+      {'position': 2, 'state': false, 'id': 3, 'choosePiece': true},
+      {'position': 3, 'state': false, 'id': 4, 'choosePiece': true}
     ],
     hand: [
-      {'value': 5, 'id': 5, 'chooseCard': false},
-      {'value': 14, 'id': 6, 'chooseCard': false},
-      {'value': 7, 'id': 7, 'chooseCard': false},
-      {'value': 3, 'id': 8, 'chooseCard': false}
+      {'value': 5, 'id': 5, 'chooseCard': true},
+      {'value': 14, 'id': 6, 'chooseCard': true},
+      {'value': 7, 'id': 7, 'chooseCard': true},
+      {'value': 3, 'id': 8, 'chooseCard': true}
     ],
     color: 'blue'
   }, {
     pieces: [
-      {'position': 5, 'state': false, 'id': 1, 'choosePiece': false},
-      {'position': 7, 'state': false, 'id': 2, 'choosePiece': false}
+      {'position': 5, 'state': false, 'id': 1, 'choosePiece': true},
+      {'position': 7, 'state': false, 'id': 2, 'choosePiece': true}
     ],
     hand: [
-      {'value': 14, 'id': 1, 'chooseCard': false},
-      {'value': 5, 'id': 2, 'chooseCard': false},
-      {'value': 8, 'id': 3, 'chooseCard': false},
-      {'value': 1, 'id': 4, 'chooseCard': false}
+      {'value': 14, 'id': 1, 'chooseCard': true},
+      {'value': 5, 'id': 2, 'chooseCard': true},
+      {'value': 8, 'id': 3, 'chooseCard': true},
+      {'value': 1, 'id': 4, 'chooseCard': true}
     ],
     color: 'red'
   }];
