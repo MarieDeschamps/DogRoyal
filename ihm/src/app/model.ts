@@ -3,29 +3,32 @@ export interface Player {
   hand: Hand;
   color: string;
 
+
 }
 
-export interface Piece{
+export interface Piece {
   position: number;
-  state : boolean;
-  id:number;
+  state: boolean;
+  id: number;
+  choosePiece: boolean;
 }
 
 
-export interface Hand extends Array<Card>{
+export interface Hand extends Array<Card> {
 
 }
 
-export interface Card{
+export interface Card {
   value: number;
-  id:number;
+  id: number;
+  chooseCard: boolean;
 }
 
-export interface Deck{
-  pick : number;
+export interface Deck {
+  pick: number;
   discard: number;
 }
 
-export interface Players extends Array<Player>{
+export interface Players extends Array<Player> {
 
 }
