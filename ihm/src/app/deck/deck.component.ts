@@ -7,7 +7,7 @@ import {Deck} from '../model';
 @Component({
   selector: 'app-deck',
   template: `<div>DISCARD{{deck.discard}} PICK{{deck.pick}} </div>`,
-  // style: ['']
+  styles: [`div:{border:1px solid black}`],
 })
 
 export class DeckComponent {

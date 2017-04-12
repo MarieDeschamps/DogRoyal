@@ -8,7 +8,7 @@ import {Card} from '../model';
   selector: 'app-card',
   template: `
     <div class="cardStyle">
-      <div>{{nOfCard}} </div>
+      <div>{{card}}</div>
       <div *ngIf="chooseCard">
         <button (click)="onChoose()"> choose this card</button>
       </div>
@@ -19,8 +19,8 @@ import {Card} from '../model';
 
 export class CardComponent {
 
-  @Input() nOfCard: Card;
-  @Input () chooseCard : boolean;
+  @Input() card: Card;
+  @Input() chooseCard: boolean;
   @Output() chosen = new EventEmitter<null>();
 
   onChoose() {

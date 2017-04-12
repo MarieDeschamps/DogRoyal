@@ -47,14 +47,6 @@ public class DeckTest {
 	}
 
 	@Test
-	public void pickMultiple() {
-		int size = d.size();
-		List<Card> cs = d.pick(2);
-		assertTrue(d.size() == size - 2);
-		assertTrue(cs.size() == 2);
-	}
-
-	@Test
 	public void addToDisguard() {
 		int size = d.getDisguard().size();
 		d.addToDisguard(new Card(17, 3, false));
