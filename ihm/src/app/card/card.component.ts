@@ -8,9 +8,9 @@ import {Card} from '../model';
   selector: 'app-card',
   template: `
     <div class="cardStyle">
-      <div>{{card}}</div>
-      <div *ngIf="chooseCard">
-        <button (click)="onChoose()"> choose this card</button>
+      <div>{{card.value}}</div>
+      <div *ngIf="card.chooseCard">
+        <button (click)="onChooseCard()"> choose this card</button>
       </div>
     </div>
   `
@@ -20,11 +20,11 @@ import {Card} from '../model';
 export class CardComponent {
 
   @Input() card: Card;
-  @Input() chooseCard: boolean;
-  @Output() chosen = new EventEmitter<null>();
 
-  onChoose() {
-    this.chosen.emit();
+  @Output() choosenCard: EventEmitter<number> = new EventEmitter();
+
+  onChooseCard() {
+    this.choosenCard.emit();
   }
 
 }

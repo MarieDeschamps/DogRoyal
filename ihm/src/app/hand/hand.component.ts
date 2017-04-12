@@ -10,8 +10,8 @@ import {Card, Hand} from '../model';
     <div class="cardsStyle">
       <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
         <app-card [card]='card.value'
-                  [chooseCard]='chooseCard'
-                  (chosen)='onChosen(i)'></app-card>
+                  [chooseCard]='card.chooseCard'
+                  (choosenCard)='chooseThisCard(i)'></app-card>
       </div>
     </div>`,
   styles: [
@@ -24,15 +24,12 @@ import {Card, Hand} from '../model';
     }`
   ]
 })
-
-
 export class HandComponent {
 
   @Input() hand: Hand;
-  @Input() chooseCard: boolean;
-  @Output() chosen = new EventEmitter<number>();
+  @Output() choosenCard: EventEmitter<number> = new EventEmitter();
 
-  onChosen(cardIndex) {
-    this.chosen.emit(cardIndex)
+  chooseThisCard(indexCard) {
+    this.choosenCard.emit(indexCard);
   }
 }
