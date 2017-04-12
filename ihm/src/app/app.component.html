@@ -2,20 +2,13 @@
   D O G - R O Y A L
 </h1>
 
-<h2>Test de la carte</h2>
+<app-newGameForm (validation)="newGameData($event)"></app-newGameForm>
 
-<app-card [nOfCard]="5"></app-card>
 
-<h2>Choose Yourself!</h2>
-<div>
-  Choose the number of players<input [(ngModel)]='nOfPlayers'/>
-  Choose the number of pieces<input [(ngModel)]='nOfPieces'/>
+<div *ngIf="!winner">
+<div *ngIf="start">
+  <app-players [players]="playersTry"></app-players>
+  <br/>
+  <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
 </div>
-<br/><br/><br/><br/>
-
-<app-players [players]="playersTry"></app-players>
-
-<br/>
-<app-gameBoard [nbCases]="24" [players]="playersTry">
-
-</app-gameBoard>
+</div>

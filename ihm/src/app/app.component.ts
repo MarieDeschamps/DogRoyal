@@ -7,13 +7,21 @@ import {Players} from './model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  nOfPlayers;
-  nOfPieces;
+  nOfPlayers: number;
+  nOfPieces: number;
   @Input() Players;
-  @Output() choosePlayers = new EventEmitter<number>();
+  nbCases : number;
+  start : boolean;
+winner=null;
 
+  newGameData($event) {
+    this.nOfPieces = $event.piecesPlayer;
+    this.nOfPlayers = $event.totalPlayers;
+    this.start=true;
+    this.nbCases = 16 * (this.nOfPlayers);
+  }
+;
 
-  nbCases = 16 * (this.playersTry.length);
 
   playersTry: Players = [{
     pieces: [
@@ -41,6 +49,8 @@ export class AppComponent {
     color: 'red'
   }];
 
-  chooseCard = false;
+
+
 
 }
+
