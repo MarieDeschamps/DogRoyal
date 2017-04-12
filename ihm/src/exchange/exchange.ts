@@ -10,39 +10,42 @@ export class Exchange {
   }
 
   getGamesChoice() {
-    this.http.get(this.beginPath)
+    return this.http.get(this.beginPath)
       .toPromise()
       .then((response: Response) => response.json());
   }
-}
-/*
+
+
   create(nbPlayers, nbPiecesByPlayer) {
-    return fetch(this.beginPath + "create/{{nbPlayers}}/{{nbPiecesByPlayer}}", {method: "POST"});
+    return this.http.post(this.beginPath + "create/{{nbPlayers}}/{{nbPiecesByPlayer}}","")
+        .toPromise()
+        .then((response: Response) => response.json());
   }
 
-  /!*load (game) {
-   return fetch(this.beginPath+"load/{{game}}", { method: "POST" });
-   },*!/
+  /*load (game) {
+   return this.http.post(this.beginPath + "load/{{game}}","")
+        .toPromise()
+        .then((response: Response) => response.json());
+    }*/
 
   load() {
-    return fetch(this.beginPath + "load", {method: "POST"});
+    return this.http.post(this.beginPath + "load","")
+        .toPromise()
+        .then((response: Response) => response.json());
   }
 
   pick5() {
-    return fetch(this.beginPath + "pick5", {method: "PUT"});
+    return this.http.put(this.beginPath + "pick5", "")
+        .toPromise()
+        .then((response: Response) => response.json());
   }
 
   play(player, card, piece) {
-    return fetch(this.beginPath,
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify(player, card, piece)
-      })
+    return this.http.post(this.beginPath+"play",JSON.stringify(player, card, piece))
+        .toPromise()
+        .then((response: Response) => response.json());
   }
 }
+
 export default Exchange;
- */
+ 
