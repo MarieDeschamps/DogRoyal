@@ -25,3 +25,7 @@ export interface Deck{
   pick : number;
   discard: number;
 }
+
+export interface Players extends Array<Player>{
+
+}
