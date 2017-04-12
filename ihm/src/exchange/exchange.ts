@@ -41,7 +41,12 @@ export class Exchange {
   }
 
   play(player, card, piece) {
-    return this.http.post(this.beginPath+"play",JSON.stringify(player, card, piece))
+    let data = {
+        "player": player,
+        "card" : card,
+        "piece": piece 
+    }
+    return this.http.post(this.beginPath+"play",JSON.stringify(data))
         .toPromise()
         .then((response: Response) => response.json());
   }
