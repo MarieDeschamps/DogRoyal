@@ -12,7 +12,7 @@ export class AppComponent {
   @Input() Players;
   nbCases : number;
   start : boolean;
-
+winner=null;
 
   newGameData($event) {
     this.nOfPieces = $event.piecesPlayer;
