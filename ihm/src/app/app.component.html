@@ -1,64 +1,21 @@
-<!--<div>
-  Choose the number of players
-  <input [(ngModel)]='nOfPlayers'/>
-  Choose the number of players
-  <input [(ngModel)]='nOfPieces'/>
-</div>
-
 <h1>
-    D O G - R O Y A L
+  D O G - R O Y A L
 </h1>
 
 <h2>Test de la carte</h2>
 
 <app-card [nOfCard]="5"></app-card>
 
-//
-
-
-<app-card [nOfCard]="3" [chooseCard]="true"></app-card>
-
-
-<h2>Test de la main</h2>
-
-<app-hand [cards]="[1,5,9,14]"></app-hand>
-
-
-//////////////////////////////////////////////
-
-<app-hand [cards]="[1,5,9,14]" [chooseCard]="true"></app-hand>
-
-<h2>Test du deck</h2>
-<app-deck [nOfCardsLeft]="76"></app-deck>
-
-<h2>TEST GAME BOARD</h2>
-
-<app-gameBoard [nbCases]="12"></app-gameBoard>
-
-//////////////////
-
-&lt;!&ndash;
-<app-gameBoard [nbCases]="12" [players]="[[[2,3],[5,4,3]],[[2,3],[5,4,3]]]" ></app-gameBoard>
-&ndash;&gt;
-
-
-
-<h2>TEST PIECE</h2>
-<app-piece [position]="3" [positionInitial]="0"></app-piece>
-
-<h2>TEST PLAYER</h2>
-<app-player [pieces]="[3,4,5]"></app-player>
-
-/////////////////////////////////////////////////-->
 <h2>Choose Yourself!</h2>
 <div>
-  Choose the number of players
-  <input [(ngModel)]='nOfPlayers'/> Choose the number of players
-  <input [(ngModel)]='nOfPieces'/>
+  Choose the number of players<input [(ngModel)]='nOfPlayers'/>
+  Choose the number of pieces<input [(ngModel)]='nOfPieces'/>
 </div>
 <br/><br/><br/><br/>
 
 <app-players [players]="playersTry"></app-players>
+
+<br/>
 <app-gameBoard [nbCases]="24" [players]="playersTry">
 
 </app-gameBoard>

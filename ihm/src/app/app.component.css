@@ -1,0 +1,8 @@
+app-players{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+  padding-left: 20%;
+  padding-right: 20%;
+}
