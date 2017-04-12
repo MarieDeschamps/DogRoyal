@@ -6,7 +6,11 @@ import {Player, Deck, Players} from '../model';
 
 @Component({
   selector: 'app-players',
-  template: ``,
+  template: `<div *ngFor="let player of players;">
+  <app-player [player]="player">
+    <app-hand [hand]="player.hand" [chooseCard]="true"></app-hand>
+  </app-player>
+  </div>`,
   styles: ['']
 })
 export class PlayersComponent{

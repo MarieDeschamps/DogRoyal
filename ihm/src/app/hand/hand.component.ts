@@ -8,8 +8,8 @@ import {Card, Hand} from '../model';
   selector: 'app-hand',
   template: `
     <div class="cardsStyle">
-      <app-card *ngFor='let i of hand; let i=cardIndex;'
-                [nOfCard]='hand[i].value'
+      <app-card *ngFor='let card of cards; let i=cardIndex;'
+                [nOfCard]='this.hand[card].value'
                 [chooseCard]='chooseCard'
                 (chosen)='onChosen(i)' style='border:1px solid black;font-size: 100%;text-align: center'></app-card>
     </div>`,
@@ -20,6 +20,7 @@ import {Card, Hand} from '../model';
     }`
   ]
 })
+
 
 export class HandComponent {
 

@@ -52,18 +52,13 @@
 /////////////////////////////////////////////////-->
 <h2>Choose Yourself!</h2>
 <div>
-  Choose the number of players
-  <input [(ngModel)]='nOfPlayers'/>
-  Choose the number of players
-  <input [(ngModel)]='nOfPieces'/>
+    Choose the number of players
+    <input [(ngModel)]='nOfPlayers' /> Choose the number of players
+    <input [(ngModel)]='nOfPieces' />
 </div>
-
-<app-players *ngFor="let player of players;">
-  <app-player [player]="player">
-    <app-hand [hand]="player.hand" [chooseCard]="true"></app-hand>
-  </app-player>
-
-</app-players>
+<br/><br/><br/><br/>
 
 
-<app-gameBoard [nbCases]="12" [players]="playersTry"></app-gameBoard>
+<app-gameBoard [nbCases]="24" [players]="playersTry">
+    <app-players [players]="playersTry"></app-players>
+</app-gameBoard>
