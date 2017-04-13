@@ -35,35 +35,32 @@ Enregistrement de la partie dans deux tables :
 	* la situation du pion dans le jeu(sorti ou non)
 
 ## Structure du projet
-### Objet Joueur
-    Liste<pions>
-    int numéro
-    String couleur
-    case finale ()
-    Main
-    Select(pion)
-    pionMêmeCase()
-### Objet Main
-    pick()
-    pick(5)
-    selectCard()
-### Objet pion
-    sorti?
-    int position
-    rentré()
-### Objet Deck
-    List<card>
-    card pick()
-    List<card> pick(5)
-    generate()
-    List<card> //(défausse)
-    Mix()
-    addToThrow()
-### Objet Carte
-    boolean AllowsExit
-    number()
-### Objet Pion
-    position
-    id
-    onBoard()
-    int positionInitial 
+###Objet GameBoard {
+	nbcases
+	Players
+}
+### Objet Deck {
+  pick: number;
+  discard: number;
+}
+### Objet Players extends Array<Player>
+
+### Objet Player
+     pieces: Piece[];
+  hand: Hand;
+  color: string;
+  id : number;
+}
+### Objet Hand extends Array<Card>
+### Objet Card {
+  value: number;
+  id: number;
+  chooseCard: boolean;
+  }
+### Objet Piece {
+  position: number;
+  state: boolean;
+  id: number;
+  choosePiece: boolean;
+}
+
