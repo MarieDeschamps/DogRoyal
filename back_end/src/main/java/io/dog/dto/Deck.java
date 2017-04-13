@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    List<Card> pickable;
-    List<Card> disguard;
+	private List<Card> pickable;
+	private List<Card> disguard;
 
     public Deck() {
     	this.pickable = new ArrayList<>();

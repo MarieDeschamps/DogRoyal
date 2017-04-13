@@ -29,7 +29,7 @@ public class PlayerTest {
 	@Test
 	public void pick(){
 		List<Card> cs = new ArrayList<>();
-		cs.add(new Card(1,3,false));
+		cs.add(new Card(1,3));
 		Deck d = new Deck(cs);
 		player.pick(d);
 		assertTrue(player.getCards().size()==1);
@@ -38,7 +38,7 @@ public class PlayerTest {
 	
 	@Test
 	public void playableCard(){
-		Card c = new Card(10,3,false);
+		Card c = new Card(10,3);
 		List<Card> cs = new ArrayList<>();
 		cs.add(c);
 		Deck d = new Deck(cs);
@@ -59,7 +59,7 @@ public class PlayerTest {
 		}else{
 			initNbCards = player.getCards().size();
 		}
-		Card c = new Card(10,3,false);
+		Card c = new Card(10,3);
 		List<Card> cs = new ArrayList<>();
 		cs.add(c);
 		Deck d = new Deck(cs);

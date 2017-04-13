@@ -14,9 +14,9 @@ public class DeckTest {
 	@Before
 	public void before() {
 		List<Card> cards = new ArrayList<>();
-		cards.add(new Card(2, 1, false));
-		cards.add(new Card(3, 2, false));
-		cards.add(new Card(16, 2, false));
+		cards.add(new Card(2, 1));
+		cards.add(new Card(3, 2));
+		cards.add(new Card(16, 2));
 
 		d = new Deck(cards);
 	}
@@ -49,14 +49,14 @@ public class DeckTest {
 	@Test
 	public void addToDisguard() {
 		int size = d.getDisguard().size();
-		d.addToDisguard(new Card(17, 3, false));
+		d.addToDisguard(new Card(17, 3));
 		assertTrue(d.getDisguard().size() == size + 1);
 		assertTrue(d.getDisguard().get(d.getDisguard().size() - 1).getId() == 17);
 	}
 
 	@Test
 	public void shuffle() {
-		d.addToDisguard(new Card(17, 3, false));
+		d.addToDisguard(new Card(17, 3));
 		int sizePickable = d.size();
 		int sizeDisguard = d.getDisguard().size();
 

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-	List<Piece> pieces;
-	List<Card> cards;
-	int id;
+	private List<Piece> pieces;
+	private List<Card> cards;
+	private int id;
+	private Color color;
 	
 	public Player() {
 		this.pieces = new ArrayList<>();
@@ -20,6 +21,7 @@ public class Player {
 		}
 		this.pieces = pieces;
 		this.cards = new ArrayList<>();
+		this.color = Color.values()[number-1];
 	}
 
 	public Player(List<Piece> pieces, List<Card> cards, int number) {
@@ -29,6 +31,7 @@ public class Player {
 		}
 		this.pieces = pieces;
 		this.cards = cards;
+		this.color = Color.values()[number-1];
 	}
 
 	public Player(int nbPiece, List<Integer> pieceIds, List<Card> cards, int number) {
@@ -40,6 +43,7 @@ public class Player {
 		this.pieces = pieces;
 		this.cards = cards;
 		this.id = number;
+		this.color = Color.values()[number-1];
 	}
 
 	public int initialPosition() {
@@ -68,7 +72,7 @@ public class Player {
 		boolean movePiece;
 		if (p.isArrived() == true) {
 			movePiece = false;
-		} else if (c.isSpecial() == true) {
+		} else if (c.getValue() == 0) {
 			movePiece = true;
 		} else if (p.isStatus()) {
 			movePiece = true;
@@ -127,6 +131,14 @@ public class Player {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 	
 	

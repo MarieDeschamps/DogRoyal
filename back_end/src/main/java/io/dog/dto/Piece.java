@@ -1,11 +1,11 @@
 package io.dog.dto;
 
 public class Piece {
-	int id;
-	boolean status;
-	int initialPosition;
-	int position;
-	boolean arrived;
+	private int id;
+	private boolean status;
+	private int initialPosition;
+	private int position;
+	private boolean arrived;
 	
 	public Piece() {
 	}
@@ -14,8 +14,8 @@ public class Piece {
 		this.id = id;
 		this.status = false;
 		this.arrived = false;
-		this.position = 0;
 		this.initialPosition = initialPosition;
+		this.position = this.initialPosition;
 	}
 	
 	public Piece(int id, boolean status, int position, boolean arrived, int initialPosition) {
@@ -67,7 +67,7 @@ public class Piece {
 	public void resetToBeginning(){
 		this.status = false;
 		this.arrived = false;
-		this.position = 0;
+		this.position = this.initialPosition;
 	}
 
 	public void setId(int id) {

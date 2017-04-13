@@ -69,7 +69,7 @@ public class LoadService {
 
 		List<Card> newList = new ArrayList<>();
 		for (CardDB card : list) {
-			newList.add(new Card(card.getId(), card.getValue(), card.isSpecial()));
+			newList.add(new Card(card.getId(), card.getValue()));
 		}
 		return newList;
 	}

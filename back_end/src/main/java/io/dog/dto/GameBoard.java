@@ -4,8 +4,8 @@ import java.util.List;
 
 public class GameBoard {
 
-	int nbJoueurs;
-	List<Piece> pieces;
+	private int nbJoueurs;
+	private List<Piece> pieces;
 
 	public GameBoard(int nbJoueurs, List<Piece> pieces) {
 		this.nbJoueurs = nbJoueurs;
