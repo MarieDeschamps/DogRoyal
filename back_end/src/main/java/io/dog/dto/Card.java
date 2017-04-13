@@ -3,17 +3,20 @@ package io.dog.dto;
 public class Card {
     private int id;
     private  int value;
+    private boolean chooseCard;
     
     public Card() {
 	}
 
 	public Card(int id) {
     	this.id = id;
+    	this.chooseCard = true;
     }
 
     public Card(int id, int value) {
     	this.id = id;
         this.value = value;
+        this.chooseCard = true;
     }
 
     public void setValue(int value) {
@@ -57,6 +60,14 @@ public class Card {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public boolean isChooseCard() {
+		return chooseCard;
+	}
+
+	public void setChooseCard(boolean chooseCard) {
+		this.chooseCard = chooseCard;
 	}
 	
 	
