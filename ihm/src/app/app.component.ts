@@ -21,6 +21,30 @@ export class AppComponent {
 
   }
 
+  newGameData($event) {
+    this.nOfPieces = $event.piecesPlayer;
+    this.nOfPlayers = $event.totalPlayers;
+    this.nbCases = 16 * (this.nOfPlayers);
+
+    this.exchange.create(this.nOfPlayers, this.nOfPieces);
+
+  };
+
+  create() {
+    this.exchange.create(this.nOfPlayers, this.nOfPieces).then(data => {
+      this.playersTry = data.players;
+      this.deckTry.pick = data.deck.pickable.length;
+      this.deckTry.discard = data.deck.disguard.length;
+      this.winner = data.winner;
+      if (!data.ok) {
+        console.log(data.message);
+      }
+      this.whoPlayNow = data.whoPlayNow;
+      this.start = true;
+    });
+
+  }
+
   load() {
     this.exchange.load().then(data => {
       this.playersTry = data.players;
@@ -35,15 +59,6 @@ export class AppComponent {
     });
 
   }
-
-  newGameData($event) {
-    this.nOfPieces = $event.piecesPlayer;
-    this.nOfPlayers = $event.totalPlayers;
-    this.nbCases = 16 * (this.nOfPlayers);
-
-    this.exchange.create(this.nOfPlayers, this.nOfPieces).then(() => this.load())
-
-  };
 
 
   // winner = null;
