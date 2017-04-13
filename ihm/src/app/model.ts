@@ -19,7 +19,7 @@ export interface Hand extends Array<Card> {
 export interface Card {
   value: number;
   id: number;
-  chooseCard : boolean;
+  chooseCard: boolean;
 }
 
 export interface Deck {

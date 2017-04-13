@@ -16,3 +16,8 @@
     <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
   </div>
 </div>
+<div *ngIf="winner">
+
+  {{winner}} YOU WIN !!! CONGRATs!!
+
+</div>
