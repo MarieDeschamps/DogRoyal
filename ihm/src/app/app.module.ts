@@ -13,6 +13,7 @@ import {PlayersComponent} from './players/players.component';
 import {NewGameFormComponent} from "./forms/newGameForm.component";
 
 import {AppComponent} from './app.component';
+import {Exchange} from "./exchange/exchange";
 
 
 
@@ -33,7 +34,7 @@ import {AppComponent} from './app.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [Exchange],
   bootstrap: [AppComponent]
 })
 export class AppModule {
