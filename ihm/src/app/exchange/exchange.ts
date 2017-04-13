@@ -1,4 +1,4 @@
-import {Http, Response} from "@angular/http";
+import {Http,Response} from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import {Injectable} from "@angular/core";
 
@@ -18,7 +18,7 @@ export class Exchange {
 
 
   create(nbPlayers, nbPiecesByPlayer) {
-    return this.http.post(this.beginPath + "create/" + nbPlayers + "/" + nbPiecesByPlayer, JSON.stringify({}))
+    return this.http.get(this.beginPath + "create/" + nbPlayers + "/" + nbPiecesByPlayer)
       .toPromise()
       .then((response: Response) => response.json());
   }
@@ -30,13 +30,13 @@ export class Exchange {
    }*/
 
   load() {
-    return this.http.post(this.beginPath + "load", "")
+    return this.http.get(this.beginPath + "load")
       .toPromise()
       .then((response: Response) => response.json());
   }
 
   pick5() {
-    return this.http.put(this.beginPath + "pick5", "")
+    return this.http.get(this.beginPath + "pick5")
       .toPromise()
       .then((response: Response) => response.json());
   }

@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, JsonpModule} from '@angular/http';
 
 import {CardComponent} from './card/card.component';
 import {DeckComponent} from './deck/deck.component';
@@ -14,7 +14,6 @@ import {NewGameFormComponent} from "./forms/newGameForm.component";
 
 import {AppComponent} from './app.component';
 import {Exchange} from "./exchange/exchange";
-
 
 
 @NgModule({
@@ -32,7 +31,8 @@ import {Exchange} from "./exchange/exchange";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    JsonpModule
   ],
   providers: [Exchange],
   bootstrap: [AppComponent]
