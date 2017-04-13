@@ -7,13 +7,13 @@ export interface Player {
 
 export interface Piece {
   position: number;
-  state: boolean;
+  ready: boolean;
   id: number;
+  arrived: boolean;
+  choosePiece: boolean;
 }
 
-
 export interface Hand extends Array<Card> {
-
 }
 
 export interface Card {

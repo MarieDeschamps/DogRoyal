@@ -9,7 +9,7 @@ import {Card, Hand} from '../model';
   template: `
     <div class="myHand">
     <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
-      <app-card [card]='card'></app-card>
+      <app-card [card]='card' (choosenCard)="choosethisCard($event)"></app-card>
     </div>
     </div>
   `,
@@ -23,5 +23,12 @@ import {Card, Hand} from '../model';
 export class HandComponent {
 
   @Input() hand: Hand;
-  @Output() choosenCard: EventEmitter<Card> = new EventEmitter();
+  @Output() choosenCard: EventEmitter<boolean> = new EventEmitter();
+  thisCard : boolean;
+
+  choosethisCard ($event){
+    this.choosenCard.emit($event);
+    console.log("Hand : card found" + this.thisCard)
+  }
+
 }

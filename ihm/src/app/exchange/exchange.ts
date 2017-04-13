@@ -1,4 +1,4 @@
-import {Http,Response} from "@angular/http";
+import {Http, Response} from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import {Injectable} from "@angular/core";
 
@@ -41,10 +41,18 @@ export class Exchange {
       .then((response: Response) => response.json());
   }
 
-  play(player, card, piece) {
+
+  play(players, whoPlayNow) {
+    let card = players[whoPlayNow - 1].hand.filter(function (card) {
+      return card.chooseCard === false;
+    });
+    let piece = players[whoPlayNow - 1].pieces.filter(function (piece) {
+      return piece.choosePiece === true;
+    });
+
     let data = {
       "player": {
-        "id": player.id
+        "id": whoPlayNow
       },
       "card": {
         "id": card.id
@@ -53,7 +61,7 @@ export class Exchange {
         "id": piece.id
       }
     }
-    return this.http.post(this.beginPath + "play", JSON.stringify(data))
+    return this.http.put(this.beginPath + "play", JSON.stringify(data))
       .toPromise()
       .then((response: Response) => response.json());
   }

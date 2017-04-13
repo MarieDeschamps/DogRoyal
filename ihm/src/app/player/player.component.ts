@@ -8,18 +8,44 @@ import {Piece, Player} from '../model';
 @Component({
   selector: 'app-player',
   template: `
-    <div>Player {{player.id}} with {{player.color}}  pieces
+    <div>Player {{player.id}} with {{player.color}} pieces
       <div *ngFor="let piece of player.pieces;let i=indexPiece">
-        <app-piece [piece]="piece"
+
+        <app-piece [piece]="piece" (choosenPiece)="chooseThisPiece($event)"
         ></app-piece>
+
       </div>
-      <app-hand [hand]="player.hand" ></app-hand>
+      <app-hand [hand]="player.hand" (choosenCard)="chooseThisCard($event)"></app-hand>
     </div>`,
   styles: [``]
 })
 export class PlayerComponent {
   @Input() player: Player;
+  @Output() choosenElements: EventEmitter<boolean> = new EventEmitter();
 
+  thisCard: boolean = false;
+  thisPiece: boolean = false;
+
+  chooseThisPiece($event) {
+    this.thisPiece = $event;
+    console.log("Player : piece found");
+    this.chooseElements();
+  }
+
+  chooseThisCard($event) {
+    this.thisCard = $event;
+    console.log("Player : card found"+this.thisCard);
+    this.chooseElements();
+  }
+
+  chooseElements() {
+    console.log("Player : piece = " + this.thisPiece + ", card = " + this.thisCard);
+
+    if (this.thisCard === true && this.thisPiece === true) {
+      console.log("Player : ready to emit")
+      this.choosenElements.emit(true);
+      console.log("Player : emitted")
+    }
+  }
 }
-
 
