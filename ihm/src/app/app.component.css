@@ -10,3 +10,8 @@ app-players {
 app-deck {
   display: flex;
 }
+
+app-card{
+  display: flex;
+  ;
+}

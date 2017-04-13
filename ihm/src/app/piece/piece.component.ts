@@ -9,7 +9,7 @@ import {Piece} from '../model';
   template: `
     <div class="piece">
       <div>Piece position{{piece.position}}</div>
-      <button *ngIf="piece.choosePiece" (click)="onChoosePiece(piece)"> Choose this piece</button>
+      <button (click)="onChoosePiece(piece)"> Choose this piece</button>
     </div><br/>`,
   styles: [`
     .piece {

@@ -9,22 +9,25 @@ import {Players} from '../model';
   selector: 'app-gameBoard',
   template: `
     <div class="cases">
-      <div *ngFor='let i of cases;' class='case' style='border:1px solid black;' [style.backgroundColor]='colorCase(i)'>
+      <div *ngFor='let i of cases;' class='case' style='border:1px solid black;'
+           [style.backgroundColor]='colorCase(i)'>
         {{i}}
       </div>
     </div>
   `,
   styles: [`
     .case {
-      height: 20px;
+
       flex: 0 1 4em;
       border: 1px solid black;
+      height: 3em;
     }
 
     .cases {
       display: flex;
       flex-flow: row wrap;
     }
+
   `]
 })
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>

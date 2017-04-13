@@ -13,12 +13,13 @@ import {Piece, Player} from '../model';
         <app-piece [piece]="piece"
         ></app-piece>
       </div>
-      <app-hand [hand]="player.hand"></app-hand>
+      <app-hand [hand]="player.hand" ></app-hand>
     </div>`,
   styles: [``]
 })
 export class PlayerComponent {
   @Input() player: Player;
+
 }
 
 
