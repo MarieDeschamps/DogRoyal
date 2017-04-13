@@ -37,7 +37,8 @@ export class AppComponent {
       {'value': 7, 'id': 7, 'chooseCard': true},
       {'value': 3, 'id': 8, 'chooseCard': true}
     ],
-    color: 'blue'
+    color: 'blue',
+    id: 1,
   }, {
     pieces: [
       {'position': 5, 'state': false, 'id': 1, 'choosePiece': true},
@@ -49,7 +50,8 @@ export class AppComponent {
       {'value': 8, 'id': 3, 'chooseCard': true},
       {'value': 1, 'id': 4, 'chooseCard': true}
     ],
-    color: 'red'
+    color: 'red',
+    id: 2,
   }];
 
 

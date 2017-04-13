@@ -11,8 +11,8 @@ import {Players} from '../model';
   template: `
     <h2>Choose Yourself!</h2>
     <div>
-      Choose the number of players<input type="number" required [(ngModel)]='totalPlayers' name="nOfPlayers"/>
-      Choose the number of pieces<input type="number" required [(ngModel)]='piecesPlayer' name="nOfPieces"/>
+      Choose the number of players<input type="number" required [(ngModel)]='totalPlayers' name="nOfPlayers" min="2"/>
+      Choose the number of pieces<input type="number" required [(ngModel)]='piecesPlayer' name="nOfPieces" min="1"/>
     </div>
     <button (click)="validate()">OK</button>
     <br/><br/><br/><br/>

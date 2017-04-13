@@ -6,11 +6,11 @@ import {Card, Hand} from '../model';
 
 @Component({
   selector: 'app-hand',
-  template: `    
-      <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
-        <app-card [card]='card'
-                  ></app-card>
-      </div>
+  template: `
+    <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
+      <app-card [card]='card'
+      ></app-card>
+    </div>
   `,
   styles: [
       `

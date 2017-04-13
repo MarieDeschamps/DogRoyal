@@ -17,7 +17,7 @@ import {Players} from '../model';
   styles: [`
     .case {
       height: 20px;
-      flex: 1 1;
+      flex: 0 1 4em;
       border: 1px solid black;
     }
 
