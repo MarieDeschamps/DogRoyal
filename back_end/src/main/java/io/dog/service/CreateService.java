@@ -35,19 +35,19 @@ public class CreateService {
 
 		for (int i = 0; i < 7; i++) {
 
-			cdao.create(new CardDB(2, false));
-			cdao.create(new CardDB(3, false));
-			cdao.create(new CardDB(5, false));
-			cdao.create(new CardDB(6, false));
-			cdao.create(new CardDB(8, false));
-			cdao.create(new CardDB(9, false));
-			cdao.create(new CardDB(10, false));
-			cdao.create(new CardDB(12, false));
+			cdao.create(new CardDB(2, 0));
+			cdao.create(new CardDB(3, 0));
+			cdao.create(new CardDB(5, 0));
+			cdao.create(new CardDB(6, 0));
+			cdao.create(new CardDB(8, 0));
+			cdao.create(new CardDB(9, 0));
+			cdao.create(new CardDB(10, 0));
+			cdao.create(new CardDB(12, 0));
 
 		}
 
 		for (int i = 0; i < 20; i++) {
-			cdao.create(new CardDB(0, true));
+			cdao.create(new CardDB(0, 0));
 		}
 	}
 

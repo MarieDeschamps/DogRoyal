@@ -13,7 +13,7 @@ public class CardDB {
 	private Integer id = null;
 
 	int value;
-	boolean special;
+	int game_id = 0;
 	boolean pickable = true;
 	int player = 0;
 
@@ -21,9 +21,9 @@ public class CardDB {
 
 	}
 
-	public CardDB(int value, boolean special) {
+	public CardDB(int value, int game_id) {
 		this.value = value;
-		this.special = special;
+		this.game_id = game_id;
 
 	}
 
@@ -43,12 +43,12 @@ public class CardDB {
 		this.value = value;
 	}
 
-	public boolean isSpecial() {
-		return special;
+	public int getGame_id() {
+		return game_id;
 	}
 
-	public void setSpecial(boolean special) {
-		this.special = special;
+	public void setGame_id(int game_id) {
+		this.game_id = game_id;
 	}
 
 	public boolean isPickable() {

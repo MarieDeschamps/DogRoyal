@@ -20,7 +20,9 @@ public class CardDaoTest {
 
 	EntityManager em;
 	CardDao dao;
-	CardDB one = new CardDB(2, false);
+	CardDB one = new CardDB(2, 0);
+	CardDB test = new CardDB(2, 0);
+	CardDB test2 = new CardDB(2, 0);
 
 	@Before
 	public void setUp() {
@@ -30,19 +32,19 @@ public class CardDaoTest {
 		// Create Data
 		for (int i = 0; i < 7; i++) {
 
-			dao.create(new CardDB(2, false));
-			dao.create(new CardDB(3, false));
-			dao.create(new CardDB(5, false));
-			dao.create(new CardDB(6, false));
-			dao.create(new CardDB(8, false));
-			dao.create(new CardDB(9, false));
-			dao.create(new CardDB(10, false));
-			dao.create(new CardDB(12, false));
+			dao.create(new CardDB(2, 0));
+			dao.create(new CardDB(3, 0));
+			dao.create(new CardDB(5, 0));
+			dao.create(new CardDB(6, 0));
+			dao.create(new CardDB(8, 0));
+			dao.create(new CardDB(9, 0));
+			dao.create(new CardDB(10, 0));
+			dao.create(new CardDB(12, 0));
 
 		}
 
 		for (int i = 0; i < 20; i++) {
-			dao.create(new CardDB(0, true));
+			dao.create(new CardDB(0, 0));
 		}
 
 		// Update 2 players with 5 cards
@@ -50,7 +52,7 @@ public class CardDaoTest {
 			dao.updatePickedCards(i + 15, 2);
 		}
 
-			dao.updatePickedCards(2, 1);
+			dao.updatePickedCards(6, 1);
 			dao.updatePickedCards(65, 1);
 			dao.updatePickedCards(3, 1);
 			dao.updatePickedCards(66, 1);
@@ -82,19 +84,26 @@ public class CardDaoTest {
 		List<CardDB> all = dao.findAll();
 		assertTrue(all.size() > 75);
 		em.getTransaction().commit();
+		
+		em.getTransaction().begin();
+		dao.deleteAll();
+		all = dao.findAll();
+		assertTrue(all.isEmpty());
+		em.getTransaction().commit();
+
 
 	}
 
 	@Test
 	public void createAndDeleteTest() {
 		em.getTransaction().begin();
-		dao.create(one);
-		assertTrue(one.getId() > 0);
+		dao.create(test);
+		assertTrue(test.getId() > 0);
 		em.getTransaction().commit();
 
 		em.getTransaction().begin();
-		dao.delete(one);
-		assertEquals(null, dao.findById(one.getId()));
+		dao.delete(test);
+		assertEquals(null, dao.findById(test.getId()));
 		em.getTransaction().commit();
 
 	}
