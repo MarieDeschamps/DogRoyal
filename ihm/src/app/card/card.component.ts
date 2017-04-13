@@ -12,22 +12,22 @@ import {Card} from '../model';
       <button *ngIf="card.chooseCard" (click)="onChooseCard(card)"> choose this card</button>
     </div>
   `,
-  styles:[`
+  styles: [`
     .card {
-    border: 1px solid black;
-  }`]
+      border: 1px solid black;
+    }`]
 })
 
 export class CardComponent {
 
   @Input() card: Card;
+  @Output() choosenCard = new EventEmitter();
 
-  @Output() choosenCard: EventEmitter<Card> = new EventEmitter();
 
   onChooseCard(card) {
-    card.chooseCard=false;
+    this.card.chooseCard = false;
     this.choosenCard.emit(card);
-    console.log(this.card);
+    console.log(this.card)
   }
 
 }

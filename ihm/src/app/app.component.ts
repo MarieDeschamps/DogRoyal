@@ -28,27 +28,27 @@ export class AppComponent {
 
   playersTry: Players = [{
     pieces: [
-      {'position': 2, 'state': false, 'id': 3, 'choosePiece': true},
-      {'position': 1, 'state': false, 'id': 4, 'choosePiece': true}
+      {'position': 2, 'state': false, 'id': 3},
+      {'position': 1, 'state': false, 'id': 4}
     ],
     hand: [
-      {'value': 5, 'id': 5, 'chooseCard': true},
-      {'value': 14, 'id': 6, 'chooseCard': true},
-      {'value': 7, 'id': 7, 'chooseCard': true},
-      {'value': 3, 'id': 8, 'chooseCard': true}
+      {'value': 5, 'id': 5, 'chooseCard':true},
+      {'value': 14, 'id': 6, 'chooseCard':true},
+      {'value': 7, 'id': 7, 'chooseCard':true},
+      {'value': 3, 'id': 8, 'chooseCard':true}
     ],
     color: 'blue',
     id: 1,
   }, {
     pieces: [
-      {'position': 5, 'state': false, 'id': 1, 'choosePiece': true},
-      {'position': 9, 'state': false, 'id': 2, 'choosePiece': true}
+      {'position': 5, 'state': false, 'id': 1},
+      {'position': 9, 'state': false, 'id': 2}
     ],
     hand: [
-      {'value': 14, 'id': 1, 'chooseCard': true},
-      {'value': 5, 'id': 2, 'chooseCard': true},
-      {'value': 8, 'id': 3, 'chooseCard': true},
-      {'value': 1, 'id': 4, 'chooseCard': true}
+      {'value': 14, 'id': 1, 'chooseCard':true},
+      {'value': 5, 'id': 2, 'chooseCard':true},
+      {'value': 8, 'id': 3, 'chooseCard':true},
+      {'value': 1, 'id': 4, 'chooseCard':true}
     ],
     color: 'red',
     id: 2,

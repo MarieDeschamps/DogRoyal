@@ -8,18 +8,13 @@ import {Card, Hand} from '../model';
   selector: 'app-hand',
   template: `
     <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
-      <app-card [card]='card'
-      ></app-card>
+      <app-card [card]='card'></app-card>
     </div>
   `,
-  styles: [
-      `
-    `
-  ]
+  styles: [``]
 })
 export class HandComponent {
 
   @Input() hand: Hand;
-  @Output() choosenCard: EventEmitter<number> = new EventEmitter();
-
+  @Output() choosenCard: EventEmitter<Card> = new EventEmitter();
 }
