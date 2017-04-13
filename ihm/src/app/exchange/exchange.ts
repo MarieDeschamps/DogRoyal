@@ -61,7 +61,8 @@ export class Exchange {
         "id": piece.id
       }
     }
-    return this.http.put(this.beginPath + "play", JSON.stringify(data))
+    console.log(data);
+    return this.http.put(this.beginPath + "play", data)
       .toPromise()
       .then((response: Response) => response.json());
   }
