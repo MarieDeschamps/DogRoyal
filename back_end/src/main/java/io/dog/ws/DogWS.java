@@ -52,7 +52,7 @@ public class DogWS {
 		return games;
 	}
 	
-	@POST
+	@GET
 	@Path("create/{nbPlayers}/{nbPiecesByPlayer}")
 	public ContainerForOutputWS create(@PathParam("nbPlayers") int nbPlayers, @PathParam("nbPiecesByPlayer") int nbPiecesByPlayer){
 		if(nbPlayers<2){
@@ -69,14 +69,14 @@ public class DogWS {
 		return new ContainerForOutputWS(deck, players, whoPlayNow, true);
 	}
 	
-	@POST
+	@GET
 	@Path("load")
 	public ContainerForOutputWS load(){
 		this.loadBdd();
 		return new ContainerForOutputWS(deck, players, whoPlayNow, true);
 	}
 	
-	@PUT
+	@GET
 	@Path("pick5")
 	public ContainerForOutputWS pick5(){
 		this.loadBdd();
