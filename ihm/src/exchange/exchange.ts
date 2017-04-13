@@ -42,9 +42,15 @@ export class Exchange {
 
   play(player, card, piece) {
     let data = {
-        "player": player,
-        "card" : card,
-        "piece": piece 
+        "player": {
+            "id":player.id
+        },
+        "card" : {
+            "id":card.id
+        },
+        "piece": {
+            "id":piece.id 
+        }
     }
     return this.http.post(this.beginPath+"play",JSON.stringify(data))
         .toPromise()
