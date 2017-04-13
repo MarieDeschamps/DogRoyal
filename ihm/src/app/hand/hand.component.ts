@@ -8,27 +8,26 @@ import {Card, Hand} from '../model';
   selector: 'app-hand',
   template: `
     <div class="myHand">
-    <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
-      <app-card [card]='card' (choosenCard)="choosethisCard($event)"></app-card>
-    </div>
+      <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
+        <app-card [card]='card' (choosenCard)="choosethisCard($event)"></app-card>
+      </div>
     </div>
   `,
   styles: [`
-  .myHand{
-    display: flex;
-    flex-direction: row;
-  }
+    .myHand {
+      display: flex;
+      flex-direction: row;
+    }
   `]
 })
 export class HandComponent {
 
   @Input() hand: Hand;
   @Output() choosenCard: EventEmitter<boolean> = new EventEmitter();
-  thisCard : boolean;
+  thisCard: boolean;
 
-  choosethisCard ($event){
+  choosethisCard($event) {
     this.choosenCard.emit($event);
-    console.log("Hand : card found" + this.thisCard)
   }
 
 }

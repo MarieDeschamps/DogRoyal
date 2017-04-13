@@ -46,19 +46,22 @@ export class Exchange {
     let card = players[whoPlayNow - 1].hand.filter(function (card) {
       return card.chooseCard === false;
     });
+    console.log("playsssss");
+    console.log(card);
     let piece = players[whoPlayNow - 1].pieces.filter(function (piece) {
       return piece.choosePiece === true;
     });
+    console.log(piece);
 
     let data = {
       "player": {
         "id": whoPlayNow
       },
       "card": {
-        "id": card.id
+        "id": card[0].id
       },
       "piece": {
-        "id": piece.id
+        "id": piece[0].id
       }
     }
     console.log(data);

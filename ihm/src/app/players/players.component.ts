@@ -19,8 +19,6 @@ export class PlayersComponent {
   @Output() choosenElements: EventEmitter<boolean> = new EventEmitter();
 
   chooseElements() {
-    console.log("Players : received");
-
     this.choosenElements.emit(true);
   }
 }

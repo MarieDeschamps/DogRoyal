@@ -3,6 +3,7 @@
  */
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Card} from '../model';
+import {discardPeriodicTasks} from "@angular/core/testing";
 
 @Component({
   selector: 'app-card',
@@ -22,12 +23,12 @@ export class CardComponent {
 
   @Input() card: Card;
   @Output() choosenCard = new EventEmitter();
-  thisCard: boolean=false;
+  thisCard: boolean = false;
 
   onChooseCard() {
     this.card.chooseCard = false;
     this.choosenCard.emit(this.thisCard = true);
-    console.log(this.card)
+    console.log(this.card);
   }
 
 }

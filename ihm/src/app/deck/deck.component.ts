@@ -24,7 +24,6 @@ export class DeckComponent {
   deal: boolean;
 
   constructor(private exchange: Exchange) {
-
   }
 
   pickCard() {

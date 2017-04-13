@@ -28,23 +28,17 @@ export class PlayerComponent {
 
   chooseThisPiece($event) {
     this.thisPiece = $event;
-    console.log("Player : piece found");
     this.chooseElements();
   }
 
   chooseThisCard($event) {
     this.thisCard = $event;
-    console.log("Player : card found"+this.thisCard);
     this.chooseElements();
   }
 
   chooseElements() {
-    console.log("Player : piece = " + this.thisPiece + ", card = " + this.thisCard);
-
     if (this.thisCard === true && this.thisPiece === true) {
-      console.log("Player : ready to emit")
       this.choosenElements.emit(true);
-      console.log("Player : emitted")
     }
   }
 }

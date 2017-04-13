@@ -27,6 +27,6 @@ export class PieceComponent {
   onChoosePiece() {
     this.piece.choosePiece = true;
     this.choosenPiece.emit(this.thisPiece = true);
-    console.log(this.piece)
+    console.log(this.piece);
   }
 }

@@ -1,7 +1,6 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component} from '@angular/core';
 import {Deck, Players} from './model';
 import {Exchange} from './exchange/exchange';
-import {bootstrapItem} from "@angular/cli/lib/ast-tools";
 
 @Component({
   selector: 'app-root',
@@ -24,11 +23,9 @@ export class AppComponent {
   pieceChosen: boolean;
 
   constructor(private exchange: Exchange) {
-
   }
 
   elementChoosen($event) {
-    console.log("App : received");
     this.play();
   }
 
@@ -36,14 +33,12 @@ export class AppComponent {
     this.nOfPieces = $event.piecesPlayer;
     this.nOfPlayers = $event.totalPlayers;
     this.nbCases = 16 * (this.nOfPlayers);
-
     this.create();
 
   };
 
   distribuate($event) {
     let deal: boolean = $event;
-    console.log(deal);
     if (deal === true) {
       this.exchange.pick5().then(data => this.translateData(data));
     }
@@ -59,7 +54,6 @@ export class AppComponent {
 
   load() {
     this.exchange.load().then(data => this.translateData(data));
-
   }
 
   translateData(data) {
