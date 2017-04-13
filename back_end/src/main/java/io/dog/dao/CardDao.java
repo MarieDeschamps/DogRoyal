@@ -19,12 +19,10 @@ public class CardDao {
 	}
 
 	public void delete(CardDB card) {
-		em.remove(card);
-
+		em.remove(findById(card.getId()));
 	}
 
 	public void update(CardDB card) {
-
 	}
 
 	public CardDB findById(int id) {
@@ -60,7 +58,6 @@ public class CardDao {
 	public List<CardDB> findAll() {
 		String jpql = "SELECT c FROM CardDB c";
 		return em.createQuery(jpql, CardDB.class).getResultList();
-
 	}
 
 	public void updateNewDeck() {

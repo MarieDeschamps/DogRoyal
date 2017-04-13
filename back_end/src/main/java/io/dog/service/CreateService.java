@@ -3,6 +3,7 @@ package io.dog.service;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -16,7 +17,7 @@ import io.dog.entities.PieceDB;
  */
 
 @Startup
-@Singleton
+@Stateless
 public class CreateService {
 	CardDao cdao;
 	PieceDao pdao;

@@ -1,0 +1,39 @@
+package io.dog;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+/**
+ * A SUPPRIMER...
+ */
+public class EmFactory {
+	private static EntityManagerFactory instance;
+
+	private EmFactory() {
+		// "fora" was the value of the name attribute of the
+		// persistence.xml file.
+		instance = Persistence.createEntityManagerFactory("fora");
+	}
+
+	public EntityManager getEntityManager() {
+		return instance.createEntityManager();
+	}
+
+	public void close() {
+		instance.close();
+	}
+	
+	public static EntityManagerFactory getInstance(){
+		if (instance == null){
+			instance = Persistence.createEntityManagerFactory("dogroyal");
+		}
+		return instance;
+	}
+	
+	public static EntityManager createEntityManager(){
+		return getInstance().createEntityManager();
+	}
+}

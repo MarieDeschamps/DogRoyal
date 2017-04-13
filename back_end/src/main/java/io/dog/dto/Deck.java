@@ -33,8 +33,9 @@ public class Deck {
         return this.pickable.size();
     }
 
+    // isEmpty est plus rapide sur les linkedlist par exemple
     public boolean isEmpty() {
-        return this.size() == 0;
+        return this.pickable.isEmpty();
     }
 
     public Card pick() {
@@ -44,8 +45,9 @@ public class Deck {
     	if(this.isEmpty()){
     		throw new IllegalArgumentException("not enough cards in the pickables");
         }
-        Card c = this.pickable.get(0);
-        this.pickable.remove(0);
+
+        Card c = pickable.remove( 0);
+
         return c;
     }
 
@@ -56,7 +58,7 @@ public class Deck {
     public void shuffle(){
         Collections.shuffle(this.disguard);
         this.pickable.addAll(this.disguard);
-        this.disguard = new ArrayList<>();
+        this.disguard.clear();
     }
     
     public void shufflePickable(){

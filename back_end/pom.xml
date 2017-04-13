@@ -72,34 +72,6 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-			<plugin>
-				<!-- Do not run Integration Test -->
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
-				<configuration>
-					<excludedGroups>io.robusta.funko.IntegrationTest</excludedGroups>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.18.1</version>
-				<configuration>
-					<includes>
-						<include>**/*.java</include>
-					</includes>
-					<!-- run only Integration Test -->
-					<groups>io.robusta.funko.IntegrationTest</groups>
-				</configuration>
-				<executions>
-					<!-- Strangely there is no default -->
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 

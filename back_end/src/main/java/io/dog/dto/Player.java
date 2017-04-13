@@ -9,17 +9,11 @@ public class Player {
 	int id;
 	
 	public Player() {
-		this.pieces = new ArrayList<>();
-		this.cards = new ArrayList<>();
+		this(new ArrayList<>(), new ArrayList<>(), 0);
 	}
 
 	public Player(List<Piece> pieces, int number) {
-		this.id = number;
-		for (Piece piece : pieces) {
-			piece.setInitialPosition(this.initialPosition());
-		}
-		this.pieces = pieces;
-		this.cards = new ArrayList<>();
+		this(pieces, new ArrayList<>(), number);
 	}
 
 	public Player(List<Piece> pieces, List<Card> cards, int number) {

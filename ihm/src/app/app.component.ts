@@ -14,17 +14,16 @@ export class AppComponent {
   start: boolean;
   winner = null;
 
-  newGameData($event) {
-    this.nOfPieces = $event.piecesPlayer;
-    this.nOfPlayers = $event.totalPlayers;
+  newGameData(event) {
+    this.nOfPieces = event.piecesPlayer;
+    this.nOfPlayers = event.totalPlayers;
     this.start = true;
     this.nbCases = 16 * (this.nOfPlayers);
   }
-  ;
 
   deckTry: Deck = {
     'pick': 76, 'discard': 0
-  };
+  }
 
   playersTry: Players = [{
     pieces: [
@@ -52,8 +51,6 @@ export class AppComponent {
     ],
     color: 'red',
     id: 2,
-  }];
-
-
+  }]
 }
 

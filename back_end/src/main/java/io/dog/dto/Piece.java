@@ -6,18 +6,14 @@ public class Piece {
 	int initialPosition;
 	int position;
 	boolean arrived;
-	
+
 	public Piece() {
 	}
 
 	public Piece(int id, int initialPosition) {
-		this.id = id;
-		this.status = false;
-		this.arrived = false;
-		this.position = 0;
-		this.initialPosition = initialPosition;
+		this(id,false,0,false,initialPosition);
 	}
-	
+
 	public Piece(int id, boolean status, int position, boolean arrived, int initialPosition) {
 		this.id = id;
 		this.status = status;
@@ -63,7 +59,7 @@ public class Piece {
 	public void setInitialPosition(int initialPosition) {
 		this.initialPosition = initialPosition;
 	}
-	
+
 	public void resetToBeginning(){
 		this.status = false;
 		this.arrived = false;
@@ -95,7 +91,7 @@ public class Piece {
 			return false;
 		return true;
 	}
-	
-	
-	
+
+
+
 }
