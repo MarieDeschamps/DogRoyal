@@ -57,4 +57,30 @@ public class PieceDao {
 		String jpql = "DELETE FROM PieceDB";
 		em.createQuery(jpql).executeUpdate();
 	}
+	
+	//Methods with Game id
+	public int getGameId(int piece_id) {
+		return this.findById(piece_id).getGame_id();
+	}
+	
+	public List<PieceDB> getPlayersPieces(int numberplayer,int game_id) {
+		String jpql = "SELECT p FROM PieceDB p WHERE p.player = :player AND p.game_id:game_id";
+		return em.createQuery(jpql, PieceDB.class).setParameter("player", numberplayer).setParameter("game_id", game_id).getResultList();
+	}
+
+	public List<PieceDB> findAll(int game_id) {
+		String jpql = "SELECT p FROM PieceDB p WHERE p.game_id:game_id";
+		return em.createQuery(jpql, PieceDB.class).setParameter("game_id", game_id).getResultList();
+	}
+
+	public int getNbPlayers(int game_id) {
+		String jpql = "select count(distinct p.player) FROM PieceDB p WHERE p.game_id:game_id";
+		Object r = em.createQuery(jpql).setParameter("game_id", game_id).getSingleResult();
+		return (int) (long) (Long) r;
+	}
+
+	public void deleteAll(int game_id) {
+		String jpql = "DELETE FROM PieceDB p WHERE p.game_id:game_id";
+		em.createQuery(jpql).setParameter("game_id", game_id).executeUpdate();
+	}
 }
