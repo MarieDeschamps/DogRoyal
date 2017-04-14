@@ -17,6 +17,9 @@ import {Card, Hand} from '../model';
     .myHand {
       display: flex;
       flex-direction: row;
+      padding-top: 2em;
+      padding-bottom: 2em;
+      
     }
   `]
 })

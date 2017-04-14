@@ -46,19 +46,21 @@ export class GameBoardComponent {
   cases = [];
 
   colorCase(i) {
-    if (!this.players || !this.cases)
-      return 'pink';
-    let nbPlayer = this.players.length;
-
-    for (let j = 0; j < nbPlayer; j++) {
-      for (let p = 0; p < this.players[j].pieces.length; p++) {
-        if (this.players[j].pieces[p].position == i) {
-
-          return this.players[j].color;
+    if (!this.players || !this.cases) {
+      return 'white';
+    } else {
+      let nbPlayer = this.players.length;
+      for (let j = 0; j < nbPlayer; j++) {
+        for (let p = 0; p < this.players[j].pieces.length; p++) {
+          if (this.players[j].pieces[p].position == i) {
+            if (this.players[j].pieces[p].ready === true) {
+              return this.players[j].color;
+            }
+          }
         }
       }
+      return 'white';
     }
-    return 'white';
   }
 }
 
