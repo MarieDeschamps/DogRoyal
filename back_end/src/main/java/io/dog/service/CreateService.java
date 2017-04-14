@@ -68,6 +68,7 @@ public class CreateService {
 	public void deleteGame(){
 		cdao.deleteAll();
 		pdao.deleteAll();
+		gdao.deleteAll();
 	}
 	
 	// Methods for game_id

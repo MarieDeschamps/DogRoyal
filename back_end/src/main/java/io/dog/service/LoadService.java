@@ -102,7 +102,7 @@ public class LoadService {
 		}
 		return newList;
 	}
-	
+
 	// MEthods for game_id
 
 	public HashMap<String, String> getGames() {
@@ -128,7 +128,7 @@ public class LoadService {
 		}
 		return map;
 	}
-	
+
 	public Deck getDeck(int game_id) {
 
 		List<CardDB> pickableDB = cdao.getPickablesCards(game_id);
@@ -147,14 +147,37 @@ public class LoadService {
 		List<PieceDB> playerspiecesDB;
 
 		for (int i = 1; i < nbPlayers + 1; i++) {
-			playercardsDB = cdao.getPlayersCards(i,game_id);
-			playerspiecesDB = pdao.getPlayersPieces(i,game_id);
+			playercardsDB = cdao.getPlayersCards(i, game_id);
+			playerspiecesDB = pdao.getPlayersPieces(i, game_id);
 			players.add(new Player(toPiece(playerspiecesDB), toCard(playercardsDB), i));
 		}
 
 		return players;
 	}
+
+	public boolean isGameExist(int game_id) {
+		List<GameDB> games = gdao.getGameStatus(game_id);
+		if (games.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean isGoodGameId(int card_id,int piece_id) {
+		CardDB card = cdao.findById(card_id);
+		PieceDB piece = pdao.findById(piece_id);
+		
+		if (card.getGame_id() == piece.getGame_id()){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	
-	
+	public int getGameId(int id){
+		return cdao.getGameId(id);
+	}
 
 }

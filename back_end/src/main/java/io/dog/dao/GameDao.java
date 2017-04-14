@@ -56,5 +56,6 @@ public class GameDao {
 		String jpql = "SELECT g FROM GameDB g WHERE g.free=true ORDER BY g.game_id";
 		return em.createQuery(jpql, GameDB.class).getResultList();
 	}
+
 	
 }
