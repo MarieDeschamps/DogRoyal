@@ -258,8 +258,8 @@ public class DogWS {
 	}
 	
 	@PUT
-	@Path("playgameid")
-	public ContainerForOutputWS playbyid(ContainerForInputWS input){
+	@Path("play/game")
+	public ContainerForOutputWS playByGameId(ContainerForInputWS input){
 		Player player = input.getPlayer();
 		Card card = input.getCard();
 		Piece piece = input.getPiece();
