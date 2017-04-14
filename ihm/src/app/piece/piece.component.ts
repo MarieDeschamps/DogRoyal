@@ -8,7 +8,7 @@ import {Piece} from '../model';
   selector: 'app-piece',
   template: `
     <div class="piece">
-      <div>Piece position{{piece.position}}</div>
+      <div>Piece {{piece.id}} position {{piece.position}}</div>
       <button (click)="onChoosePiece()"> Choose this piece</button>
     </div><br/>`,
   styles: [`

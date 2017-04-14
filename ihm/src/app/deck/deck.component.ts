@@ -14,11 +14,13 @@ import {Exchange} from "../exchange/exchange";
   styles: [`div {
     border: 1px solid black;
     padding: 10px;
-    background-image: url("../../assets/dickCard.png");
+    background-image: url("../../assets/backCard.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
     height: 5.5em;
+    vertical-align: middle;
+    line-height: 5.5em;
   }`],
 })
 
