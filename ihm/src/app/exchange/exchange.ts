@@ -23,11 +23,17 @@ export class Exchange {
       .then((response: Response) => response.json());
   }
 
-  /*load (game) {
+  askForPlayer(game, player){
+    return this.http.post(this.beginPath + "load/{{game}}/{{player}}","")
+      .toPromise()
+      .then((response: Response) => response.json());
+  }
+
+  loadGame (game) {
    return this.http.post(this.beginPath + "load/{{game}}","")
    .toPromise()
    .then((response: Response) => response.json());
-   }*/
+   }
 
   load() {
     return this.http.get(this.beginPath + "load")
