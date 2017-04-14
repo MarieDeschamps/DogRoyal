@@ -15,6 +15,7 @@ public class ContainerForOutputWS{
 	Player winner;
 	boolean ok;
 	String message;
+	int game_id;
 	
 	public ContainerForOutputWS(Deck deck, List<Player> players, int whoPlayNow, boolean ok) {
 		this.deck = deck;
@@ -36,6 +37,20 @@ public class ContainerForOutputWS{
 		this.winner = null;
 		this.ok = ok;
 		this.message = message;
+	}
+	
+	public ContainerForOutputWS(Deck deck, List<Player> players, int whoPlayNow, boolean ok,int game_id) {
+		this.deck = deck;
+		this.players = players;
+		if(whoPlayNow>players.size()){
+			this.whoPlayNow = 1;
+		}else{
+			this.whoPlayNow = whoPlayNow;
+		}
+		this.winner = null;
+		this.ok = ok;
+		this.message = "";
+		this.game_id=game_id;
 	}
 
 	public Deck getDeck() {

@@ -15,6 +15,7 @@ public class PieceDB {
 	int player;
 	int position;
 	boolean ready = false;
+	int game_id = 0;
 
 	public PieceDB() {
 	}
@@ -22,6 +23,12 @@ public class PieceDB {
 	public PieceDB(int player, int position) {
 		this.player = player;
 		this.position = position;
+	}
+	
+	public PieceDB(int player, int position, int game_id) {
+		this.player = player;
+		this.position = position;
+		this.game_id = game_id;
 	}
 
 	public Integer getId() {
@@ -55,4 +62,14 @@ public class PieceDB {
 	public void setReady(boolean status) {
 		this.ready = status;
 	}
+
+	public int getGame_id() {
+		return game_id;
+	}
+
+	public void setGame_id(int game_id) {
+		this.game_id = game_id;
+	}
+	
+	
 }
