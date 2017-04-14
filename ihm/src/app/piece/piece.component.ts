@@ -9,7 +9,7 @@ import {Piece} from '../model';
   template: `
     <div class="piece">
       <div>Piece position{{piece.position}}</div>
-      <button (click)="onChoosePiece(piece)"> Choose this piece</button>
+      <button (click)="onChoosePiece()"> Choose this piece</button>
     </div><br/>`,
   styles: [`
     .piece {
@@ -21,10 +21,12 @@ import {Piece} from '../model';
 export class PieceComponent {
   @Input() piece: Piece;
 
-  @Output() choosenPiece: EventEmitter<Piece> = new EventEmitter();
+  @Output() choosenPiece: EventEmitter<boolean> = new EventEmitter();
+  thisPiece: boolean;
 
-  onChoosePiece(piece) {
-    this.choosenPiece.emit(piece);
-    console.log(this.piece)
+  onChoosePiece() {
+    this.piece.choosePiece = true;
+    this.choosenPiece.emit(this.thisPiece = true);
+    console.log(this.piece);
   }
 }

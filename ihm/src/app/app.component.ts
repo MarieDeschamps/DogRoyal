@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component} from '@angular/core';
 import {Deck, Players} from './model';
 import {Exchange} from './exchange/exchange';
 
@@ -14,36 +14,61 @@ export class AppComponent {
   nbCases: number;
   start: boolean;
   playersTry: Players;
-  deckTry: Deck;
   whoPlayNow: number;
+  deckTry: Deck = {
+    'pick': -1, 'discard': -1
+  };
+
+  cardChosen: boolean;
+  pieceChosen: boolean;
 
   constructor(private exchange: Exchange) {
-
   }
 
-  load() {
-    this.exchange.load().then(data => {
-      this.playersTry = data.players;
-      this.deckTry.pick = data.deck.pickable.length;
-      this.deckTry.discard = data.deck.disguard.length;
-      this.winner = data.winner;
-      if (!data.ok) {
-        console.log(data.message);
-      }
-      this.whoPlayNow = data.whoPlayNow;
-      this.start = true;
-    });
-
+  elementChoosen($event) {
+    this.play();
   }
 
   newGameData($event) {
     this.nOfPieces = $event.piecesPlayer;
     this.nOfPlayers = $event.totalPlayers;
     this.nbCases = 16 * (this.nOfPlayers);
-
-    this.exchange.create(this.nOfPlayers, this.nOfPieces).then(() => this.load())
+    this.create();
 
   };
+
+  distribuate($event) {
+    let deal: boolean = $event;
+    if (deal === true) {
+      this.exchange.pick5().then(data => this.translateData(data));
+    }
+  }
+
+  play() {
+    this.exchange.play(this.playersTry, this.whoPlayNow).then(data => this.translateData(data));
+  }
+
+  create() {
+    this.exchange.create(this.nOfPlayers, this.nOfPieces).then(data => this.translateData(data));
+  }
+
+  load() {
+    this.exchange.load().then(data => this.translateData(data));
+  }
+
+  translateData(data) {
+    if (!data.ok) {
+      console.log(data.message);
+    } else {
+      this.playersTry = data.players;
+      this.deckTry.pick = data.deck.pickable.length;
+      this.deckTry.discard = data.deck.disguard.length;
+      this.winner = data.winner;
+      this.whoPlayNow = data.whoPlayNow;
+      this.start = true;
+    }
+    console.log("start = " + this.start)
+  }
 
 
   // winner = null;
@@ -53,10 +78,10 @@ export class AppComponent {
    deckTry: Deck = {
    'pick': 76, 'discard': 0
    };
-   */
 
 
-  /*[{
+
+   [{
    pieces: [
    {'position': 2, 'state': false, 'id': 3},
    {'position': 1, 'state': false, 'id': 4}

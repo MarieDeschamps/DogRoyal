@@ -3,13 +3,14 @@
  */
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Card} from '../model';
+import {discardPeriodicTasks} from "@angular/core/testing";
 
 @Component({
   selector: 'app-card',
   template: `
     <div class="card" *ngIf="card.chooseCard==true">
       <div>{{card.value}}</div>
-      <button *ngIf="card.chooseCard" (click)="onChooseCard(card)"> choose this card</button>
+      <button *ngIf="card.chooseCard" (click)="onChooseCard()"> choose this card</button>
     </div>
   `,
   styles: [`
@@ -22,12 +23,12 @@ export class CardComponent {
 
   @Input() card: Card;
   @Output() choosenCard = new EventEmitter();
+  thisCard: boolean = false;
 
-
-  onChooseCard(card) {
+  onChooseCard() {
     this.card.chooseCard = false;
-    this.choosenCard.emit(card);
-    console.log(this.card)
+    this.choosenCard.emit(this.thisCard = true);
+    console.log(this.card);
   }
 
 }
