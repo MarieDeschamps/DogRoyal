@@ -14,7 +14,7 @@ public class PieceDB {
 
 	int player;
 	int position;
-	boolean status = false;
+	boolean ready = false;
 
 	public PieceDB() {
 	}
@@ -48,11 +48,11 @@ public class PieceDB {
 		this.position = position;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isReady() {
+		return ready;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setReady(boolean status) {
+		this.ready = status;
 	}
 }

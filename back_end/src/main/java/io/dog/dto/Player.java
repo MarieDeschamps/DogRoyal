@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Player {
 	private List<Piece> pieces;
-	private List<Card> cards;
+	private List<Card> hand;
 	private int id;
 	private Color color;
 	
 	public Player() {
 		this.pieces = new ArrayList<>();
-		this.cards = new ArrayList<>();
+		this.hand = new ArrayList<>();
 	}
 
 	public Player(List<Piece> pieces, int number) {
@@ -20,7 +20,7 @@ public class Player {
 			piece.setInitialPosition(this.initialPosition());
 		}
 		this.pieces = pieces;
-		this.cards = new ArrayList<>();
+		this.hand = new ArrayList<>();
 		this.color = Color.values()[number-1];
 	}
 
@@ -30,7 +30,7 @@ public class Player {
 			piece.setInitialPosition(this.initialPosition());
 		}
 		this.pieces = pieces;
-		this.cards = cards;
+		this.hand = cards;
 		this.color = Color.values()[number-1];
 	}
 
@@ -41,7 +41,7 @@ public class Player {
 			pieces.add(new Piece(pieceIds.get(i), (number - 1) * 16));
 		}
 		this.pieces = pieces;
-		this.cards = cards;
+		this.hand = cards;
 		this.id = number;
 		this.color = Color.values()[number-1];
 	}
@@ -51,20 +51,20 @@ public class Player {
 	}
 
 	public void pick(Deck d) {
-		if(this.cards==null){
-			this.cards = new ArrayList<>();
+		if(this.hand==null){
+			this.hand = new ArrayList<>();
 		}
 		boolean added = false;
 		Card card = d.pick();
-		for(int c = 0; c<this.cards.size();c++){
-			if(this.cards.get(c).getValue()>card.getValue()){
-				this.cards.add(c,card);
+		for(int c = 0; c<this.hand.size();c++){
+			if(this.hand.get(c).getValue()>card.getValue()){
+				this.hand.add(c,card);
 				added = true;
 				break;
 			}
 		}
 		if(!added){
-			this.cards.add(card);
+			this.hand.add(card);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class Player {
 			movePiece = false;
 		} else if (c.getValue() == 0) {
 			movePiece = true;
-		} else if (p.isStatus()) {
+		} else if (p.isReady()) {
 			movePiece = true;
 		} else {
 			movePiece = false;
@@ -83,7 +83,7 @@ public class Player {
 	}
 
 	public void disguardCard(Deck d, Card c) {
-		cards.remove(c);
+		hand.remove(c);
 		d.addToDisguard(c);
 	}
 
@@ -91,8 +91,8 @@ public class Player {
 		return pieces;
 	}
 
-	public List<Card> getCards() {
-		return cards;
+	public List<Card> getHand() {
+		return hand;
 	}
 
 	public int getId() {
@@ -103,8 +103,8 @@ public class Player {
 		this.pieces = pieces;
 	}
 
-	public void setCards(List<Card> cards) {
-		this.cards = cards;
+	public void setHand(List<Card> cards) {
+		this.hand = cards;
 	}
 
 	public void setId(int number) {

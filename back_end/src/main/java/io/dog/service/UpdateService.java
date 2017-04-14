@@ -38,7 +38,7 @@ public class UpdateService {
 		}
 
 		for (Player player : players) {
-			for (Card card : player.getCards()) {
+			for (Card card : player.getHand()) {
 				cdao.updatePickedCards(card.getId(), player.getId());
 			}
 		}
@@ -56,7 +56,7 @@ public class UpdateService {
 		}
 		
 		for (Piece piece : pieces) {
-			if (piece.isStatus()) {
+			if (piece.isReady()) {
 				pdao.updateStatus(piece.getId());
 			} else {
 				pdao.updatePosition(piece.getId(), piece.getPosition());

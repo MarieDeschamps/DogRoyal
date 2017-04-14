@@ -93,7 +93,7 @@ public class LoadService {
 
 			initialPosition = (piece.getPlayer() - 1) * 16;
 
-			newList.add(new Piece(piece.getId(), piece.isStatus(), piece.getPosition(), arrived, initialPosition));
+			newList.add(new Piece(piece.getId(), piece.isReady(), piece.getPosition(), arrived, initialPosition));
 		}
 		return newList;
 	}

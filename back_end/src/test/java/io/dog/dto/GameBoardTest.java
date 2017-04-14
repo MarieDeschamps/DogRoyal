@@ -31,7 +31,7 @@ public class GameBoardTest {
 		Piece p = board.getPieces().get(0);
 		p.setPosition(5);
 		board.startPiece(p);
-		assertTrue(p.isStatus()==true);
+		assertTrue(p.isReady()==true);
 		assertTrue(p.getPosition()==0);
 	}
 	
@@ -64,6 +64,6 @@ public class GameBoardTest {
 		
 		p.setPosition(10);
 		assertTrue(board.samePosition(p)!=null);
-		assertFalse(board.getPieces().get(3).isStatus());
+		assertFalse(board.getPieces().get(3).isReady());
 	}
 }

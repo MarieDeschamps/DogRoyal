@@ -2,36 +2,40 @@ package io.dog.dto;
 
 public class Piece {
 	private int id;
-	private boolean status;
+	private boolean ready;
 	private int initialPosition;
 	private int position;
 	private boolean arrived;
+	private boolean choosePiece;
 	
 	public Piece() {
+		this.choosePiece = false;
 	}
 
 	public Piece(int id, int initialPosition) {
 		this.id = id;
-		this.status = false;
+		this.ready = false;
 		this.arrived = false;
 		this.initialPosition = initialPosition;
 		this.position = this.initialPosition;
+		this.choosePiece = false;
 	}
 	
 	public Piece(int id, boolean status, int position, boolean arrived, int initialPosition) {
 		this.id = id;
-		this.status = status;
+		this.ready = status;
 		this.arrived = arrived;
 		this.position = position;
 		this.initialPosition = initialPosition;
+		this.choosePiece = false;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isReady() {
+		return ready;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setReady(boolean status) {
+		this.ready = status;
 		this.position = this.initialPosition;
 	}
 
@@ -65,13 +69,21 @@ public class Piece {
 	}
 	
 	public void resetToBeginning(){
-		this.status = false;
+		this.ready = false;
 		this.arrived = false;
 		this.position = this.initialPosition;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isChoosePiece() {
+		return choosePiece;
+	}
+
+	public void setChoosePiece(boolean choosePiece) {
+		this.choosePiece = choosePiece;
 	}
 
 	@Override

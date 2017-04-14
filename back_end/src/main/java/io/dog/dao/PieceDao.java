@@ -33,7 +33,7 @@ public class PieceDao {
 
 	public void updateStatus(int id) {
 		PieceDB pieces = findById(id);
-		pieces.setStatus(true);
+		pieces.setReady(true);
 	}
 
 	public void updatePosition(int id, int position) {

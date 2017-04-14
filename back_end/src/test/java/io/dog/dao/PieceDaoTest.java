@@ -64,7 +64,7 @@ public class PieceDaoTest {
 		// Add Piece One to Status True
 		em.getTransaction().begin();
 		dao.updateStatus(two.getId());
-		assertTrue(dao.findById(two.getId()).isStatus());
+		assertTrue(dao.findById(two.getId()).isReady());
 		em.getTransaction().commit();
 
 		// Move this piece to position 10

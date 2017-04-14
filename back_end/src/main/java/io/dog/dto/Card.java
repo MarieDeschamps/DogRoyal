@@ -6,6 +6,7 @@ public class Card {
     private boolean chooseCard;
     
     public Card() {
+    	this.chooseCard = true;
 	}
 
 	public Card(int id) {

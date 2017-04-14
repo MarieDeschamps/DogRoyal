@@ -10,24 +10,41 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/dog/*")
+@WebFilter("/game/*")
 public class CORSFilter implements Filter {
-	@Override
-	public void init(FilterConfig fConfig) throws ServletException {
+
+	/**
+	 * Default constructor.
+	 */
+	public CORSFilter() {
+		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		if (response instanceof HttpServletResponse) {
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			httpResponse.addHeader("Access-Control-Allow-Origin", "*");
-		}
 
+		if (response instanceof HttpServletResponse)
+			((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
+        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 		chain.doFilter(request, response);
 	}
 
-	@Override
-	public void destroy() {
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		// TODO Auto-generated method stub
 	}
+
 }

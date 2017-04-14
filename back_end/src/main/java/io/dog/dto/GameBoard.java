@@ -17,10 +17,10 @@ public class GameBoard {
 	}
 	
 	public void startPiece(Piece p){
-		if(p.isStatus() || p.isArrived()){
+		if(p.isReady() || p.isArrived()){
 			throw new IllegalArgumentException("The piece is not in the game!");
 		}
-		p.setStatus(true);
+		p.setReady(true);
 	}
 	
 	public void movePiece(Piece p, int nbMoves){
@@ -37,9 +37,9 @@ public class GameBoard {
 	}
 
 	public Piece samePosition(Piece p) {
-		if (!p.isArrived() && p.isStatus()) {
+		if (!p.isArrived() && p.isReady()) {
 			for (Piece piece : pieces) {
-				if (p.getId() != piece.getId() && p.getPosition()== piece.getPosition() && !piece.isArrived() && piece.isStatus()) {
+				if (p.getId() != piece.getId() && p.getPosition()== piece.getPosition() && !piece.isArrived() && piece.isReady()) {
 					piece.resetToBeginning();
 					return piece;
 				}

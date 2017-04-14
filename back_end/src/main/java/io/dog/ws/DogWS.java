@@ -83,7 +83,7 @@ public class DogWS {
 		
 		//guard
 		for (Player player : players) {
-			if(player.getCards()!=null && !player.getCards().isEmpty()){
+			if(player.getHand()!=null && !player.getHand().isEmpty()){
 				return new ContainerForOutputWS(whoPlayNow, false,"the players already have cards");
 			}
 		}
@@ -120,14 +120,14 @@ public class DogWS {
 			return new ContainerForOutputWS(whoPlayNow, false,"it's not the player "+ player.getId() + " turn");
 		}
 		
-		if(player.getCards().isEmpty()){
+		if(player.getHand().isEmpty()){
 			return new ContainerForOutputWS(whoPlayNow, false,"the player has no cards");
 		}
 		
-		if(!player.getCards().contains(card)){
+		if(!player.getHand().contains(card)){
 			return new ContainerForOutputWS(whoPlayNow, false, "the player have not this card");
 		}
-		card  = player.getCards().get(player.getCards().indexOf(card));
+		card  = player.getHand().get(player.getHand().indexOf(card));
 		
 		if(!player.getPieces().contains(piece)){
 			return new ContainerForOutputWS(whoPlayNow, false, "the player have not this piece");
@@ -136,7 +136,7 @@ public class DogWS {
 		
 		//play
 		if(player.playableCard(card, piece)){
-			if(piece.isStatus()==false){
+			if(piece.isReady()==false){
 				gameBoard.startPiece(piece);
 			}else{
 				gameBoard.movePiece(piece, card.getValue());
@@ -147,11 +147,11 @@ public class DogWS {
 			if(comedPiece !=null){
 				modifiedPieces.add(comedPiece);
 			}
-			updateService.updatePieces(modifiedPieces);
+			updateService.updatePieces(modifiedPieces); 
 			player.disguardCard(deck, card);
 			updateService.updateDisguardCard(card);
 		}else{
-			for(Card c : player.getCards()){
+			for(Card c : player.getHand()){
 				for(Piece p : player.getPieces()){
 					if(player.playableCard(c, p)){
 						return new ContainerForOutputWS(whoPlayNow, false,"It exists a card in the player hand that can be played in a player piece");
@@ -189,7 +189,7 @@ public class DogWS {
 		
 		whoPlayNow = 1;
 		for (int p=1;p<players.size();p++) {
-			if(players.get(p).getCards()!= null && players.get(p-1).getCards()!= null && players.get(p).getCards().size()>players.get(p-1).getCards().size()){
+			if(players.get(p).getHand()!= null && players.get(p-1).getHand()!= null && players.get(p).getHand().size()>players.get(p-1).getHand().size()){
 				whoPlayNow = players.get(p).getId();
 				break;
 			}
