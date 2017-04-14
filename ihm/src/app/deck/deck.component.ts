@@ -8,13 +8,17 @@ import {Exchange} from "../exchange/exchange";
 @Component({
   selector: 'app-deck',
   template: `
-    <div>DISCARD {{deck.discard}}</div>
     <div> PICK {{deck.pick}}</div>
     <button (click)="pickCard()"> Deal 5 cards</button>
   `,
   styles: [`div {
     border: 1px solid black;
     padding: 10px;
+    background-image: url("../../assets/dickCard.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 5.5em;
   }`],
 })
 
