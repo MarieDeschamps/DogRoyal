@@ -204,7 +204,7 @@ public class DogWS {
 		if(nbPiecesByPlayer<=0){
 			return new ContainerForOutputWS(0, false, "There must be almost 1 piece by player");
 		}
-		if(!loadService.isGameExist(game_id)){
+		if(loadService.isGameExist(game_id)){
 			return new ContainerForOutputWS(0, false, "Game already exists");
 		}
 		
