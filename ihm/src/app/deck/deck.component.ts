@@ -8,19 +8,22 @@ import {Exchange} from "../exchange/exchange";
 @Component({
   selector: 'app-deck',
   template: `
-    <div> PICK {{deck.pick}}</div>
+    <div>{{deck.pick}}</div>
     <button (click)="pickCard()"> Deal 5 cards</button>
   `,
   styles: [`div {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     padding: 10px;
     background-image: url("../../assets/backCard.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 5.5em;
+    width: 63px;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
     vertical-align: middle;
-    line-height: 5.5em;
+    font-size: 2em;
   }`],
 })
 

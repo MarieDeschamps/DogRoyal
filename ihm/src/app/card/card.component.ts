@@ -9,7 +9,7 @@ import {discardPeriodicTasks} from "@angular/core/testing";
   selector: 'app-card',
   template: `
     <div class="card" *ngIf="card.chooseCard==true">
-      <div>{{card.value}}</div>
+      <div><img src="../../assets/{{card.value}}.png" alt="{{card.value}}" height="150"/></div>
       <button *ngIf="card.chooseCard" (click)="onChooseCard()"> choose this card</button>
     </div>
   `,

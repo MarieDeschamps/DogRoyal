@@ -2,22 +2,34 @@
   D O G - R O Y A L
 </h1>
 
-<app-newGameForm (validation)="newGameData($event)"></app-newGameForm>
 
+<div *ngIf="!start || winner">
+    <app-chooseNewOrLoadForm (createNewGame)="chargeNewGame($event)" (loadAGame)="chargeAGame($event)"></app-chooseNewOrLoadForm>
 
-<div *ngIf="!winner">
-  <div *ngIf="start">
-
-    <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)" [whoPlayNow]="whoPlayNow"></app-players>
-
-    <br/>
-    <app-deck [deck]="deckTry" (pick5Cards)="distribuate($event)"></app-deck>
-    <br/>
-    <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
-  </div>
+    <div *ngIf="newGame">
+      <app-newGameForm (validation)="createNewGame($event)"></app-newGameForm>
+    </div>
+    <div *ngIf="loadGame">
+      <app-loadGameForm (validation)="loadGameFirstTime($event)"></app-loadGameForm>
+    </div>
 </div>
+
+<div *ngIf="start && !winner">
+  <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)"
+               [whoPlayNow]="whoPlayNow"></app-players>
+  <br/>
+  <app-deck [deck]="deckTry" (pick5Cards)="distribuate($event)"></app-deck>
+  <br/>
+  <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
+</div>
+
 <div *ngIf="winner">
 
   PLAYER {{winner.id}} YOU WIN !!! CONGRATs!!
 
 </div>
+
+
+
+
+

@@ -11,9 +11,11 @@ import {PieceComponent} from './piece/piece.component';
 import {PlayerComponent} from  './player/player.component';
 import {PlayersComponent} from './players/players.component';
 import {NewGameFormComponent} from "./forms/newGameForm.component";
+import {ChooseNewOrLoadFormComponent} from "./forms/chooseNewOrLoadForm.component";
 
 import {AppComponent} from './app.component';
 import {Exchange} from "./exchange/exchange";
+import {LoadGameFormComponent} from "./forms/loadGameForm.component";
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {Exchange} from "./exchange/exchange";
     PieceComponent,
     PlayerComponent,
     PlayersComponent,
-    NewGameFormComponent
+    ChooseNewOrLoadFormComponent,
+    NewGameFormComponent,
+    LoadGameFormComponent,
   ],
   imports: [
     BrowserModule,
