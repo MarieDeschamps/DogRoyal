@@ -23,14 +23,14 @@ export class Exchange {
       .then((response: Response) => response.json());
   }
 
-  askForPlayer(game, player){
-    return this.http.post(this.beginPath + "load/{{game}}/{{player}}","")
+  loadGamePlayer(game, player){
+    return this.http.get(this.beginPath + "load/"+game+"/"+player)
       .toPromise()
       .then((response: Response) => response.json());
   }
 
   loadGame (game) {
-   return this.http.post(this.beginPath + "load/{{game}}","")
+   return this.http.get(this.beginPath + "load/"+game)
    .toPromise()
    .then((response: Response) => response.json());
    }
@@ -41,8 +41,8 @@ export class Exchange {
       .then((response: Response) => response.json());
   }
 
-  pick5() {
-    return this.http.get(this.beginPath + "pick5")
+  pick5(game) {
+    return this.http.get(this.beginPath + "pick5/"+game)
       .toPromise()
       .then((response: Response) => response.json());
   }
@@ -52,12 +52,9 @@ export class Exchange {
     let card = players[whoPlayNow - 1].hand.filter(function (card) {
       return card.chooseCard === false;
     });
-    console.log("playsssss");
-    console.log(card);
     let piece = players[whoPlayNow - 1].pieces.filter(function (piece) {
       return piece.choosePiece === true;
     });
-    console.log(piece);
 
     let data = {
       "player": {

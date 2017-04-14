@@ -8,11 +8,11 @@ import {Player, Deck, Players} from '../model';
   selector: 'app-players',
   template: `
     <div class="playersStyle" *ngFor="let player of players;">
-      <div *ngIf="whoPlayNow===player.id">
-      <app-player [player]="player" (choosenElements)="chooseElements()">
+      
+      <app-player [player]="player" (choosenElements)="chooseElements()" [whoPlayNow]="whoPlayNow">
         <app-hand [hand]="player.hand"></app-hand>
       </app-player>
-      </div>
+    
     </div>`,
   styles: [``]
 })

@@ -9,23 +9,27 @@ import {Piece, Player} from '../model';
   selector: 'app-player',
   template: `
     <div>Player {{player.id}} with {{player.color}} pieces
-      <div *ngFor="let piece of player.pieces;let i=indexPiece">
-        <app-piece [piece]="piece" (choosenPiece)="chooseThisPiece($event)"></app-piece>
+      <div *ngIf="whoPlayNow===player.id">
+        <div *ngFor="let piece of player.pieces;let i=indexPiece">
+          <app-piece [piece]="piece" (choosenPiece)="chooseThisPiece($event)"></app-piece>
+        </div>
       </div>
       <div class="showAllPieces">
         Home !
         <div *ngFor="let piece of player.pieces;let i=indexPiece">
-          <div *ngIf="!piece.ready" class="showPieces"><img src="../../assets/piece.jpg" style="width:3em;height:3em;vertical-align: middle;">{{piece.id}}
+          <div *ngIf="!piece.ready" class="showPieces"><img src="../../assets/piece.jpg"
+                                                            style="width:3em;height:3em;vertical-align: middle;">{{piece.id}}
           </div>
         </div>
       </div>
-      
-      <app-hand [hand]="player.hand" (choosenCard)="chooseThisCard($event)"></app-hand>
-      
+      <div *ngIf="whoPlayNow===player.id">
+        <app-hand [hand]="player.hand" (choosenCard)="chooseThisCard($event)"></app-hand>
+      </div>
       <div class="showAllPiecesFinish">
         Arrived ! :
         <div *ngFor="let piece of player.pieces;let i=indexPiece">
-          <div *ngIf="piece.arrived" class="showPieces"><img src="../../assets/piece.jpg" style="width:auto;height:auto;vertical-align: middle;" >{{piece.id}}
+          <div *ngIf="piece.arrived" class="showPieces"><img src="../../assets/piece.jpg"
+                                                             style="width:auto;height:auto;vertical-align: middle;">{{piece.id}}
           </div>
         </div>
       </div>
@@ -36,13 +40,13 @@ import {Piece, Player} from '../model';
       flex-direction: row;
       vertical-align: middle;
       line-height: 5.5em;
-    
+
     }
 
     .showAllPieces {
       display: flex;
       flex-direction: row;
-     
+
       vertical-align: middle;
       line-height: 5.5em;
     }
@@ -50,10 +54,11 @@ import {Piece, Player} from '../model';
     .showPieces {
       border: 1px solid black;
       flex: 0 0;
-      
+
     }`]
 })
 export class PlayerComponent {
+  @Input() whoPlayNow;
   @Input() player: Player;
   @Output() choosenElements: EventEmitter<boolean> = new EventEmitter();
 

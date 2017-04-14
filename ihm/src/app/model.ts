@@ -29,3 +29,12 @@ export interface Deck {
 
 export interface Players extends Array<Player> {
 }
+
+export interface Game {
+  id: number;
+  freePlayers : number[];
+}
+
+export interface Games extends Array<Game> {
+
+}

@@ -12,9 +12,14 @@ export class AppComponent {
   nOfPieces: number;
   winner: number;
   nbCases: number;
-  start: boolean;
+  start: boolean=false;
   playersTry: Players;
   whoPlayNow: number;
+  newGame: boolean=false;
+  loadGame : boolean=false;
+  game_id: number;
+  user_id: number;
+
   deckTry: Deck = {
     'pick': -1, 'discard': -1
   };
@@ -25,22 +30,35 @@ export class AppComponent {
   constructor(private exchange: Exchange) {
   }
 
+  chargeNewGame($event) {
+    this.newGame = true;
+  }
+  chargeAGame($event){
+    this.loadGame = true;
+  }
+
+
   elementChoosen($event) {
     this.play();
   }
 
-  newGameData($event) {
+  createNewGame($event) {
     this.nOfPieces = $event.piecesPlayer;
     this.nOfPlayers = $event.totalPlayers;
-    this.nbCases = 16 * (this.nOfPlayers);
+    this.user_id = 1;
     this.create();
-
   };
+
+  loadGameFirstTime($event){
+    this.game_id = $event.choosenGame;
+    this.user_id = $event.choosenPlayer;
+    this.exchange.loadGamePlayer(this.game_id, this.user_id);
+  }
 
   distribuate($event) {
     let deal: boolean = $event;
     if (deal === true) {
-      this.exchange.pick5().then(data => this.translateData(data));
+      this.exchange.pick5(this.game_id).then(data => this.translateData(data));
     }
   }
 
@@ -49,11 +67,13 @@ export class AppComponent {
   }
 
   create() {
+    this.newGame = false;
     this.exchange.create(this.nOfPlayers, this.nOfPieces).then(data => this.translateData(data));
   }
 
   load() {
-    this.exchange.load().then(data => this.translateData(data));
+    this.loadGame = false;
+    this.exchange.loadGame(this.game_id).then(data => this.translateData(data));
   }
 
   translateData(data) {
@@ -66,6 +86,8 @@ export class AppComponent {
       this.winner = data.winner;
       this.whoPlayNow = data.whoPlayNow;
       this.start = true;
+      this.nbCases = 16 * (this.playersTry.length);
+      this.game_id = data.game_id;
     }
     console.log("start = " + this.start)
   }
