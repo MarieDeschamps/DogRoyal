@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {Deck, Players} from './model';
 import {Exchange} from './exchange/exchange';
 
@@ -7,7 +7,7 @@ import {Exchange} from './exchange/exchange';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   nOfPlayers: number;
   nOfPieces: number;
   winner: number;
@@ -19,6 +19,7 @@ export class AppComponent {
   loadGame : boolean=false;
   game_id: number;
   user_id: number;
+  intervalReload = window.setInterval(this.reloadData,5000);
 
   deckTry: Deck = {
     'pick': -1, 'discard': -1
@@ -28,6 +29,10 @@ export class AppComponent {
   pieceChosen: boolean;
 
   constructor(private exchange: Exchange) {
+  }
+
+  ngOnDestroy(){
+
   }
 
   chargeNewGame($event) {
@@ -52,13 +57,19 @@ export class AppComponent {
   loadGameFirstTime($event){
     this.game_id = $event.choosenGame;
     this.user_id = $event.choosenPlayer;
-    this.exchange.loadGamePlayer(this.game_id, this.user_id);
+    this.exchange.loadGamePlayer(this.game_id, this.user_id).then(data => this.translateData(data));
   }
 
   distribuate($event) {
     let deal: boolean = $event;
     if (deal === true) {
       this.exchange.pick5(this.game_id).then(data => this.translateData(data));
+    }
+  }
+
+  reloadData(){
+    if(this.start && !this.winner && this.whoPlayNow!=this.user_id){
+      this.load();
     }
   }
 
@@ -77,6 +88,7 @@ export class AppComponent {
   }
 
   translateData(data) {
+    console.log(data);
     if (!data.ok) {
       console.log(data.message);
     } else {
@@ -87,7 +99,9 @@ export class AppComponent {
       this.whoPlayNow = data.whoPlayNow;
       this.start = true;
       this.nbCases = 16 * (this.playersTry.length);
-      this.game_id = data.game_id;
+      if(!this.game_id){
+        this.game_id = data.game_id;
+      }
     }
     console.log("start = " + this.start)
   }

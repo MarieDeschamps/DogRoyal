@@ -32,7 +32,7 @@ import {Exchange} from '../exchange/exchange';
 // <div *ngIf='position==i' class="piece" [style.backgroundColor]=' colorCase(i)'></div>
 export class LoadGameFormComponent implements OnInit{
   @Output() validation: EventEmitter<{ choosenGame: number; choosenPlayer: number; }> = new EventEmitter();
-  games: Games = [{id: 3, freePlayers: [4]}, {id: 5, freePlayers: [3, 4, 5, 3]}];
+  games: Games = [];
   choosenGame: Game = null;
   choosenPlayer: number;
 

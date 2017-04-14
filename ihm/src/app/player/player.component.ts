@@ -55,7 +55,9 @@ import {Piece, Player} from '../model';
       border: 1px solid black;
       flex: 0 0;
 
-    }`]
+    }
+  
+    `]
 })
 export class PlayerComponent {
   @Input() whoPlayNow;
