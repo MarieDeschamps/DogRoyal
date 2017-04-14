@@ -31,14 +31,10 @@ public class PieceDao {
 		return em.find(PieceDB.class, id);
 	}
 
-	public void updateStatus(int id) {
-		PieceDB pieces = findById(id);
-		pieces.setReady(true);
-	}
-
-	public void updatePosition(int id, int position) {
+	public void updatePiece(int id, int position, boolean ready) {
 		PieceDB pieces = findById(id);
 		pieces.setPosition(position);
+		pieces.setReady(ready);
 	}
 
 	public List<PieceDB> getPlayersPieces(int numberplayer) {

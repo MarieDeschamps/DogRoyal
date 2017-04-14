@@ -56,11 +56,7 @@ public class UpdateService {
 		}
 		
 		for (Piece piece : pieces) {
-			if (piece.isReady()) {
-				pdao.updateStatus(piece.getId());
-			} else {
-				pdao.updatePosition(piece.getId(), piece.getPosition());
-			}
+			pdao.updatePiece(piece.getId(), piece.getPosition(), piece.isReady());
 		}
 	}
 	
