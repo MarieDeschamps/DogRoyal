@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, HostListener, OnDestroy} from '@angular/core';
 import {Deck, Players} from './model';
 import {Exchange} from './exchange/exchange';
 
@@ -7,7 +7,8 @@ import {Exchange} from './exchange/exchange';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent {
+
   nOfPlayers: number;
   nOfPieces: number;
   winner: number;
@@ -33,8 +34,16 @@ export class AppComponent implements OnDestroy {
   constructor(private exchange: Exchange) {
   }
 
-  ngOnDestroy() {
+//TODO free player
+
+  @HostListener('window:unload', ['$event'])
+  freePlayer(event: Event) {
+    alert("coucou ");
     this.exchange.freePlayer(this.game_id, this.user_id);
+    setTimeout(() => {
+      ;
+    }, 1000);
+
   }
 
   chargeNewGame($event) {
