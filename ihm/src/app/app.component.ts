@@ -21,7 +21,7 @@ export class AppComponent implements OnDestroy {
   user_id: number;
 
 
-  intervalReload = setInterval(this.reloadData, 5000);
+  intervalReload = setInterval(() => this.reloadData, 5000);
 
   deckTry: Deck = {
     'pick': -1, 'discard': -1
@@ -47,7 +47,6 @@ export class AppComponent implements OnDestroy {
     this.newGame = false;
   }
 
-
   elementChoosen($event) {
     this.play();
   }
@@ -57,6 +56,7 @@ export class AppComponent implements OnDestroy {
     this.nOfPlayers = $event.totalPlayers;
     this.user_id = 1;
     this.create();
+    console.log("create user_id " + this.user_id);
   };
 
   loadGameFirstTime($event) {
