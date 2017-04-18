@@ -12,7 +12,6 @@ import {Players} from '../model';
       <button (click)=" newGame()">New Game</button>
       <button (click)=" loadGame()">Load Game</button>
     </div>
-    <br/><br/><br/><br/>
   `,
   styles: [`
   `]

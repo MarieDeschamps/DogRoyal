@@ -7,19 +7,19 @@ import {Exchange} from './exchange/exchange';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnDestroy {
   nOfPlayers: number;
   nOfPieces: number;
   winner: number;
   nbCases: number;
-  start: boolean=false;
+  start: boolean = false;
   playersTry: Players;
   whoPlayNow: number;
-  newGame: boolean=false;
-  loadGame : boolean=false;
+  newGame: boolean = false;
+  loadGame: boolean = false;
   game_id: number;
   user_id: number;
-  intervalReload = window.setInterval(this.reloadData,5000);
+  intervalReload = window.setInterval(this.reloadData, 5000);
 
   deckTry: Deck = {
     'pick': -1, 'discard': -1
@@ -31,15 +31,18 @@ export class AppComponent implements OnDestroy{
   constructor(private exchange: Exchange) {
   }
 
-  ngOnDestroy(){
-
+  ngOnDestroy() {
+    this.exchange.freePlayer(this.game_id, this.user_id);
   }
 
   chargeNewGame($event) {
     this.newGame = true;
+    this.loadGame = false;
   }
-  chargeAGame($event){
+
+  chargeAGame($event) {
     this.loadGame = true;
+    this.newGame = false;
   }
 
 
@@ -54,7 +57,7 @@ export class AppComponent implements OnDestroy{
     this.create();
   };
 
-  loadGameFirstTime($event){
+  loadGameFirstTime($event) {
     this.game_id = $event.choosenGame;
     this.user_id = $event.choosenPlayer;
     this.exchange.loadGamePlayer(this.game_id, this.user_id).then(data => this.translateData(data));
@@ -67,9 +70,11 @@ export class AppComponent implements OnDestroy{
     }
   }
 
-  reloadData(){
-    if(this.start && !this.winner && this.whoPlayNow!=this.user_id){
+  reloadData() {
+    if (this.start && !this.winner && this.whoPlayNow != this.user_id) {
       this.load();
+      if (this.whoPlayNow === this.user_id)
+        alert("It's your turn");
     }
   }
 
@@ -79,7 +84,13 @@ export class AppComponent implements OnDestroy{
 
   create() {
     this.newGame = false;
-    this.exchange.create(this.nOfPlayers, this.nOfPieces).then(data => this.translateData(data));
+    this.exchange.create(this.nOfPlayers, this.nOfPieces)
+      .then(data => this.translateData(data))
+      .then(() => {
+        if (this.user_id === 1) {
+          alert("It's your turn");
+        }
+      });
   }
 
   load() {
@@ -90,7 +101,7 @@ export class AppComponent implements OnDestroy{
   translateData(data) {
     console.log(data);
     if (!data.ok) {
-      console.log(data.message);
+      alert(data.message);
     } else {
       this.playersTry = data.players;
       this.deckTry.pick = data.deck.pickable.length;
@@ -99,52 +110,12 @@ export class AppComponent implements OnDestroy{
       this.whoPlayNow = data.whoPlayNow;
       this.start = true;
       this.nbCases = 16 * (this.playersTry.length);
-      if(!this.game_id){
+      if (!this.game_id) {
         this.game_id = data.game_id;
       }
     }
     console.log("start = " + this.start)
   }
-
-
-  // winner = null;
-
-  /*
-
-   deckTry: Deck = {
-   'pick': 76, 'discard': 0
-   };
-
-
-
-   [{
-   pieces: [
-   {'position': 2, 'state': false, 'id': 3},
-   {'position': 1, 'state': false, 'id': 4}
-   ],
-   hand: [
-   {'value': 5, 'id': 5, 'chooseCard': true},
-   {'value': 14, 'id': 6, 'chooseCard': true},
-   {'value': 7, 'id': 7, 'chooseCard': true},
-   {'value': 3, 'id': 8, 'chooseCard': true}
-   ],
-   color: 'blue',
-   id: 1,
-   }, {
-   pieces: [
-   {'position': 5, 'state': false, 'id': 1},
-   {'position': 9, 'state': false, 'id': 2}
-   ],
-   hand: [
-   {'value': 14, 'id': 1, 'chooseCard': true},
-   {'value': 5, 'id': 2, 'chooseCard': true},
-   {'value': 8, 'id': 3, 'chooseCard': true},
-   {'value': 1, 'id': 4, 'chooseCard': true}
-   ],
-   color: 'red',
-   id: 2,
-   }];*/
-
 
 }
 

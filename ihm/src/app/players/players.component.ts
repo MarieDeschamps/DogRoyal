@@ -9,7 +9,7 @@ import {Player, Deck, Players} from '../model';
   template: `
     <div class="playersStyle" *ngFor="let player of players;">
       
-      <app-player [player]="player" (choosenElements)="chooseElements()" [whoPlayNow]="whoPlayNow">
+      <app-player [player]="player" (choosenElements)="chooseElements()" [user_id]="user_id">
         <app-hand [hand]="player.hand"></app-hand>
       </app-player>
     
@@ -17,7 +17,7 @@ import {Player, Deck, Players} from '../model';
   styles: [``]
 })
 export class PlayersComponent {
-  @Input() whoPlayNow;
+  @Input() user_id;
   @Input() players: Players;
   @Output() choosenElements: EventEmitter<boolean> = new EventEmitter();
 

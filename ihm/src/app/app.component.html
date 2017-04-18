@@ -15,8 +15,7 @@
 </div>
 
 <div *ngIf="start && !winner">
-  <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)"
-               [whoPlayNow]="whoPlayNow"></app-players>
+  <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)" [user_id]="user_id"></app-players>
   <br/>
   <app-deck [deck]="deckTry" (pick5Cards)="distribuate($event)"></app-deck>
   <br/>

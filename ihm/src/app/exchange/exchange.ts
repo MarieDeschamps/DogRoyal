@@ -5,7 +5,7 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class Exchange {
-  beginPath = "http://10.31.0.17:8080/back_end_-0.0.1-SNAPSHOT/game/dog/";
+  beginPath = "http://10.31.0.30:8080/back_end_-0.0.1-SNAPSHOT/game/dog/";
 
   constructor(private http: Http) {
   }
@@ -23,17 +23,17 @@ export class Exchange {
       .then((response: Response) => response.json());
   }
 
-  loadGamePlayer(game, user){
-    return this.http.get(this.beginPath + "load/"+game+"/"+user)
+  loadGamePlayer(game, user) {
+    return this.http.get(this.beginPath + "load/" + game + "/" + user)
       .toPromise()
       .then((response: Response) => response.json());
   }
 
   loadGame(game) {
-   return this.http.get(this.beginPath + "load/"+game)
-     .toPromise()
-     .then((response: Response) => response.json());
-   }
+    return this.http.get(this.beginPath + "load/" + game)
+      .toPromise()
+      .then((response: Response) => response.json());
+  }
 
   load() {
     return this.http.get(this.beginPath + "load")
@@ -42,13 +42,13 @@ export class Exchange {
   }
 
   pick5(game) {
-    return this.http.get(this.beginPath + "pick5/"+game)
+    return this.http.get(this.beginPath + "pick5/" + game)
       .toPromise()
       .then((response: Response) => response.json());
   }
 
-  freePlayer(game,user){
-    this.http.get(this.beginPath+"freePlayer/"+game+"/"+user);
+  freePlayer(game, user) {
+    this.http.get(this.beginPath + "freePlayer/" + game + "/" + user);
   }
 
   play(players, whoPlayNow) {

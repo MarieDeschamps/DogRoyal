@@ -9,7 +9,7 @@ import {Piece, Player} from '../model';
   selector: 'app-player',
   template: `
     <div>Player {{player.id}} with {{player.color}} pieces
-      <div *ngIf="whoPlayNow===player.id">
+      <div *ngIf="user_id===player.id">
         <div *ngFor="let piece of player.pieces;let i=indexPiece">
           <app-piece [piece]="piece" (choosenPiece)="chooseThisPiece($event)"></app-piece>
         </div>
@@ -22,7 +22,7 @@ import {Piece, Player} from '../model';
           </div>
         </div>
       </div>
-      <div *ngIf="whoPlayNow===player.id">
+      <div *ngIf="user_id===player.id">
         <app-hand [hand]="player.hand" (choosenCard)="chooseThisCard($event)"></app-hand>
       </div>
       <div class="showAllPiecesFinish">
@@ -56,11 +56,11 @@ import {Piece, Player} from '../model';
       flex: 0 0;
 
     }
-  
-    `]
+
+  `]
 })
 export class PlayerComponent {
-  @Input() whoPlayNow;
+  @Input() user_id;
   @Input() player: Player;
   @Output() choosenElements: EventEmitter<boolean> = new EventEmitter();
 
