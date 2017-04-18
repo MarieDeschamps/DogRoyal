@@ -74,7 +74,9 @@ export class AppComponent implements OnDestroy {
     if (this.start && !this.winner && this.whoPlayNow != this.user_id) {
       this.load();
       if (this.whoPlayNow === this.user_id)
-        alert("It's your turn");
+        setTimeout(() => {
+          alert("It's your turn");
+        }, 1000);
     }
   }
 
@@ -88,7 +90,9 @@ export class AppComponent implements OnDestroy {
       .then(data => this.translateData(data))
       .then(() => {
         if (this.user_id === 1) {
-          alert("It's your turn");
+          setTimeout(() => {
+            alert("It's your turn");
+          }, 1000);
         }
       });
   }
