@@ -73,17 +73,15 @@ export class AppComponent implements OnDestroy {
   }
 
   reloadData() {
-    console.log("alert reload " + this.user_id);
-    console.log("this.start " + this.start + " this.winner " + this.winner + " this.whoPlayNow " + this.whoPlayNow);
     if (this.start && !this.winner && this.whoPlayNow !== this.user_id) {
-      this.load();
-      console.log("je suis a lexterieur du if de reload avec le settimeout");
-      if (this.whoPlayNow === this.user_id) {
-        console.log("je suis a linterieur du if de reload avec le settimeout");
-        setTimeout(() => {
-          alert("It's your turn");
-        }, 1000);
-      }
+      this.load().then(() => {
+        if (this.whoPlayNow === this.user_id) {
+
+          setTimeout(() => {
+            alert("It's your turn");
+          }, 1000);
+        }
+      })
     }
   }
 
@@ -106,7 +104,7 @@ export class AppComponent implements OnDestroy {
 
   load() {
     this.loadGame = false;
-    this.exchange.loadGame(this.game_id).then(data => this.translateData(data));
+    return this.exchange.loadGame(this.game_id).then(data => this.translateData(data));
   }
 
   translateData(data) {
