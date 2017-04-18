@@ -208,6 +208,7 @@ public class DogWS {
 		int game_id = createService.createAll(nbPlayers, nbPiecesByPlayer);
 
 		this.loadBdd(game_id);
+		updateService.updateFree(game_id, 1, false);
 		return new ContainerForOutputWS(deck, players, whoPlayNow,true,game_id);
 	}
 	
@@ -345,6 +346,12 @@ public class DogWS {
 			createService.deleteGame(game_id);
 		}
 		return result;
+	}
+	
+	@GET
+	@Path("free/{game_id}/{player_id}")
+	public void free(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
+		updateService.updateFree(game_id, player_id, true);
 	}
 	
 	
