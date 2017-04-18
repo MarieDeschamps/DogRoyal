@@ -74,14 +74,16 @@ export class AppComponent implements OnDestroy {
 
   reloadData() {
     console.log("alert reload " + this.user_id);
+    console.log("this.start " + this.start + " this.winner " + this.winner + " this.whoPlayNow " + this.whoPlayNow);
     if (this.start && !this.winner && this.whoPlayNow !== this.user_id) {
       this.load();
       console.log("je suis a lexterieur du if de reload avec le settimeout");
-      if (this.whoPlayNow === this.user_id)
+      if (this.whoPlayNow === this.user_id) {
         console.log("je suis a linterieur du if de reload avec le settimeout");
         setTimeout(() => {
           alert("It's your turn");
         }, 1000);
+      }
     }
   }
 
