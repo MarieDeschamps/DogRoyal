@@ -56,6 +56,11 @@ public class GameDao {
 		String jpql = "SELECT g FROM GameDB g WHERE g.free=true ORDER BY g.game_id";
 		return em.createQuery(jpql, GameDB.class).getResultList();
 	}
+	
+	public List<Integer> getGameIds() {
+		String jpql = "Select DISTINCT g.game_id FROM GameDB g";
+		return em.createQuery(jpql,Integer.class).getResultList();
+	}
 
 	
 }

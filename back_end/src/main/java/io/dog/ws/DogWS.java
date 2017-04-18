@@ -50,7 +50,7 @@ public class DogWS {
 	}
 	
 	@GET
-	@Path("create/{nbPlayers}/{nbPiecesByPlayer}")
+	@Path("creategarbage/{nbPlayers}/{nbPiecesByPlayer}")
 	public ContainerForOutputWS create(@PathParam("nbPlayers") int nbPlayers, @PathParam("nbPiecesByPlayer") int nbPiecesByPlayer){
 		if(nbPlayers<2){
 			return new ContainerForOutputWS(0, false, "There must be almost 2 players");
@@ -196,21 +196,16 @@ public class DogWS {
 	// Methods for game id
 	
 	@GET
-	@Path("create/{nbPlayers}/{nbPiecesByPlayer}/{game_id}")
-	public ContainerForOutputWS create(@PathParam("nbPlayers") int nbPlayers, @PathParam("nbPiecesByPlayer") int nbPiecesByPlayer,@PathParam("game_id") int game_id){
+	@Path("create/{nbPlayers}/{nbPiecesByPlayer}")
+	public ContainerForOutputWS createAll(@PathParam("nbPlayers") int nbPlayers, @PathParam("nbPiecesByPlayer") int nbPiecesByPlayer){
 		if(nbPlayers<2){
 			return new ContainerForOutputWS(0, false, "There must be almost 2 players");
 		}
 		if(nbPiecesByPlayer<=0){
 			return new ContainerForOutputWS(0, false, "There must be almost 1 piece by player");
 		}
-		if(loadService.isGameExist(game_id)){
-			return new ContainerForOutputWS(0, false, "Game already exists");
-		}
-		
-		createService.createDeck(game_id);
-		createService.createPiece(nbPlayers, nbPiecesByPlayer,game_id);
-		createService.createGame(game_id, nbPlayers);
+	
+		int game_id = createService.createAll(nbPlayers, nbPiecesByPlayer);
 
 		this.loadBdd(game_id);
 		return new ContainerForOutputWS(deck, players, whoPlayNow,true,game_id);
@@ -219,6 +214,10 @@ public class DogWS {
 	@GET
 	@Path("load/{game_id}")
 	public ContainerForOutputWS load(@PathParam("game_id") int game_id){
+		//guards load
+		if(!loadService.isGameExist(game_id)){
+			return new ContainerForOutputWS(0, false, "Game doessn't exist");
+		}
 		this.loadBdd(game_id);
 		return new ContainerForOutputWS(deck, players, whoPlayNow, true,game_id);
 	}
@@ -226,6 +225,10 @@ public class DogWS {
 	@GET
 	@Path("load/{game_id}/{player_id}")
 	public ContainerForOutputWS load(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
+		//guards load
+		if(!loadService.isGameExist(game_id)){
+			return new ContainerForOutputWS(0, false, "Game doessn't exist");
+		}
 		this.loadBdd(game_id);
 		updateService.updateFree(game_id, player_id, false);
 		return new ContainerForOutputWS(deck, players, whoPlayNow, true,game_id);
@@ -234,6 +237,11 @@ public class DogWS {
 	@GET
 	@Path("pick5/{game_id}")
 	public ContainerForOutputWS pick5(@PathParam("game_id") int game_id){
+		//guards load
+		if(!loadService.isGameExist(game_id)){
+			return new ContainerForOutputWS(0, false, "Game doessn't exist");
+		}
+		
 		this.loadBdd(game_id);
 		
 		//guard

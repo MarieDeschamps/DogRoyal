@@ -1,6 +1,6 @@
 package io.dog.service;
 
-import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -111,6 +111,25 @@ public class CreateService {
 		cdao.deleteAll(game_id);
 		pdao.deleteAll(game_id);
 		gdao.deleteAll(game_id);
+	}
+	
+	public int createAll(int nbPlayers, int nbPieces){
+		List<Integer> game_list = gdao.getGameIds();
+		int game_id = 1;
+		for (Integer id : game_list) {
+			if(id == game_id){
+				game_id++;
+			}
+			else{
+				break;
+			}
+		}
+		
+		this.createGame(game_id, nbPlayers);
+		this.createDeck(game_id);
+		this.createPiece(nbPlayers, nbPieces, game_id);
+		
+		return game_id;
 	}
 
 }
