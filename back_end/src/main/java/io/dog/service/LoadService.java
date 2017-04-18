@@ -122,7 +122,7 @@ public class LoadService {
 			} else {
 				playerlist = playerlist + games.get(i).getPlayer();
 				map.put(String.valueOf(games.get(i).getGame_id()), playerlist);
-				playerlist = String.valueOf(games.get(i).getPlayer()) + "_";
+				playerlist ="";
 
 			}
 		}
