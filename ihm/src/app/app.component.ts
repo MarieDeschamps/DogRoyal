@@ -21,7 +21,7 @@ export class AppComponent implements OnDestroy {
   user_id: number;
 
 
-  intervalReload = setInterval(() => this.reloadData, 5000);
+  intervalReload = setInterval(() => this.reloadData(), 5000);
 
   deckTry: Deck = {
     'pick': -1, 'discard': -1
@@ -74,9 +74,11 @@ export class AppComponent implements OnDestroy {
 
   reloadData() {
     console.log("alert reload " + this.user_id);
-    if (this.start && !this.winner && this.whoPlayNow != this.user_id) {
+    if (this.start && !this.winner && this.whoPlayNow !== this.user_id) {
       this.load();
+      console.log("je suis a lexterieur du if de reload avec le settimeout");
       if (this.whoPlayNow === this.user_id)
+        console.log("je suis a linterieur du if de reload avec le settimeout");
         setTimeout(() => {
           alert("It's your turn");
         }, 1000);
