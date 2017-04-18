@@ -100,5 +100,15 @@ public class ContainerForOutputWS{
 	public void setWinner(Player winner) {
 		this.winner = winner;
 	}
+
+	public int getGame_id() {
+		return game_id;
+	}
+
+	public void setGame_id(int game_id) {
+		this.game_id = game_id;
+	}
+	
+	
 	
 }
