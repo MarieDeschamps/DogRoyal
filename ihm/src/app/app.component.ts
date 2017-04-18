@@ -19,7 +19,9 @@ export class AppComponent implements OnDestroy {
   loadGame: boolean = false;
   game_id: number;
   user_id: number;
-  intervalReload = window.setInterval(this.reloadData, 5000);
+
+
+  intervalReload = setInterval(this.reloadData, 5000);
 
   deckTry: Deck = {
     'pick': -1, 'discard': -1
@@ -71,6 +73,7 @@ export class AppComponent implements OnDestroy {
   }
 
   reloadData() {
+    console.log("alert reload " + this.user_id);
     if (this.start && !this.winner && this.whoPlayNow != this.user_id) {
       this.load();
       if (this.whoPlayNow === this.user_id)

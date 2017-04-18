@@ -16,7 +16,6 @@ export class Exchange {
       .then((response: Response) => response.json());
   }
 
-
   create(nbPlayers, nbPiecesByPlayer) {
     return this.http.get(this.beginPath + "create/" + nbPlayers + "/" + nbPiecesByPlayer)
       .toPromise()
