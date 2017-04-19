@@ -2,6 +2,7 @@ package io.dog.ws;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -45,7 +46,13 @@ public class DogWS {
 	
 	@GET
 	public HashMap<String, String> getGames(){
-		return loadService.getGames();
+		HashMap<String, String> result = loadService.getGames();
+		for (String game : result.keySet()) {
+			if(isGameFinished(Integer.parseInt(game))){
+				result.remove(game);
+			}
+		}
+		return result;
 	}
 	
 	@GET
@@ -187,24 +194,40 @@ public class DogWS {
 			updateService.updateDisguardCard(card);
 		}
 		whoPlayNow++;
+		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow,true,game_id);
+		if(winner(player)){
+			result.setWinner(player);
+		}
+		return result;
+	}
+
+	private boolean winner(Player player) {
 		boolean winner = true;
 		for(Piece p : player.getPieces()){
 			if(!p.isArrived()){
 				winner = false;
 			}
 		}
-		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow,true,game_id);
-		if(winner){
-			result.setWinner(player);
-			createService.deleteGame(game_id);
+		return winner;
+	}
+	
+	private boolean isGameFinished(int game_id){
+		this.loadBdd(game_id);
+		for (Player player : players) {
+			if(winner(player)){
+				return true;
+			}
 		}
-		return result;
+		return false;
 	}
 	
 	@GET
 	@Path("free/{game_id}/{player_id}")
 	public void free(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
 		updateService.updateFree(game_id, player_id, true);
+		if(isGameFinished(game_id) && loadService.areAllPlayersFree(game_id)){
+			createService.deleteGame(game_id);
+		}
 	}
 	
 	

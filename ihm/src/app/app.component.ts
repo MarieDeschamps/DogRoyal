@@ -43,8 +43,7 @@ export class AppComponent {
     }, 1000);
   }
 
-
-  finishGame() {
+  leaveGame() {
     this.exchange.freePlayer(this.game_id, this.user_id);
   }
 

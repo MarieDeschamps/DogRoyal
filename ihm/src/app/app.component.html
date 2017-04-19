@@ -4,30 +4,32 @@
 
 
 <div *ngIf="!start || winner">
-    <app-chooseNewOrLoadForm (createNewGame)="chargeNewGame($event)" (loadAGame)="chargeAGame($event)"></app-chooseNewOrLoadForm>
+  <app-chooseNewOrLoadForm (createNewGame)="chargeNewGame($event)"
+                           (loadAGame)="chargeAGame($event)"></app-chooseNewOrLoadForm>
 
-    <div *ngIf="newGame">
-      <app-newGameForm (validation)="createNewGame($event)"></app-newGameForm>
-    </div>
-    <div *ngIf="loadGame">
-      <app-loadGameForm (validation)="loadGameFirstTime($event)"></app-loadGameForm>
-    </div>
+  <div *ngIf="newGame">
+    <app-newGameForm (validation)="createNewGame($event)"></app-newGameForm>
+  </div>
+  <div *ngIf="loadGame">
+    <app-loadGameForm (validation)="loadGameFirstTime($event)"></app-loadGameForm>
+  </div>
 </div>
 
 <div *ngIf="start && !winner">
+  <button onclick="leaveGame()">Leave Game</button>
   <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)" [user_id]="user_id"></app-players>
   <br/>
   <app-deck [deck]="deckTry" (pick5Cards)="distribuate($event)"></app-deck>
   <br/>
   <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
+
+
 </div>
-
-
 
 <div *ngIf="winner">
   <br/>
   PLAYER {{winner.id}} YOU WIN !!! CONGRATs!!
-  <button onclick="finishGame()">Finish Game</button>
+  <button onclick="leaveGame()">Finish Game</button>
 
 </div>
 
