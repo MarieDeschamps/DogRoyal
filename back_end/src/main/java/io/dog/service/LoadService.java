@@ -88,6 +88,17 @@ public class LoadService {
 	public int getGameId(int id) {
 		return cdao.getGameId(id);
 	}
+	
+	public boolean arePlayersExistInGame(int game_id){
+		if (gdao.getNoFreeGame(game_id).isEmpty()){
+			return false;
+		}
+		else{
+			return true;
+		}
+		
+	}
+	
 
 	public List<Card> toCard(List<CardDB> list) {
 

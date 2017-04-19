@@ -47,11 +47,6 @@ public class GameDao {
 		return em.find(GameDB.class, id);
 	}
 	
-	public List<Integer> getNbGames() {
-		String jpql = "Select DISTINCT g.player FROM GameDB g";
-		return em.createQuery(jpql,Integer.class).getResultList();
-	}
-	
 	public List<GameDB> getFreeGames() {
 		String jpql = "SELECT g FROM GameDB g WHERE g.free=true ORDER BY g.game_id";
 		return em.createQuery(jpql, GameDB.class).getResultList();
@@ -60,6 +55,11 @@ public class GameDao {
 	public List<Integer> getGameIds() {
 		String jpql = "Select DISTINCT g.game_id FROM GameDB g";
 		return em.createQuery(jpql,Integer.class).getResultList();
+	}
+	
+	public List<GameDB> getNoFreeGame(int game_id) {
+		String jpql = "SELECT g FROM GameDB g WHERE g.free=false AND g.game_id=:game_id";
+		return em.createQuery(jpql, GameDB.class).setParameter("game_id", game_id).getResultList();
 	}
 
 	
