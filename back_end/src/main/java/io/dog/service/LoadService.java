@@ -89,17 +89,18 @@ public class LoadService {
 		return cdao.getGameId(id);
 	}
 	
-	public boolean arePlayersExistInGame(int game_id){
-		if (gdao.getNoFreeGame(game_id).isEmpty()){
-			return false;
+	public boolean areAllPlayersFree(int game_id){
+		List<GameDB> list = gdao.getFreeGame(game_id);
+		int nbPlayers = pdao.getNbPlayers(game_id);
+		if (list.size() == nbPlayers){
+			return true;
 		}
 		else{
-			return true;
+			return false;
 		}
 		
 	}
 	
-
 	public List<Card> toCard(List<CardDB> list) {
 
 		if (list.isEmpty()) {
