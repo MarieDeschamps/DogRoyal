@@ -4,156 +4,122 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import io.dog.EmFactory;
 import io.dog.entities.CardDB;
 
 public class CardDaoTest {
-
-	EntityManager em;
-	CardDao dao;
-	CardDB one = new CardDB(2, 0);
-	CardDB test = new CardDB(2, 0);
-	CardDB test2 = new CardDB(2, 0);
+	private static EntityManagerFactory emf;
 
 	@Before
 	public void setUp() {
-		em = EmFactory.createEntityManager();
-		dao = new CardDao(em);
-		em.getTransaction().begin();
-		// Create Data
-		for (int i = 0; i < 7; i++) {
+		emf = Persistence.createEntityManagerFactory("dogroyal");
 
-			dao.create(new CardDB(2, 0));
-			dao.create(new CardDB(3, 0));
-			dao.create(new CardDB(5, 0));
-			dao.create(new CardDB(6, 0));
-			dao.create(new CardDB(8, 0));
-			dao.create(new CardDB(9, 0));
-			dao.create(new CardDB(10, 0));
-			dao.create(new CardDB(12, 0));
+		executeInTransaction(new Consumer<CardDao>() {
+			@Override
+			public void accept(CardDao dao) {
+				int game_id = 300;
+				// Create Data
+				for (int i = 0; i < 7; i++) {
 
-		}
+					dao.create(new CardDB(2, game_id));
+					dao.create(new CardDB(3, game_id));
+					dao.create(new CardDB(5, game_id));
+					dao.create(new CardDB(6, game_id));
+					dao.create(new CardDB(8, game_id));
+					dao.create(new CardDB(9, game_id));
+					dao.create(new CardDB(10, game_id));
+					dao.create(new CardDB(12, game_id));
 
-		for (int i = 0; i < 20; i++) {
-			dao.create(new CardDB(0, 0));
-		}
+				}
 
-		// Update 2 players with 5 cards
-		for (int i = 0; i < 5; i++) {
-			dao.updatePickedCards(i + 15, 2);
-		}
-
-			dao.updatePickedCards(6, 1);
-			dao.updatePickedCards(65, 1);
-			dao.updatePickedCards(3, 1);
-			dao.updatePickedCards(66, 1);
-			dao.updatePickedCards(12, 1);
-
-		// Update 10 cards to disguard
-		for (int i = 0; i < 10; i++) {
-			dao.updatePickedCards(i + 30, 2);
-			dao.updateDisguardCard(i + 30);
-		}
-		em.getTransaction().commit();
-	}
-
-	@After
-	public void tearDown() {
-		if (em.isOpen()) {
-			em.close();
-		}
+				for (int i = 0; i < 20; i++) {
+					dao.create(new CardDB(0, game_id));
+				}
+			}
+		});
 	}
 
 	@AfterClass
 	public static void close() {
-		EmFactory.getInstance().close();
+		emf.close();
 	}
 
 	@Test
-	public void findAllTest() {
-		em.getTransaction().begin();
-		List<CardDB> all = dao.findAll();
-		assertTrue(all.size() > 75);
-		em.getTransaction().commit();
-		
-		em.getTransaction().begin();
-		dao.deleteAll();
-		all = dao.findAll();
-		assertTrue(all.isEmpty());
-		em.getTransaction().commit();
-
-
+	public void getGameIdtest() {
+		executeInTransaction((dao) -> {
+			int game_id = dao.getGameId(5);
+			assertEquals(game_id, 300);
+		});
 	}
 
 	@Test
-	public void createAndDeleteTest() {
-		em.getTransaction().begin();
-		dao.create(test);
-		assertTrue(test.getId() > 0);
-		em.getTransaction().commit();
+	public void updateCardTest() {
+		executeInTransaction((dao) -> {
+			for (int i = 1; i < 6; i++) {
+				dao.updatePickedCards(i, 1);
+				dao.updatePickedCards(i + 10, 2);
+			}
 
-		em.getTransaction().begin();
-		dao.delete(test);
-		assertEquals(null, dao.findById(test.getId()));
-		em.getTransaction().commit();
+			for (int i = 0; i < 10; i++) {
+				dao.updatePickedCards(i + 40, 0);
+				dao.updateDisguardCard(i + 40);
+			}
 
+			List<CardDB> player1 = dao.getPlayersCards(1, 300);
+			List<CardDB> player2 = dao.getPlayersCards(2, 300);
+			List<CardDB> disguard = dao.getDiguardsCards(300);
+			List<CardDB> pickable = dao.getPickablesCards(300);
+
+			assertEquals(player1.size(), 5);
+			assertEquals(player2.size(), 5);
+			assertEquals(disguard.size(), 10);
+			assertEquals(pickable.size(), 56);
+
+			dao.updateNewDeck(300);
+			disguard = dao.getDiguardsCards(300);
+			pickable = dao.getPickablesCards(300);
+			assertEquals(disguard.size(), 0);
+			assertEquals(pickable.size(), 66);
+
+		});
 	}
 
 	@Test
-	public void updatePickedAndDisguardCardTest() {
-
-		// Check if card 6 of for player one
-		em.getTransaction().begin();
-		assertTrue(dao.findById(6).getPlayer() == 1);
-		em.getTransaction().commit();
-
-		// Check if card 6 of for disguard
-		em.getTransaction().begin();
-		assertTrue(dao.findById(33).getPlayer() == 0);
-		em.getTransaction().commit();
+	public void deleteTest() {
+		executeInTransaction((dao) -> {
+			assertEquals(dao.getPickablesCards(300).size(), 76);
+			dao.deleteAll(300);
+			List<CardDB> disguard = dao.getDiguardsCards(300);
+			List<CardDB> pickable = dao.getPickablesCards(300);
+			assertTrue(disguard.isEmpty());
+			assertTrue(pickable.isEmpty());
+		});
 	}
 
-	@Test
-	public void getPlayersPickablesDisguardsCardsAndNewDeckTest() {
+	private void executeInTransaction(Consumer<CardDao> consumer) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
 
-		em.getTransaction().begin();
-		List<CardDB> pickable = dao.getPickablesCards();
-		List<CardDB> disguard = dao.getDiguardsCards();
-		List<CardDB> player1Cards = dao.getPlayersCards(1);
-		List<CardDB> player2Cards = dao.getPlayersCards(2);
+			CardDao dao = new CardDao(em);
 
-		for (CardDB cardDB : player1Cards) {
-			System.out.println(cardDB.getId() + "-- value -- "+cardDB.getValue());
-			
+			consumer.accept(dao);
+
+			em.getTransaction().commit();
+		} catch (Throwable t) {
+			em.getTransaction().rollback();
+			throw t;
+		} finally {
+			em.close();
 		}
-		assertTrue(player1Cards.size() == 5);
-		assertTrue(player2Cards.size() == 5);
-		assertTrue(disguard.size() == 10);
-		assertTrue(pickable.size() == 56);
-
-		em.getTransaction().commit();
-
-		em.getTransaction().begin();
-		dao.updateNewDeck();
-		pickable = dao.getPickablesCards();
-		disguard = dao.getDiguardsCards();
-		player1Cards = dao.getPlayersCards(1);
-		player2Cards = dao.getPlayersCards(2);
-		assertTrue(disguard.size() == 0);
-		assertTrue(pickable.size() == 66);
-		assertTrue(player1Cards.size() == 5);
-		assertTrue(player2Cards.size() == 5);
-		em.getTransaction().commit();
-
 	}
-
 }

@@ -23,19 +23,14 @@ export class Exchange {
   }
 
   loadGamePlayer(game, user) {
+    return this.http.get(this.beginPath + "loadGameFirstTime/" + game + "/" + user)
+      .toPromise()
+      .then((response: Response) => response.json());
+  }
+
+
+  loadGame(game, user) {
     return this.http.get(this.beginPath + "load/" + game + "/" + user)
-      .toPromise()
-      .then((response: Response) => response.json());
-  }
-
-  loadGame(game) {
-    return this.http.get(this.beginPath + "load/" + game)
-      .toPromise()
-      .then((response: Response) => response.json());
-  }
-
-  load() {
-    return this.http.get(this.beginPath + "load")
       .toPromise()
       .then((response: Response) => response.json());
   }
@@ -48,6 +43,10 @@ export class Exchange {
 
   freePlayer(game, user) {
     this.http.get(this.beginPath + "free/" + game + "/" + user);
+  }
+
+  iAmHere(game, user) {
+    this.http.get(this.beginPath + "here/" + game + "/" + user);
   }
 
   play(players, whoPlayNow) {

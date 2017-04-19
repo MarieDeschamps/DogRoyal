@@ -43,8 +43,7 @@ export class AppComponent {
     }, 1000);
   }
 
-
-  finishGame() {
+  leaveGame() {
     this.exchange.freePlayer(this.game_id, this.user_id);
   }
 
@@ -87,12 +86,14 @@ export class AppComponent {
     if (this.start && !this.winner && this.whoPlayNow !== this.user_id) {
       this.load().then(() => {
         if (this.whoPlayNow === this.user_id) {
-
           setTimeout(() => {
             alert("It's your turn");
           }, 1000);
         }
       })
+    }
+    if (this.start && !this.winner && this.whoPlayNow === this.user_id) {
+      this.exchange.iAmHere(this.game_id, this.user_id);
     }
   }
 
@@ -115,7 +116,7 @@ export class AppComponent {
 
   load() {
     this.loadGame = false;
-    return this.exchange.loadGame(this.game_id).then(data => this.translateData(data));
+    return this.exchange.loadGame(this.game_id, this.user_id).then(data => this.translateData(data));
   }
 
   translateData(data) {
