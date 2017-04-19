@@ -44,6 +44,8 @@ export class Exchange {
   }
 
   freePlayer(game, user) {
+    console.log("coucou je vais sortir::: " + this.beginPath + "free/" + game + "/" + user)
+
     this.http.get(this.beginPath + "free/" + game + "/" + user);
   }
 

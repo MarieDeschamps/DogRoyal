@@ -16,6 +16,8 @@
 </div>
 
 <div *ngIf="start && !winner">
+  <div class="gameId">Game Id : {{game_id}}</div>
+  <br/>
   <button (click)="leaveGame()">Leave Game</button>
   <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)" [user_id]="user_id"
                [whoPlayNow]="whoPlayNow"></app-players>
