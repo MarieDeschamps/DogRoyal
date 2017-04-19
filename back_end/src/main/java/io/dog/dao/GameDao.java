@@ -57,8 +57,8 @@ public class GameDao {
 		return em.createQuery(jpql,Integer.class).getResultList();
 	}
 	
-	public List<GameDB> getNoFreeGame(int game_id) {
-		String jpql = "SELECT g FROM GameDB g WHERE g.free=false AND g.game_id=:game_id";
+	public List<GameDB> getFreeGame(int game_id) {
+		String jpql = "SELECT g FROM GameDB g WHERE g.free=true AND g.game_id=:game_id ORDER BY g.game_id";
 		return em.createQuery(jpql, GameDB.class).setParameter("game_id", game_id).getResultList();
 	}
 
