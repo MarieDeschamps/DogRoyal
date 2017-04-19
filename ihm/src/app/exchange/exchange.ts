@@ -44,13 +44,12 @@ export class Exchange {
   }
 
   freePlayer(game, user) {
-    console.log("coucou je vais sortir::: " + this.beginPath + "free/" + game + "/" + user)
-
-    this.http.get(this.beginPath + "free/" + game + "/" + user);
+    this.http.get(this.beginPath + "free/" + game + "/" + user).toPromise();
+    console.log("coucou je vais sortir::: " + this.beginPath + "free/" + game + "/" + user);
   }
 
   iAmHere(game, user) {
-    this.http.get(this.beginPath + "here/" + game + "/" + user);
+    this.http.get(this.beginPath + "here/" + game + "/" + user).toPromise();
     console.log("I am here" + game, user);
   }
 
