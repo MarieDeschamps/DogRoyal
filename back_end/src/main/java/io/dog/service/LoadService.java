@@ -89,6 +89,16 @@ public class LoadService {
 		return cdao.getGameId(id);
 	}
 	
+	public boolean isPlayerFree(int game_id, int player_id){
+		List<GameDB> list = gdao.getFreeGame(game_id);
+		for (GameDB l : list) {
+			if(l.getPlayer()==player_id && l.isFree()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean areAllPlayersFree(int game_id){
 		List<GameDB> list = gdao.getFreeGame(game_id);
 		int nbPlayers = pdao.getNbPlayers(game_id);
@@ -139,7 +149,7 @@ public class LoadService {
 		return newList;
 	}
 
-	public HashMap<String, String> getGames() {
+	public HashMap<String, String> getFreeGames() {
 		List<GameDB> games = gdao.getFreeGames();
 		HashMap<String, String> map = new HashMap<>();
 		String playerlist = "";

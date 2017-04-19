@@ -70,6 +70,5 @@ public class UpdateService {
 	public void updateFree(int game_id, int player, boolean free){
 		gdao.updateFree(game_id, player, free);
 	}
-	
 
 }

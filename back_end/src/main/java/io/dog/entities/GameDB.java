@@ -1,5 +1,7 @@
 package io.dog.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,7 @@ public class GameDB {
 	int game_id = 0;
 	int player;
 	boolean free = true;
+	Timestamp lastRequest;
 
 	public GameDB() {
 	}
@@ -55,7 +58,12 @@ public class GameDB {
 	public void setFree(boolean free) {
 		this.free = free;
 	}
-	
-	
 
+	public Timestamp getLastRequest() {
+		return lastRequest;
+	}
+
+	public void setLastRequest(Timestamp lastRequest) {
+		this.lastRequest = lastRequest;
+	}
 }

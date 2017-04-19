@@ -45,8 +45,14 @@ public class DogWS {
 	int whoPlayNow;
 	
 	@GET
+	@Path("here/{game_id}/{player_id}")
+	public void isHere(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
+		updateService.updateFree(game_id, player_id, false);
+	}
+	
+	@GET
 	public HashMap<String, String> getGames(){
-		HashMap<String, String> result = loadService.getGames();
+		HashMap<String, String> result = loadService.getFreeGames();
 		for (String game : result.keySet()) {
 			if(isGameFinished(Integer.parseInt(game))){
 				result.remove(game);
@@ -73,22 +79,26 @@ public class DogWS {
 	}
 	
 	@GET
-	@Path("load/{game_id}")
-	public ContainerForOutputWS load(@PathParam("game_id") int game_id){
-		//guards load
-		if(!loadService.isGameExist(game_id)){
-			return new ContainerForOutputWS(0, false, "Game doessn't exist");
-		}
-		this.loadBdd(game_id);
-		return new ContainerForOutputWS(deck, players, whoPlayNow, true,game_id);
-	}
-	
-	@GET
 	@Path("load/{game_id}/{player_id}")
 	public ContainerForOutputWS load(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
 		//guards load
 		if(!loadService.isGameExist(game_id)){
 			return new ContainerForOutputWS(0, false, "Game doessn't exist");
+		}
+		this.loadBdd(game_id);
+		updateService.updateFree(game_id, 1, false);
+		return new ContainerForOutputWS(deck, players, whoPlayNow, true,game_id);
+	}
+	
+	@GET
+	@Path("loadFirstTime/{game_id}/{player_id}")
+	public ContainerForOutputWS loadFirstTime(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
+		//guards load
+		if(!loadService.isGameExist(game_id)){
+			return new ContainerForOutputWS(0, false, "Game doessn't exist");
+		}
+		if(!loadService.isPlayerFree(game_id, player_id)){
+			return new ContainerForOutputWS(0, false, "The player is not free");
 		}
 		this.loadBdd(game_id);
 		updateService.updateFree(game_id, player_id, false);
