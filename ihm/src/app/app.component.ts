@@ -36,14 +36,16 @@ export class AppComponent {
 
 //TODO free player
 
-  @HostListener('window:unload', ['$event'])
-  freePlayer(event: Event) {
+  freePlayer() {
     alert("coucou ");
     this.exchange.freePlayer(this.game_id, this.user_id);
     setTimeout(() => {
-      ;
     }, 1000);
+  }
 
+
+  finishGame() {
+    this.exchange.freePlayer(this.game_id, this.user_id);
   }
 
   chargeNewGame($event) {
