@@ -45,7 +45,6 @@ export class Exchange {
 
   freePlayer(game, user) {
     this.http.get(this.beginPath + "free/" + game + "/" + user);
-
   }
 
   iAmHere(game, user) {

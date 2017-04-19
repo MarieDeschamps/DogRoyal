@@ -11,7 +11,7 @@ import {Piece, Player} from '../model';
     <div>Player {{player.id}} with {{player.color}} pieces
       <div *ngIf="user_id===player.id">
         <div *ngFor="let piece of player.pieces;let i=indexPiece">
-          <app-piece [piece]="piece" (choosenPiece)="chooseThisPiece($event)"></app-piece>
+          <app-piece [piece]="piece" (choosenPiece)="chooseThisPiece($event)" [enableButtons]="enableButtons"></app-piece>
         </div>
       </div>
       <div class="showAllPieces">
@@ -23,7 +23,7 @@ import {Piece, Player} from '../model';
         </div>
       </div>
       <div *ngIf="user_id===player.id">
-        <app-hand [hand]="player.hand" (choosenCard)="chooseThisCard($event)"></app-hand>
+        <app-hand [hand]="player.hand" (choosenCard)="chooseThisCard($event)" [enableButtons]="enableButtons"></app-hand>
       </div>
       <div class="showAllPiecesFinish">
         Arrived ! :
@@ -60,6 +60,7 @@ import {Piece, Player} from '../model';
   `]
 })
 export class PlayerComponent {
+  @Input() enableButtons;
   @Input() user_id;
   @Input() player: Player;
   @Output() choosenElements: EventEmitter<boolean> = new EventEmitter();
