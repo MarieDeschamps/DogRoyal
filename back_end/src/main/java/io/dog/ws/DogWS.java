@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -188,12 +187,7 @@ public class DogWS {
 			updateService.updateDisguardCard(card);
 		}
 		whoPlayNow++;
-		boolean winner = true;
-		for(Piece p : player.getPieces()){
-			if(!p.isArrived()){
-				winner = false;
-			}
-		}
+		boolean winner = winner(player);
 		ContainerForOutputWS result = new ContainerForOutputWS(deck, players, whoPlayNow,true,game_id);
 		if(winner){
 			result.setWinner(player);
@@ -201,11 +195,34 @@ public class DogWS {
 		}
 		return result;
 	}
+
+	private boolean winner(Player player) {
+		boolean winner = true;
+		for(Piece p : player.getPieces()){
+			if(!p.isArrived()){
+				winner = false;
+			}
+		}
+		return winner;
+	}
+	
+	private boolean isGameFinished(int game_id){
+		this.loadBdd(game_id);
+		for (Player player : players) {
+			if(winner(player)){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	@GET
 	@Path("free/{game_id}/{player_id}")
 	public void free(@PathParam("game_id") int game_id,@PathParam("player_id") int player_id){
 		updateService.updateFree(game_id, player_id, true);
+		if(isGameFinished(game_id)){
+			
+		}
 	}
 	
 	
