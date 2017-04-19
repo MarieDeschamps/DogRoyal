@@ -1,124 +1,88 @@
 package io.dog.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.dog.EmFactory;
 import io.dog.entities.PieceDB;
 
 public class PieceDaoTest {
-	EntityManager em;
-	PieceDao dao;
-	PieceDB one = new PieceDB(2, 16);
-	PieceDB two = new PieceDB(3, 32);
+	private static EntityManagerFactory emf;
 
 	@Before
 	public void setUp() {
-		em = EmFactory.createEntityManager();
-		dao = new PieceDao(em);
-	}
+		emf = Persistence.createEntityManagerFactory("dogroyal");
 
-	@After
-	public void tearDown() {
-		if (em.isOpen()) {
-			em.close();
-		}
+		executeInTransaction(new Consumer<PieceDao>() {
+			@Override
+			public void accept(PieceDao dao) {
+				int game_id = 300;
+				// Create Data
+				
+				dao.create(new PieceDB(1, 0, game_id));
+				dao.create(new PieceDB(1, 0, game_id));
+				dao.create(new PieceDB(2, 16, game_id));
+				dao.create(new PieceDB(2, 16, game_id));
+			}
+		});
 	}
 
 	@AfterClass
 	public static void close() {
-		EmFactory.getInstance().close();
+		emf.close();
+	}
+@Test
+public void updatePieceTest(){
+	executeInTransaction((dao) -> {
+		dao.updatePiece(2, 0, true);
+		assertTrue(dao.findById(2).isReady());
+		dao.updatePiece(2, 4, true);
+		assertEquals(dao.findById(2).getPosition(),4);
+	});
+}
+	@Test
+	public void getPlayersTest(){
+		executeInTransaction((dao) -> {
+			int nbPlayers = dao.getNbPlayers(300);
+			assertEquals(2, nbPlayers);
+			List<PieceDB> listPieces = dao.getPlayersPieces(2, 300);
+			assertTrue(listPieces.contains(dao.findById(3)));
+			assertEquals(2,listPieces.size());			
+		});
+	}
+	@Test
+	public void deleteTest(){
+		executeInTransaction((dao) -> {
+			dao.deleteAll(300);
+			assertEquals(0,dao.getNbPlayers(300));
+			assertTrue(dao.getPlayersPieces(1, 300).isEmpty());
+		});
 	}
 
-	@Test
-	public void createAndDeleteTest() {
-		em.getTransaction().begin();
-		dao.create(one);
-		assertTrue(one.getId() > 0);
-		em.getTransaction().commit();
+	private void executeInTransaction(Consumer<PieceDao> consumer) {
+		EntityManager em = emf.createEntityManager();
+		try {
+			em.getTransaction().begin();
 
-		em.getTransaction().begin();
-		dao.delete(one);
-		assertEquals(null, dao.findById(one.getId()));
-		em.getTransaction().commit();
+			PieceDao dao = new PieceDao(em);
 
-	}
+			consumer.accept(dao);
 
-	@Test
-	public void updatePieceTest() {
-		em.getTransaction().begin();
-
-		// Create Data
-		dao.create(two);
-		em.getTransaction().commit();
-
-		em.getTransaction().begin();
-		dao.updatePiece(two.getId(), 10, true);
-		assertTrue(dao.findById(two.getId()).getPosition() == 10);
-		assertTrue(dao.findById(two.getId()).isReady() == true);
-		em.getTransaction().commit();
-	}
-
-	@Test
-	public void getNbPlayersAndPlayersTest() {
-		em.getTransaction().begin();
-
-		// Create Data
-		for (int i = 0; i < 2; i++) {
-			em.persist(new PieceDB(1, 0));
-			em.persist(new PieceDB(2, 16));
+			em.getTransaction().commit();
+		} catch (Throwable t) {
+			em.getTransaction().rollback();
+			throw t;
+		} finally {
+			em.close();
 		}
-
-		em.getTransaction().commit();
-
-		em.getTransaction().begin();
-		int i = dao.getNbPlayers();
-		System.out.println(i);
-		assertTrue(i == 2);
-		em.getTransaction().commit();
-
-		em.getTransaction().begin();
-
-		List<PieceDB> onePiece = dao.getPlayersPieces(1);
-		List<PieceDB> twoPiece = dao.getPlayersPieces(2);
-		assertTrue(onePiece.size() == 2);
-		assertTrue(twoPiece.size() == 2);
-
-		em.getTransaction().commit();
-
-	}
-
-	@Test
-	public void findAllTest() {
-		em.getTransaction().begin();
-
-		// Create Data
-		for (int i = 0; i < 2; i++) {
-			em.persist(new PieceDB(1, 0));
-			em.persist(new PieceDB(2, 16));
-		}
-
-		em.getTransaction().commit();
-
-		em.getTransaction().begin();
-		List<PieceDB> all = dao.findAll();
-		assertTrue(all.size() > 3);
-		em.getTransaction().commit();
-		
-		em.getTransaction().begin();
-		dao.deleteAll();
-		all = dao.findAll();
-		assertTrue(all.isEmpty());
-		em.getTransaction().commit();
-
 	}
 }
