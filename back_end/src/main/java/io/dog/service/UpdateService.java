@@ -63,12 +63,6 @@ public class UpdateService {
 		}
 	}
 	
-	public void updateNewDeck(){
-		cdao.updateNewDeck();
-	}
-	
-	//Methods for game_id
-	
 	public void updateNewDeck(int game_id){
 		cdao.updateNewDeck(game_id);
 	}

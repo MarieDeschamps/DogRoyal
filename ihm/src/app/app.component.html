@@ -22,9 +22,12 @@
   <app-gameBoard [nbCases]="this.nbCases" [players]="playersTry"></app-gameBoard>
 </div>
 
+
+
 <div *ngIf="winner">
   <br/>
   PLAYER {{winner.id}} YOU WIN !!! CONGRATs!!
+  <button onclick="finishGame()">Finish Game</button>
 
 </div>
 
