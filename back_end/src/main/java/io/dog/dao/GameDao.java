@@ -19,11 +19,6 @@ public class GameDao {
 		em.persist(game);
 	}
 
-	public void deleteAll() {
-		String jpql = "DELETE FROM GameDB g";
-		em.createQuery(jpql).executeUpdate();
-	}
-
 	public void updateFree(int game_id, int player, boolean free) {
 		String jpql = "UPDATE GameDB g SET g.free=:free, g.lastRequest=:lastRequest WHERE g.game_id=:game_id AND g.player=:player";
 		em.createQuery(jpql).setParameter("free", free)

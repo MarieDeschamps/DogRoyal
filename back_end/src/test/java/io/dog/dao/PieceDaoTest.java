@@ -59,11 +59,12 @@ public void updatePieceTest(){
 			assertEquals(2,listPieces.size());			
 		});
 	}
+
 	@Test
-	public void deleteTest(){
+	public void deleteTest() {
 		executeInTransaction((dao) -> {
 			dao.deleteAll(300);
-			assertEquals(0,dao.getNbPlayers(300));
+			assertEquals(0, dao.getNbPlayers(300));
 			assertTrue(dao.getPlayersPieces(1, 300).isEmpty());
 		});
 	}
