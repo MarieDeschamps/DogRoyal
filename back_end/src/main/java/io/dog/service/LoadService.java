@@ -39,30 +39,54 @@ public class LoadService {
 		this.gdao = new GameDao(em);
 	}
 
-	public Deck getDeck() {
+	public Deck getDeck(int game_id) {
 
-		List<CardDB> pickableDB = cdao.getPickablesCards();
-		List<CardDB> disguardDB = cdao.getDiguardsCards();
+		List<CardDB> pickableDB = cdao.getPickablesCards(game_id);
+		List<CardDB> disguardDB = cdao.getDiguardsCards(game_id);
 
 		return new Deck(toCard(pickableDB), toCard(disguardDB));
 
 	}
 
-	public List<Player> getPlayers() {
+	public List<Player> getPlayers(int game_id) {
 
-		int nbPlayers = pdao.getNbPlayers();
+		int nbPlayers = pdao.getNbPlayers(game_id);
 
 		List<Player> players = new ArrayList<>();
 		List<CardDB> playercardsDB;
 		List<PieceDB> playerspiecesDB;
 
 		for (int i = 1; i < nbPlayers + 1; i++) {
-			playercardsDB = cdao.getPlayersCards(i);
-			playerspiecesDB = pdao.getPlayersPieces(i);
+			playercardsDB = cdao.getPlayersCards(i, game_id);
+			playerspiecesDB = pdao.getPlayersPieces(i, game_id);
 			players.add(new Player(toPiece(playerspiecesDB), toCard(playercardsDB), i));
 		}
 
 		return players;
+	}
+
+	public boolean isGameExist(int game_id) {
+		List<GameDB> games = gdao.getGameStatus(game_id);
+		if (games.isEmpty()) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean isGoodGameId(int card_id, int piece_id) {
+		CardDB card = cdao.findById(card_id);
+		PieceDB piece = pdao.findById(piece_id);
+
+		if (card.getGame_id() == piece.getGame_id()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int getGameId(int id) {
+		return cdao.getGameId(id);
 	}
 
 	public List<Card> toCard(List<CardDB> list) {
@@ -103,8 +127,6 @@ public class LoadService {
 		return newList;
 	}
 
-	// MEthods for game_id
-
 	public HashMap<String, String> getGames() {
 		List<GameDB> games = gdao.getFreeGames();
 		HashMap<String, String> map = new HashMap<>();
@@ -122,62 +144,11 @@ public class LoadService {
 			} else {
 				playerlist = playerlist + games.get(i).getPlayer();
 				map.put(String.valueOf(games.get(i).getGame_id()), playerlist);
-				playerlist ="";
+				playerlist = "";
 
 			}
 		}
 		return map;
-	}
-
-	public Deck getDeck(int game_id) {
-
-		List<CardDB> pickableDB = cdao.getPickablesCards(game_id);
-		List<CardDB> disguardDB = cdao.getDiguardsCards(game_id);
-
-		return new Deck(toCard(pickableDB), toCard(disguardDB));
-
-	}
-
-	public List<Player> getPlayers(int game_id) {
-
-		int nbPlayers = pdao.getNbPlayers(game_id);
-
-		List<Player> players = new ArrayList<>();
-		List<CardDB> playercardsDB;
-		List<PieceDB> playerspiecesDB;
-
-		for (int i = 1; i < nbPlayers + 1; i++) {
-			playercardsDB = cdao.getPlayersCards(i, game_id);
-			playerspiecesDB = pdao.getPlayersPieces(i, game_id);
-			players.add(new Player(toPiece(playerspiecesDB), toCard(playercardsDB), i));
-		}
-
-		return players;
-	}
-
-	public boolean isGameExist(int game_id) {
-		List<GameDB> games = gdao.getGameStatus(game_id);
-		if (games.isEmpty()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	public boolean isGoodGameId(int card_id,int piece_id) {
-		CardDB card = cdao.findById(card_id);
-		PieceDB piece = pdao.findById(piece_id);
-		
-		if (card.getGame_id() == piece.getGame_id()){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	
-	public int getGameId(int id){
-		return cdao.getGameId(id);
 	}
 
 }
