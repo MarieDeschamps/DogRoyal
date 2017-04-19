@@ -9,8 +9,8 @@ import {discardPeriodicTasks} from "@angular/core/testing";
   selector: 'app-card',
   template: `
     <div class="card" *ngIf="card.chooseCard==true">
-      <div><img src="../../assets/{{card.value}}.png" alt="{{card.value}}" height="150"/></div>
-      <button *ngIf="card.chooseCard" (click)="onChooseCard()"> choose this card</button>
+      <div><img src="../../assets/{{card.value}}.png" alt="{{card.value}}" height="150" /></div>
+      <button *ngIf="card.chooseCard" class="toPlay"(click)="onChooseCard()" [disabled]="!enableButtons"> choose this card</button>
     </div>
   `,
   styles: [`
@@ -24,6 +24,7 @@ export class CardComponent {
   @Input() card: Card;
   @Output() choosenCard = new EventEmitter();
   thisCard: boolean = false;
+  @Input() enableButtons;
 
   onChooseCard() {
     this.card.chooseCard = false;

@@ -9,7 +9,7 @@ import {Card, Hand} from '../model';
   template: `
     <div class="myHand">
       <div class="cardsStyle" *ngFor='let card of hand; let i=cardIndex;'>
-        <app-card [card]='card' (choosenCard)="choosethisCard($event)"></app-card>
+        <app-card [card]='card' (choosenCard)="choosethisCard($event)" [enableButtons]="enableButtons"></app-card>
       </div>
     </div>
   `,
@@ -24,7 +24,7 @@ import {Card, Hand} from '../model';
   `]
 })
 export class HandComponent {
-
+  @Input() enableButtons;
   @Input() hand: Hand;
   @Output() choosenCard: EventEmitter<boolean> = new EventEmitter();
   thisCard: boolean;

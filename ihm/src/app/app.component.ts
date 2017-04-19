@@ -45,6 +45,7 @@ export class AppComponent {
 
   leaveGame() {
     this.exchange.freePlayer(this.game_id, this.user_id);
+    this.start = false;
   }
 
   chargeNewGame($event) {

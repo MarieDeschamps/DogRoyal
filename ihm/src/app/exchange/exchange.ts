@@ -30,9 +30,11 @@ export class Exchange {
 
 
   loadGame(game, user) {
+    console.log("Load game" + game, user);
     return this.http.get(this.beginPath + "load/" + game + "/" + user)
       .toPromise()
       .then((response: Response) => response.json());
+
   }
 
   pick5(game) {
@@ -47,6 +49,7 @@ export class Exchange {
 
   iAmHere(game, user) {
     this.http.get(this.beginPath + "here/" + game + "/" + user);
+    console.log("I am here" + game, user);
   }
 
   play(players, whoPlayNow) {

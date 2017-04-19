@@ -16,8 +16,9 @@
 </div>
 
 <div *ngIf="start && !winner">
-  <button onclick="leaveGame()">Leave Game</button>
-  <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)" [user_id]="user_id"></app-players>
+  <button (click)="leaveGame()">Leave Game</button>
+  <app-players [players]="playersTry" (choosenElements)="elementChoosen($event)" [user_id]="user_id"
+               [whoPlayNow]="whoPlayNow"></app-players>
   <br/>
   <app-deck [deck]="deckTry" (pick5Cards)="distribuate($event)"></app-deck>
   <br/>
@@ -29,7 +30,7 @@
 <div *ngIf="winner">
   <br/>
   PLAYER {{winner.id}} YOU WIN !!! CONGRATs!!
-  <button onclick="leaveGame()">Finish Game</button>
+  <button (click)="leaveGame()">Finish Game</button>
 
 </div>
 
